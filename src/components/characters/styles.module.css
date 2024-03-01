@@ -1,0 +1,54 @@
+.aboveInputWrapper{
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    padding: calc(var(--main-padding) / 2) var(--main-padding) calc(var(--main-padding) / 4) var(--main-padding);
+}
+.aboveInputCharacters{
+    font-size: 50px;
+    font-weight: 700;
+}
+.aboveInputAmount{
+    font-size: 30px;
+    font-weight: 700;
+    color: grey;
+    line-height: 44px;
+}
+.form{
+    height: 45px;
+    display: flex;
+    justify-content: space-between;
+    gap: var(--main-padding);
+    grid-column-start: 1;
+    grid-column-end: 7;
+}
+.form input{
+    flex: 6;
+    height: 100%;
+    font-size: 16px;
+    font-weight: 500;
+}
+.form button{
+    height: 100%;
+    flex: 1;
+    background: orange;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+}
+.charactersGrid{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-column-gap: var(--main-padding);
+    grid-row-gap: calc(var(--main-padding) / 2);
+    padding: 0 var(--main-padding) var(--main-padding) var(--main-padding);
+}
+.divider{
+    border: none;
+    background: grey;
+    height: 1px;
+    grid-column-start: 1;
+    grid-column-end: 7;
+    margin: 20px 0;
+}
