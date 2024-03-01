@@ -1,0 +1,24 @@
+.characterInfo{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.portrait{
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+    object-position: 20% 20%;
+}
+.info{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+.description{
+    display: flex;
+    flex-direction: column;
+}
+.comicsList{
+    display: flex;
+    flex-direction: column;
+}
