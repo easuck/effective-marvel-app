@@ -1,19 +1,22 @@
 import {FC} from "react";
 import styles from "./styles.module.css"
-
-const CharacterInfo: FC<{image: string, name: string, description: string, comics: string[]}> =
-    ({image, name, description, comics}) => {
+import {useParams} from "react-router-dom";
+import {characters} from "../../data/CharactersData.tsx";
+/*const CharacterInfo: FC<{image: string, name: string, description: string, comics: string[]}> =
+    ({image, name, description, comics}) => {*/
+const CharacterInfo: FC = () => {
+    let {id} = useParams<"id">();
     return(
         <section className={styles.characterInfo}>
-            <img className={styles.portrait} src={image} alt="portrait"/>
+            <img className={styles.portrait} src={characters[id].image} alt="portrait"/>
             <div className={styles.info}>
                 <div className={styles.description}>
-                    <div>{name}</div>
-                    <div>{description}</div>
+                    <div>{characters[id].name}</div>
+                    <div>{characters[id].desc}</div>
                 </div>
                 <div className={styles.comicsList}>
                     <p>Comics</p>
-                    {comics.map((comics) => (
+                    {characters[id].comics.map((comics) => (
                         <p>{comics}</p>
                     ))}
                 </div>

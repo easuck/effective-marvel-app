@@ -1,9 +1,10 @@
 import {FC} from "react";
 import styles from "./styles.module.css"
 import CharacterCard from "./card/characterCard.tsx";
+import {characters} from "../../data/CharactersData.tsx";
 
 const Characters: FC = () => {
-    let charactersAmount: number = 1562;
+    let charactersAmount: number = characters.length;
 
     return(
         <section>
@@ -17,30 +18,15 @@ const Characters: FC = () => {
                     <button>SEARCH</button>
                 </form>
                 <hr className={styles.divider}/>
-                <CharacterCard image="../../../public/spider_man.jpeg" name="Spider-man"
-                               desc="Spider-man (Bully Maguire) Spider-man (Bully Maguire)"/>
-                <CharacterCard image="../../../public/spider_man.jpeg" name="Spider-man"
-                               desc="Spider-man (Bully Maguire) Spider-man (Bully Maguire)"/>
-                <CharacterCard image="../../../public/spider_man.jpeg" name="Spider-man"
-                               desc="Spider-man (Bully Maguire) Spider-man (Bully Maguire)"/>
-                <CharacterCard image="../../../public/spider_man.jpeg" name="Spider-man"
-                               desc="Spider-man (Bully Maguire) Spider-man (Bully Maguire)"/>
-                <CharacterCard image="../../../public/spider_man.jpeg" name="Spider-man"
-                               desc="Spider-man (Bully Maguire) Spider-man (Bully Maguire)"/>
-                <CharacterCard image="../../../public/spider_man.jpeg" name="Spider-man"
-                               desc="Spider-man (Bully Maguire) Spider-man (Bully Maguire)"/>
-                <CharacterCard image="../../../public/spider_man.jpeg" name="Spider-man"
-                               desc="Spider-man (Bully Maguire) Spider-man (Bully Maguire)"/>
-                <CharacterCard image="../../../public/spider_man.jpeg" name="Spider-man"
-                               desc="Spider-man (Bully Maguire) Spider-man (Bully Maguire)"/>
-                <CharacterCard image="../../../public/spider_man.jpeg" name="Spider-man"
-                               desc="Spider-man (Bully Maguire) Spider-man (Bully Maguire)"/>
-                <CharacterCard image="../../../public/spider_man.jpeg" name="Spider-man"
-                               desc="Spider-man (Bully Maguire) Spider-man (Bully Maguire)"/>
-                <CharacterCard image="../../../public/spider_man.jpeg" name="Spider-man"
-                               desc="Spider-man (Bully Maguire) Spider-man (Bully Maguire)"/>
-                <CharacterCard image="../../../public/spider_man.jpeg" name="Spider-man"
-                               desc="Spider-man (Bully Maguire) Spider-man (Bully Maguire)"/>
+                {characters.map(character =>{
+                    return <CharacterCard image={character.image} name={character.name} desc={character.desc}/>
+                })}
+                {characters.map(character =>{
+                    return <CharacterCard image={character.image} name={character.name} desc={character.desc}/>
+                })}
+                {characters.map(character =>{
+                    return <CharacterCard image={character.image} name={character.name} desc={character.desc}/>
+                })}
             </div>
         </section>
     )
