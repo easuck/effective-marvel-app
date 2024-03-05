@@ -12,7 +12,7 @@ const Comics: FC = () => {
                 <h3 className={styles.labelCharacters}>Comics</h3>
                 <h3 className={styles.labelAmount}>({comicsAmount})</h3>
             </div>
-            <SearchBar/>
+            <SearchBar subject="Comics"/>
             <hr className={styles.divider}/>
             <div className={styles.comicsList}>
                 {comics.map((comics, index) => {

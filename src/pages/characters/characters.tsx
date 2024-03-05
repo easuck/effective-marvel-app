@@ -14,7 +14,7 @@ const Characters: FC = () => {
                 <h3 className={styles.labelCharacters}>Characters</h3>
                 <h3 className={styles.labelAmount}>({charactersAmount})</h3>
             </div>
-            <SearchBar/>
+            <SearchBar subject="Characters"/>
             <hr className={styles.divider}/>
             <div className={styles.charactersGrid}>
                 {characters.map((character, index) => {
