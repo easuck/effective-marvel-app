@@ -1,11 +1,11 @@
 import {FC} from "react";
-import Characters from "./pages/characters/characters.tsx";
-import Comics from "./pages/comics/comics.tsx";
+import Characters from "../pages/characters/characters.tsx";
+import Comics from "../pages/comics/comics.tsx";
 import {useRoutes} from "react-router-dom";
-import Header from "./components/header/header.tsx";
-import CharacterInfo from "./pages/characterInfo/characterInfo.tsx";
-import ComicsInfo from "./pages/comicsInfo/comicsInfo.tsx";
-
+import Header from "../components/header/header.tsx";
+import CharacterInfo from "../pages/characterInfo/characterInfo.tsx";
+import ComicsInfo from "../pages/comicsInfo/comicsInfo.tsx";
+import styles from "./router.module.css"
 
 const Router: FC = () => {
     let element = useRoutes([
@@ -22,6 +22,6 @@ const Router: FC = () => {
             ]
         }
     ])
-    return element;
+    return <div className={styles.content}>{element}</div>;
 }
 export default Router;
