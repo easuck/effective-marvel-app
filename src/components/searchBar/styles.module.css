@@ -19,3 +19,18 @@
     font-size: 16px;
     font-weight: 500;
 }
+.labelWrapper{
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+.labelCharacters{
+    font-size: 50px;
+    font-weight: 700;
+}
+.labelAmount{
+    font-size: 30px;
+    font-weight: 700;
+    color: grey;
+    line-height: 60px;
+}

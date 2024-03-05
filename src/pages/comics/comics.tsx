@@ -8,11 +8,7 @@ const Comics: FC = () => {
     let comicsAmount = comics.length;
     return(
         <section className={styles.comicsPage}>
-            <div className={styles.labelWrapper}>
-                <h3 className={styles.labelCharacters}>Comics</h3>
-                <h3 className={styles.labelAmount}>({comicsAmount})</h3>
-            </div>
-            <SearchBar subject="Comics"/>
+            <SearchBar subject="Comics" amount={comicsAmount}/>
             <hr className={styles.divider}/>
             <div className={styles.comicsList}>
                 {comics.map((comics, index) => {

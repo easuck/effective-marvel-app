@@ -1,21 +1,6 @@
 .characters{
     padding: var(--main-padding);
 }
-.labelWrapper{
-    display: flex;
-    align-items: flex-end;
-    gap: 10px;
-}
-.labelCharacters{
-    font-size: 50px;
-    font-weight: 700;
-}
-.labelAmount{
-    font-size: 30px;
-    font-weight: 700;
-    color: grey;
-    line-height: 44px;
-}
 .charactersGrid{
     display: grid;
     grid-template-columns: repeat(6, 1fr);

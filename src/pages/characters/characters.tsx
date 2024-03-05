@@ -10,11 +10,7 @@ const Characters: FC = () => {
 
     return(
         <section className={styles.characters}>
-            <div className={styles.labelWrapper}>
-                <h3 className={styles.labelCharacters}>Characters</h3>
-                <h3 className={styles.labelAmount}>({charactersAmount})</h3>
-            </div>
-            <SearchBar subject="Characters"/>
+            <SearchBar subject="Characters" amount={charactersAmount}/>
             <hr className={styles.divider}/>
             <div className={styles.charactersGrid}>
                 {characters.map((character, index) => {
