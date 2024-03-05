@@ -1,0 +1,21 @@
+.form{
+    height: 45px;
+    display: flex;
+    justify-content: space-between;
+    gap: var(--main-padding);
+}
+.form input{
+    flex: 6;
+    height: 100%;
+    font-size: 16px;
+    font-weight: 500;
+}
+.form button{
+    height: 100%;
+    flex: 1;
+    background: orange;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+}

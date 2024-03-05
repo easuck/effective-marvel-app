@@ -11,8 +11,8 @@ const ComicsInfo: FC = () =>{
             <h1>{comics[id].name}</h1>
             <div className={styles.charactersList}>
                 <h3>Characters in this comics:</h3>
-                {comics[id].characters.map(characterIndex =>{
-                    return <Link className="link" to={"/characters/" + characterIndex}>
+                {comics[id].characters.map((characterIndex, index) =>{
+                    return <Link key={index} className="link" to={"/characters/" + characterIndex}>
                         <h4>{characters[characterIndex].name}</h4>
                     </Link>
                 })}

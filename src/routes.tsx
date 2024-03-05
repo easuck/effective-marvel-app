@@ -1,10 +1,10 @@
 import {FC} from "react";
-import Characters from "./components/characters/characters.tsx";
-import Comics from "./components/comics/comics.tsx";
+import Characters from "./pages/characters/characters.tsx";
+import Comics from "./pages/comics/comics.tsx";
 import {useRoutes} from "react-router-dom";
 import Header from "./components/header/header.tsx";
-import CharacterInfo from "./components/characterInfo/characterInfo.tsx";
-import ComicsInfo from "./components/comicsInfo/comicsInfo.tsx";
+import CharacterInfo from "./pages/characterInfo/characterInfo.tsx";
+import ComicsInfo from "./pages/comicsInfo/comicsInfo.tsx";
 
 
 const Router: FC = () => {

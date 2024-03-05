@@ -1,9 +1,0 @@
-.comicsList{
-    padding: var(--main-padding);
-    display: flex;
-    flex-direction: column;
-    gap: var(--sub-padding);
-}
-.comics{
-    font-size: 30px;
-}
