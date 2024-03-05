@@ -18,6 +18,7 @@
     color: white;
     font-size: 14px;
     text-decoration: none;
+    width: fit-content;
 }
 .footer a:hover{
     text-decoration: underline;

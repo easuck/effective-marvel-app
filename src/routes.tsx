@@ -4,6 +4,7 @@ import Comics from "./components/comics/comics.tsx";
 import {useRoutes} from "react-router-dom";
 import Header from "./components/header/header.tsx";
 import CharacterInfo from "./components/characterInfo/characterInfo.tsx";
+import ComicsInfo from "./components/comicsInfo/comicsInfo.tsx";
 
 
 const Router: FC = () => {
@@ -16,6 +17,7 @@ const Router: FC = () => {
                 {path: "characters", element: <Characters/>},
                 {path: "characters/:id", element: <CharacterInfo/>},
                 {path: "comics", element: <Comics/>},
+                {path: "comics/:id", element: <ComicsInfo/>},
                 {path: "*", element: <div>page not found</div>} 
             ]
         }

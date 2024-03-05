@@ -1,8 +1,10 @@
+.characters{
+    padding: var(--main-padding);
+}
 .aboveInputWrapper{
     display: flex;
     align-items: flex-end;
     gap: 10px;
-    padding: calc(var(--main-padding) / 2) var(--main-padding) calc(var(--main-padding) / 4) var(--main-padding);
 }
 .aboveInputCharacters{
     font-size: 50px;
@@ -19,8 +21,6 @@
     display: flex;
     justify-content: space-between;
     gap: var(--main-padding);
-    grid-column-start: 1;
-    grid-column-end: 7;
 }
 .form input{
     flex: 6;
@@ -42,7 +42,6 @@
     grid-template-columns: repeat(6, 1fr);
     grid-column-gap: var(--main-padding);
     grid-row-gap: calc(var(--main-padding) / 2);
-    padding: 0 var(--main-padding) var(--main-padding) var(--main-padding);
 }
 .divider{
     border: none;
@@ -50,5 +49,5 @@
     height: 1px;
     grid-column-start: 1;
     grid-column-end: 7;
-    margin: 20px 0;
+    margin: var(--main-padding) 0;
 }

@@ -4,4 +4,13 @@
 }
 :root{
   --main-padding: 40px;
+  --sub-padding: 20px;
+}
+.link{
+  text-decoration: none;
+  color: cornflowerblue;
+  width: fit-content;
+}
+.link:hover{
+  text-decoration: underline;
 }

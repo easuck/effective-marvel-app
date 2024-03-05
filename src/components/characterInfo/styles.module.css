@@ -10,15 +10,25 @@
     object-position: 20% 20%;
 }
 .info{
+    padding: var(--sub-padding);
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 2fr 3fr;
 }
-.description{
+.descriptionWrapper{
     display: flex;
     flex-direction: column;
+    width: 75%;
+    font-size: 30px;
+}
+.descriptionWrapper h4{
+    font-weight: 500;
 }
 .comicsList{
     display: flex;
     flex-direction: column;
+    font-size: 30px;
+}
+.comicsList h4{
+    font-weight: 500;
 }
