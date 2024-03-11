@@ -1,9 +1,9 @@
 import {FC} from "react";
 import styles from "./styles.module.css"
-import CharacterCard from "../../components/characterCard/characterCard.tsx";
+import CharacterCard from "../../components/characterCard/CharacterCard.tsx";
 import {characters} from "../../data/charactersData.tsx";
-import characterCard from "../../components/characterCard/characterCard.tsx";
-import SearchBar from "../../components/searchBar/searchBar.tsx";
+import characterCard from "../../components/characterCard/CharacterCard.tsx";
+import SearchBar from "../../components/searchBar/SearchBar.tsx";
 
 const Characters: FC = () => {
     let charactersAmount: number = characters.length;

@@ -2,7 +2,7 @@ import {FC} from "react";
 import styles from "./styles.module.css"
 import {comics} from "../../data/comicsData.tsx"
 import {Link} from "react-router-dom";
-import SearchBar from "../../components/searchBar/searchBar.tsx";
+import SearchBar from "../../components/searchBar/SearchBar.tsx";
 
 const Comics: FC = () => {
     let comicsAmount = comics.length;
