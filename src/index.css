@@ -3,6 +3,11 @@
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
+body{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 :root{
   --main-padding: 40px;
   --sub-padding: 20px;

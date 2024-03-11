@@ -2,16 +2,16 @@ import {FC} from "react";
 import Characters from "../pages/characters/Characters.tsx";
 import Comics from "../pages/comics/Comics.tsx";
 import {useRoutes} from "react-router-dom";
-import Header from "../components/header/Header.tsx";
 import CharacterInfo from "../pages/characterInfo/CharacterInfo.tsx";
 import ComicsInfo from "../pages/comicsInfo/ComicsInfo.tsx";
 import styles from "./router.module.css"
+import Layout from "../components/Layout.tsx";
 
 const Router: FC = () => {
     let element = useRoutes([
         {
             path: "/",
-            element: <Header/>,
+            element: <Layout/>,
             children:[
                 {index: true, element: <Characters/>},
                 {path: "characters", element: <Characters/>},

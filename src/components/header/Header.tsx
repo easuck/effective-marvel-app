@@ -12,7 +12,6 @@ const Header: FC = () => {
                     <Link to="comics">Comics</Link>
                 </nav>
             </header>
-            <Outlet/>
         </>
     );
 };
