@@ -4,8 +4,7 @@ import Comics from "../pages/comics/Comics.tsx";
 import {useRoutes} from "react-router-dom";
 import CharacterInfo from "../pages/characterInfo/CharacterInfo.tsx";
 import ComicsInfo from "../pages/comicsInfo/ComicsInfo.tsx";
-import styles from "./router.module.css"
-import Layout from "../components/Layout.tsx";
+import Layout from "../components/layout/Layout.tsx";
 
 const Router: FC = () => {
     let element = useRoutes([
@@ -22,6 +21,6 @@ const Router: FC = () => {
             ]
         }
     ])
-    return <div className={styles.content}>{element}</div>;
+    return element;
 }
 export default Router;
