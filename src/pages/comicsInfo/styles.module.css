@@ -1,0 +1,15 @@
+.comicsInfo{
+    display: flex;
+    flex-direction: column;
+    gap: var(--sub-padding);
+    font-size: 30px;
+    padding: var(--main-padding);
+}
+.charactersList{
+    display: flex;
+    flex-direction: column;
+}
+.charactersList h4{
+    font-weight: 500;
+    font-size: 24px;
+}

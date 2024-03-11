@@ -1,0 +1,36 @@
+.comicsPage{
+    padding: var(--main-padding);
+    display: flex;
+    flex-direction: column;
+}
+.comicsList{
+    display: flex;
+    flex-direction: column;
+    gap: var(--sub-padding);
+}
+.comics{
+    font-size: 30px;
+}
+.labelWrapper{
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+.labelCharacters{
+    font-size: 50px;
+    font-weight: 700;
+}
+.labelAmount{
+    font-size: 30px;
+    font-weight: 700;
+    color: grey;
+    line-height: 44px;
+}
+.divider{
+    border: none;
+    background: grey;
+    height: 1px;
+    grid-column-start: 1;
+    grid-column-end: 7;
+    margin: var(--main-padding) 0;
+}

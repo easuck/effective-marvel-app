@@ -1,0 +1,17 @@
+.characters{
+    padding: var(--main-padding);
+}
+.charactersGrid{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-column-gap: var(--main-padding);
+    grid-row-gap: calc(var(--main-padding) / 2);
+}
+.divider{
+    border: none;
+    background: grey;
+    height: 1px;
+    grid-column-start: 1;
+    grid-column-end: 7;
+    margin: var(--main-padding) 0;
+}
