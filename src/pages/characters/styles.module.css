@@ -4,6 +4,7 @@
 .charactersGrid{
     display: grid;
     grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 300px;
     grid-column-gap: var(--main-padding);
     grid-row-gap: calc(var(--main-padding) / 2);
 }
