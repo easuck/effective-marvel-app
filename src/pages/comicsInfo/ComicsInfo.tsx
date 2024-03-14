@@ -1,6 +1,5 @@
 import {FC} from "react";
 import styles from "./styles.module.css"
-import {characters} from "../../data/charactersData.tsx";
 import {comics} from "../../data/comicsData.tsx"
 import {Link, useParams} from "react-router-dom";
 
@@ -13,7 +12,7 @@ const ComicsInfo: FC = () =>{
                 <h3>Characters in this comics:</h3>
                 {comics[id].characters.map((characterIndex, index) =>{
                     return <Link key={index} className="link" to={"/characters/" + characterIndex}>
-                        <h4>{characters[characterIndex].name}</h4>
+                        {/*<h4>{characters[characterIndex].name}</h4>*/}
                     </Link>
                 })}
             </div>

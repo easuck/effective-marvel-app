@@ -13,7 +13,7 @@ const Characters: FC = () => {
         charactersRequests.getCharacters()
         .then(data => {
             const charactersArray: ICharacter[]  = data.map(character => {
-                let characterModel: ICharacter = {
+                const characterModel: ICharacter = {
                     id: character.id,
                     name: character.name,
                     desc: character.description,
@@ -25,19 +25,6 @@ const Characters: FC = () => {
         })
     }, []);
 
-    const openCharacterInfo = (id: number) => {
-        charactersRequests.getCharacterById(id)
-            .then(character =>{
-                let characterModel: ICharacter = {
-                    id: character.id,
-                    name: character.name,
-                    desc: character.description,
-                    image: character.thumbnail.path + "." + character.thumbnail.extension
-                }
-            })
-    }
-
-
     return(
         <section className={styles.characters}>
             <SearchBar subject="Characters" amount={charactersAmount}/>
@@ -45,7 +32,7 @@ const Characters: FC = () => {
             <div className={styles.charactersGrid}>
                 {characters.map((character, index) => {
                     return <CharacterCard key={character.id} id={character.id} image={character.image} name={character.name}
-                                          desc={character.desc} openCharacterInfo={openCharacterInfo}/>
+                                          desc={character.desc}/>
                 })}
             </div>
         </section>

@@ -8,6 +8,6 @@ export default{
 
     async getCharacterById(id: number): Promise<any>{
         const response = await axios.get("/characters/" + id);
-        return response.data.data;
+        return response.data.data.results;
     }
 }
