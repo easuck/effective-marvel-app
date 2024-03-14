@@ -10,21 +10,33 @@ const Characters: FC = () => {
     const charactersAmount: number = characters.length;
 
     useEffect(() => {
-        let result = charactersRequests.getCharacters();
-        result.then(data => {
-            data.map(character => {
+        charactersRequests.getCharacters()
+        .then(data => {
+            const charactersArray: ICharacter[]  = data.map(character => {
                 let characterModel: ICharacter = {
                     id: character.id,
                     name: character.name,
                     desc: character.description,
                     image: character.thumbnail.path + "." + character.thumbnail.extension
                 }
-                //setCharacters([...characters, characterModel]);
-                characters.push(characterModel);
+                return characterModel;
             })
+            setCharacters(charactersArray);
         })
-        console.log(characters);
     }, []);
+
+    const openCharacterInfo = (id: number) => {
+        charactersRequests.getCharacterById(id)
+            .then(character =>{
+                let characterModel: ICharacter = {
+                    id: character.id,
+                    name: character.name,
+                    desc: character.description,
+                    image: character.thumbnail.path + "." + character.thumbnail.extension
+                }
+            })
+    }
+
 
     return(
         <section className={styles.characters}>
@@ -33,7 +45,7 @@ const Characters: FC = () => {
             <div className={styles.charactersGrid}>
                 {characters.map((character, index) => {
                     return <CharacterCard key={character.id} id={character.id} image={character.image} name={character.name}
-                                          desc={character.desc}/>
+                                          desc={character.desc} openCharacterInfo={openCharacterInfo}/>
                 })}
             </div>
         </section>
