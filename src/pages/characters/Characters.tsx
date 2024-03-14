@@ -13,13 +13,12 @@ const Characters: FC = () => {
         charactersRequests.getCharacters()
         .then(data => {
             const charactersArray: ICharacter[]  = data.map(character => {
-                const characterModel: ICharacter = {
+                return {
                     id: character.id,
                     name: character.name,
                     desc: character.description,
                     image: character.thumbnail.path + "." + character.thumbnail.extension
                 }
-                return characterModel;
             })
             setCharacters(charactersArray);
         })

@@ -1,7 +1,6 @@
 import {FC, useEffect, useState} from "react";
 import styles from "./styles.module.css"
 import {Link, useParams} from "react-router-dom";
-import {comics} from "../../data/comicsData.tsx"
 import {ICharacter} from "../../types/ICharacter.tsx";
 import charactersRequests from "../../api/charactersRequests.ts";
 
@@ -12,15 +11,14 @@ const CharacterInfo: FC = () => {
     useEffect(() => {
         const numberId = + id;
         charactersRequests.getCharacterById(numberId)
-            .then(data =>{
+            .then(data => {
                 const charactersArray: ICharacter[]  = data.map(character => {
-                    const characterModel: ICharacter = {
+                    return {
                         id: character.id,
                         name: character.name,
                         desc: character.description,
                         image: character.thumbnail.path + "." + character.thumbnail.extension
                     }
-                    return characterModel;
                 })
                 setCharacter(charactersArray);
             });
