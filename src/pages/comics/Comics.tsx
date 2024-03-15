@@ -1,9 +1,9 @@
 import {FC, useEffect, useState} from "react";
 import styles from "./styles.module.css"
-import {Link} from "react-router-dom";
 import SearchBar from "../../components/searchBar/SearchBar.tsx";
 import {IComics} from "../../types/IComics.tsx";
 import comicsRequests from "../../api/comicsRequests.ts";
+import Card from "../../components/card/Card.tsx";
 
 const Comics: FC = () => {
     const [comics, setComics] = useState<IComics[]>([]);
@@ -28,11 +28,10 @@ const Comics: FC = () => {
         <section className={styles.comicsPage}>
             <SearchBar subject="Comics" amount={comicsAmount}/>
             <hr className={styles.divider}/>
-            <div className={styles.comicsList}>
-                {comics.map((comics, index) => {
-                    return <Link key={index} className="link" to={"/comics/" + comics.id}>
-                        <div className={styles.comics}>{comics.title}</div>
-                    </Link>
+            <div className={styles.comicsGrid}>
+                {comics.map((comics) => {
+                    return <Card key={comics.id} id={comics.id} image={comics.image} name={comics.title}
+                        desc={comics.desc} link="comics"/>
                 })}
             </div>
         </section>

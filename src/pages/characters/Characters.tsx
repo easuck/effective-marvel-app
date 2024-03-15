@@ -1,6 +1,6 @@
 import {FC, useEffect, useState} from "react";
 import styles from "./styles.module.css"
-import CharacterCard from "../../components/characterCard/CharacterCard.tsx";
+import Card from "../../components/card/Card.tsx";
 import SearchBar from "../../components/searchBar/SearchBar.tsx";
 import charactersRequests from "../../api/charactersRequests.ts"
 import {ICharacter} from "../../types/ICharacter.tsx";
@@ -29,9 +29,9 @@ const Characters: FC = () => {
             <SearchBar subject="Characters" amount={charactersAmount}/>
             <hr className={styles.divider}/>
             <div className={styles.charactersGrid}>
-                {characters.map((character, index) => {
-                    return <CharacterCard key={character.id} id={character.id} image={character.image} name={character.name}
-                                          desc={character.desc}/>
+                {characters.map((character) => {
+                    return <Card key={character.id} id={character.id} image={character.image} name={character.name}
+                                 desc={character.desc} link="characters"/>
                 })}
             </div>
         </section>
