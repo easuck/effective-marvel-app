@@ -3,5 +3,5 @@ export interface ICharacter{
     image: string,
     name: string,
     desc: string,
-    comics?: number[];
+    comics: number[];
 }

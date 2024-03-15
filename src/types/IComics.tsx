@@ -3,5 +3,5 @@ export interface IComics{
     image: string,
     title: string,
     desc: string,
-    characters?: number[]
+    characters: number[]
 }

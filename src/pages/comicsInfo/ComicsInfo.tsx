@@ -3,10 +3,12 @@ import styles from "./styles.module.css"
 import {Link, useParams} from "react-router-dom";
 import {IComics} from "../../types/IComics.tsx";
 import comicsRequests from "../../api/comicsRequests.ts";
+import {ICharacter} from "../../types/ICharacter.tsx";
 
 const ComicsInfo: FC = () =>{
     const {id} = useParams<"id">();
     const [comics, setComics] = useState<IComics[]>([]);
+    const [characters, setCharacters] = useState<ICharacter[]>([]);
 
     useEffect(() => {
         comicsRequests.getComicsById(id as number)
@@ -23,6 +25,20 @@ const ComicsInfo: FC = () =>{
             })
     }, []);
 
+    useEffect(() => {
+        comicsRequests.getComicsCharactersById(id as number)
+            .then(data => {
+                const charactersArray: ICharacter[] = data.map(character => {
+                    return {
+                        id: character.id,
+                        name: character.name
+                    }
+                })
+                setCharacters(charactersArray);
+            })
+    }, [])
+
+
     return(
         <section className={styles.comicsInfo}>
             <img className={styles.portrait} src={comics[0]?.image} alt="portrait"/>
@@ -33,6 +49,11 @@ const ComicsInfo: FC = () =>{
                 </div>
                 <div className={styles.charactersList}>
                     <h3>Characters in this comics:</h3>
+                    {characters.map(character => {
+                        return <Link key={character.id} className="link" to={`/characters/${character.id}`}>
+                            <h4>{character.name}</h4>
+                        </Link>
+                    })}
                 </div>
             </div>
         </section>
