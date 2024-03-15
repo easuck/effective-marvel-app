@@ -11,7 +11,7 @@ const CharacterInfo: FC = () => {
     const [comics, setComics] = useState<IComics[]>([]);
 
     useEffect(() => {
-        charactersRequests.getCharacterById(id as number)
+        charactersRequests.getCharacterById(id as unknown as number)
             .then(data => {
                 const charactersArray: ICharacter[]  = data.map(character => {
                     return {
@@ -26,7 +26,7 @@ const CharacterInfo: FC = () => {
     }, []);
 
     useEffect(() => {
-        charactersRequests.getCharacterComicsById(id as number)
+        charactersRequests.getCharacterComicsById(id as unknown as number)
             .then(data => {
                 const comicsArray: IComics[] = data.map(comics => {
                     return {
@@ -48,11 +48,13 @@ const CharacterInfo: FC = () => {
                 </div>
                 <div className={styles.comicsList}>
                     <h3>Comics with this character:</h3>
-                    {comics.map((comics) => {
-                        return <Link key={comics.id} className="link" to={`/comics/${comics.id}`}>
-                            <h4>{comics.title}</h4>
-                        </Link>
-                    })}
+                    {comics.length == 0 ? <h4>No comics</h4> :
+                        comics.map((comics) => {
+                            return <Link key={comics.id} className="link" to={`/comics/${comics.id}`}>
+                                <h4>{comics.title}</h4>
+                            </Link>
+                        })
+                    }
                 </div>
             </div>
         </section>
