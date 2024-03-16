@@ -27,7 +27,6 @@ const Characters: FC = () => {
 
     const inputHandler = (event: any) => {
         setSearchCharacter(event.target.value);
-        console.log(searchCharacter);
     }
 
     const searchCharactersByName = (event: any) => {
