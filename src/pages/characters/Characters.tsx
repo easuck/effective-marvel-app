@@ -8,6 +8,7 @@ import {ICharacter} from "../../types/ICharacter.tsx";
 const Characters: FC = () => {
     const [characters, setCharacters] = useState<ICharacter[]>([]);
     const charactersAmount: number = characters.length;
+    const [searchCharacter, setSearchCharacter] = useState<string>("");
 
     useEffect(() => {
         charactersRequests.getCharacters()
@@ -24,9 +25,30 @@ const Characters: FC = () => {
         })
     }, []);
 
+    const inputHandler = (event: any) => {
+        setSearchCharacter(event.target.value);
+        console.log(searchCharacter);
+    }
+
+    const searchCharactersByName = (event: any) => {
+        event.preventDefault();
+        charactersRequests.searchCharacterByName(searchCharacter)
+        .then(data => {
+            const charactersArray: ICharacter[]  = data.map(character => {
+                return {
+                    id: character.id,
+                    name: character.name,
+                    desc: character.description,
+                    image: character.thumbnail.path + "." + character.thumbnail.extension
+                }
+            })
+            setCharacters(charactersArray);
+        })
+    }
+
     return(
         <section className={styles.characters}>
-            <SearchBar subject="Characters" amount={charactersAmount}/>
+            <SearchBar subject="Characters" amount={charactersAmount} inputHandler={inputHandler} searchContent={searchCharactersByName} searchWord={searchCharacter}/>
             <hr className={styles.divider}/>
             <div className={styles.charactersGrid}>
                 {characters.map((character) => {

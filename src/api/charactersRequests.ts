@@ -14,5 +14,10 @@ export default{
     async getCharacterComicsById(id: number): Promise<any>{
         const response = await axios.get(`/characters/${id}/comics`);
         return response.data.data.results;
+    },
+
+    async searchCharacterByName(name: string): Promise<any>{
+        const response = await axios.get("/characters", {params: {limit: 10, nameStartsWith: name}});
+        return response.data.data.results;
     }
 }
