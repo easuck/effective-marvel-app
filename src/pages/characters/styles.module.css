@@ -4,7 +4,7 @@
 .charactersGrid{
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-template-rows: 300px; /* высота ряда применяется только один раз к первому ряду в сетке. хз как фиксить если заранее не знаешь количество рядов*/
+    grid-auto-rows: 300px;
     grid-column-gap: var(--main-padding);
     grid-row-gap: calc(var(--main-padding) / 2);
 }
