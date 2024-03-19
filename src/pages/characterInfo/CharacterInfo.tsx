@@ -13,7 +13,7 @@ const CharacterInfo: FC = () => {
     useEffect(() => {
         charactersRequests.getCharacterById(id as unknown as number)
             .then(data => {
-                const charactersArray: ICharacter[]  = data.map(character => {
+                const charactersArray: ICharacter[] = data.map(character => {
                     return {
                         id: character.id,
                         name: character.name,

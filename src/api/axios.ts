@@ -10,11 +10,11 @@ const instance = axios.create({
     }
 });
 
-instance.interceptors.request.use(
+instance.interceptors.response.use(
     undefined,
     error => {
-            console.log("ошибка");
-            return Promise.reject(error.response);
+            console.log(error.response);
+            return Promise.reject(error);
     }
 );
 
