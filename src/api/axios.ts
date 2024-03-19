@@ -10,14 +10,12 @@ const instance = axios.create({
     }
 });
 
-/*instance.interceptors.request.use(config =>{
-    config.params = {
-        ts: envs.timestamp,
-        apikey: envs.apiKey,
-        hash: envs.hash,
-        ...config.params
-    };
-    return config;
-});*/
+instance.interceptors.request.use(
+    undefined,
+    error => {
+            console.log("ошибка");
+            return Promise.reject(error.response);
+    }
+);
 
 export default instance;

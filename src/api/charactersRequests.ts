@@ -2,7 +2,7 @@ import axios from "./axios.ts";
 
 export default{
     async getCharacters(limit: number, offset: number): Promise<any>{
-        const response = await axios.get("/characters", {params: {limit: limit, offset: offset}});
+        const response = await axios.get("/characters", {params: {limit: limit, offset: offset}})
         return response.data.data.results;
     },
 
