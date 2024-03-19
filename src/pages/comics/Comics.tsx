@@ -6,15 +6,20 @@ import comicsRequests from "../../api/comicsRequests.ts";
 import Card from "../../components/card/Card.tsx";
 import charactersRequests from "../../api/charactersRequests.ts";
 import {ICharacter} from "../../types/ICharacter.tsx";
+import Pagination from "../../components/pagination/Pagination.tsx";
 
 const Comics: FC = () => {
     const [comics, setComics] = useState<IComics[]>([]);
-    const comicsAmount: number = comics.length;
     const [searchComics, setSearchComics] = useState<string>("");
+
+    const [page, setPage] = useState<number>(1);
+    const comicsOnPage : number = 18;
+    const pagesAmount: number = 5;
+    const comicsAmount: number = comicsOnPage * pagesAmount;
 
 
     useEffect(() => {
-        comicsRequests.getComics()
+        comicsRequests.getComics(comicsOnPage, (page - 1) * comicsOnPage)
             .then(data => {
                 const comicsArray: IComics[] = data.map(comics => {
                     return {
@@ -26,7 +31,7 @@ const Comics: FC = () => {
                 })
                 setComics(comicsArray);
             })
-    }, []);
+    }, [page]);
 
     const inputHandler = (event: any) => {
         setSearchComics(event.target.value);
@@ -58,6 +63,7 @@ const Comics: FC = () => {
                         desc={comics.desc} link="comics"/>
                 })}
             </div>
+            <Pagination pagesAmount={pagesAmount} page={page} setPage={setPage}/>
         </section>
     )
 }

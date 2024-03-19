@@ -12,8 +12,8 @@ const Characters: FC = () => {
 
     const [page, setPage] = useState<number>(1);
     const charactersOnPage : number = 18;
-    const pageAmount: number = 5;
-    const charactersAmount: number = charactersOnPage * pageAmount;
+    const pagesAmount: number = 5;
+    const charactersAmount: number = charactersOnPage * pagesAmount;
 
     useEffect(() => {
         charactersRequests.getCharacters(charactersOnPage, (page - 1) * charactersOnPage)
@@ -60,7 +60,7 @@ const Characters: FC = () => {
                                  desc={character.desc} link="characters"/>
                 })}
             </div>
-            <Pagination pagesAmount={pageAmount} page={page} setPage={setPage}/>
+            <Pagination pagesAmount={pagesAmount} page={page} setPage={setPage}/>
         </section>
     )
 };

@@ -1,8 +1,8 @@
 import axios from "./axios.ts";
 
 export default{
-    async getComics(): Promise<any>{
-        const response = await axios.get("/comics", {params: {limit: 10}});
+    async getComics(limit: number, offset: number): Promise<any>{
+        const response = await axios.get("/comics", {params: {limit: limit, offset: offset}});
         return response.data.data.results;
     },
 
