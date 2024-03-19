@@ -28,13 +28,11 @@ const Characters: FC = () => {
                 })
                 setCharacters(charactersArray);
             })
-        console.log("page: " + page);
-        console.log("offset: " + (page - 1) * charactersOnPage);
     }, [page]);
 
-    const setCurrentPage = (page: number) => {
+    /*const setCurrentPage = (page: number) => {
         setPage(page);
-    }
+    }*/
 
     const inputHandler = (event: any) => {
         setSearchCharacter(event.target.value);
@@ -66,7 +64,7 @@ const Characters: FC = () => {
                                  desc={character.desc} link="characters"/>
                 })}
             </div>
-            <Pagination pages={pageAmount} setPage={setCurrentPage}/>
+            <Pagination pagesAmount={pageAmount} page={page} setPage={setPage}/>
         </section>
     )
 };
