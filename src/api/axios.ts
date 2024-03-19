@@ -1,5 +1,8 @@
 import axios from "axios";
-import envs from "../config/environments.ts"
+import envs from "../config/environments.ts";
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const instance = axios.create({
     baseURL: envs.baseURL,
@@ -13,7 +16,7 @@ const instance = axios.create({
 instance.interceptors.response.use(
     undefined,
     error => {
-            console.log(error.response);
+            toast("Произошла ошибка со статус кодом " + error.response.status);
             return Promise.reject(error);
     }
 );
