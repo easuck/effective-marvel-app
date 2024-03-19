@@ -5,10 +5,12 @@ import SearchBar from "../../components/searchBar/SearchBar.tsx";
 import charactersRequests from "../../api/charactersRequests.ts"
 import {ICharacter} from "../../types/ICharacter.tsx";
 import Pagination from "../../components/pagination/Pagination.tsx";
+import useDebounce from "../../hooks/useDebounce.tsx";
 
 const Characters: FC = () => {
     const [characters, setCharacters] = useState<ICharacter[]>([]);
     const [searchCharacter, setSearchCharacter] = useState<string>("");
+    const debouncedInput = useDebounce(searchCharacter, 3000);
 
     const [page, setPage] = useState<number>(1);
     const charactersOnPage : number = 18;
@@ -30,6 +32,10 @@ const Characters: FC = () => {
             })
     }, [page]);
 
+    useEffect(() => {
+        if (debouncedInput) searchCharactersByNameDebounce();
+    }, [debouncedInput]);
+
     const inputHandler = (event: any) => {
         setSearchCharacter(event.target.value);
     }
@@ -50,9 +56,24 @@ const Characters: FC = () => {
         })
     }
 
+    const searchCharactersByNameDebounce = () => {
+        charactersRequests.searchCharacterByName(searchCharacter)
+            .then(data => {
+                const charactersArray: ICharacter[]  = data.map(character => {
+                    return {
+                        id: character.id,
+                        name: character.name,
+                        desc: character.description,
+                        image: character.thumbnail.path + "." + character.thumbnail.extension
+                    }
+                })
+                setCharacters(charactersArray);
+            })
+    }
+
     return(
         <section className={styles.characters}>
-            <SearchBar subject="Characters" amount={charactersAmount} inputHandler={inputHandler} searchContent={searchCharactersByName} searchWord={searchCharacter}/>
+            <SearchBar subject="Characters" amount={charactersAmount} inputHandler={inputHandler} callback={searchCharactersByName} searchWord={searchCharacter}/>
             <hr className={styles.divider}/>
             <div className={styles.charactersGrid}>
                 {characters.map((character) => {
