@@ -8,12 +8,12 @@ import Pagination from "../../components/pagination/Pagination.tsx";
 
 const Characters: FC = () => {
     const [characters, setCharacters] = useState<ICharacter[]>([]);
-    const charactersAmount: number = characters.length;
     const [searchCharacter, setSearchCharacter] = useState<string>("");
 
     const [page, setPage] = useState<number>(1);
-    const charactersOnPage : number = 10;
+    const charactersOnPage : number = 18;
     const pageAmount: number = 5;
+    const charactersAmount: number = charactersOnPage * pageAmount;
 
     useEffect(() => {
         charactersRequests.getCharacters(charactersOnPage, (page - 1) * charactersOnPage)
@@ -29,10 +29,6 @@ const Characters: FC = () => {
                 setCharacters(charactersArray);
             })
     }, [page]);
-
-    /*const setCurrentPage = (page: number) => {
-        setPage(page);
-    }*/
 
     const inputHandler = (event: any) => {
         setSearchCharacter(event.target.value);
