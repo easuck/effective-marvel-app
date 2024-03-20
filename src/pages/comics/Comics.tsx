@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from "react";
+import {FC, useEffect} from "react";
 import styles from "./styles.module.css"
 import SearchBar from "../../components/searchBar/SearchBar.tsx";
 import {IComics} from "../../types/IComics.tsx";
@@ -7,12 +7,18 @@ import Card from "../../components/card/Card.tsx";
 import Pagination from "../../components/pagination/Pagination.tsx";
 import useDebounce from "../../hooks/useDebounce.tsx";
 
-const Comics: FC = () => {
-    const [comics, setComics] = useState<IComics[]>([]);
-    const [searchComics, setSearchComics] = useState<string>("");
+type Props = {
+    comics: IComics[];
+    setComics: (comics: IComics[]) => void;
+    searchComics: string;
+    setSearchComics: (searchComics: string) => void;
+    page: number;
+    setPage: (page: number) => void;
+}
+const Comics: FC<Props> =
+    ({comics, searchComics, page,
+         setComics, setSearchComics, setPage}) => {
     const debouncedInput = useDebounce(searchComics, 3000);
-
-    const [page, setPage] = useState<number>(1);
     const comicsOnPage : number = 18;
     const pagesAmount: number = 5;
     const comicsAmount: number = comicsOnPage * pagesAmount;
@@ -85,7 +91,7 @@ const Comics: FC = () => {
             <Pagination pagesAmount={pagesAmount} page={page} setPage={setPage}/>
         </section>
     )
-}
+};
 
 export default Comics;
 

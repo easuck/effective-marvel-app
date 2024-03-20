@@ -14,6 +14,6 @@ const Layout: FC = () =>{
             <ToastContainer/>
         </div>
     )
-}
+};
 
 export default Layout;

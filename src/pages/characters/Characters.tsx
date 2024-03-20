@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from "react";
+import {FC, useEffect} from "react";
 import styles from "./styles.module.css"
 import Card from "../../components/card/Card.tsx";
 import SearchBar from "../../components/searchBar/SearchBar.tsx";
@@ -7,12 +7,19 @@ import {ICharacter} from "../../types/ICharacter.tsx";
 import Pagination from "../../components/pagination/Pagination.tsx";
 import useDebounce from "../../hooks/useDebounce.tsx";
 
-const Characters: FC = () => {
-    const [characters, setCharacters] = useState<ICharacter[]>([]);
-    const [searchCharacter, setSearchCharacter] = useState<string>("");
-    const debouncedInput = useDebounce(searchCharacter, 3000);
+type Props = {
+    characters: ICharacter[];
+    setCharacters: (characters: ICharacter[]) => void;
+    searchCharacter: string;
+    setSearchCharacter: (searchCharacter: string) => void;
+    page: number;
+    setPage: (page: number) => void;
+}
 
-    const [page, setPage] = useState<number>(1);
+const Characters: FC<Props> =
+    ({characters, searchCharacter, page,
+         setCharacters, setSearchCharacter, setPage}) => {
+    const debouncedInput = useDebounce(searchCharacter, 3000);
     const charactersOnPage : number = 18;
     const pagesAmount: number = 5;
     const charactersAmount: number = charactersOnPage * pagesAmount;

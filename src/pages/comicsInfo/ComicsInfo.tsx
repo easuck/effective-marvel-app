@@ -1,14 +1,20 @@
-import {FC, useEffect, useState} from "react";
+import {FC, useEffect} from "react";
 import styles from "./styles.module.css"
 import {Link, useParams} from "react-router-dom";
 import {IComics} from "../../types/IComics.tsx";
 import comicsRequests from "../../api/comicsRequests.ts";
 import {ICharacter} from "../../types/ICharacter.tsx";
 
-const ComicsInfo: FC = () =>{
+type Props = {
+    comics: IComics[];
+    setComics: (comics: IComics[]) => void;
+    characters: ICharacter[];
+    setCharacters: (characters: ICharacter[]) => void;
+}
+
+const ComicsInfo: FC<Props> =
+    ({comics, characters, setComics, setCharacters}) =>{
     const {id} = useParams<"id">();
-    const [comics, setComics] = useState<IComics[]>([]);
-    const [characters, setCharacters] = useState<ICharacter[]>([]);
 
     useEffect(() => {
         comicsRequests.getComicsById(id as unknown as number)
