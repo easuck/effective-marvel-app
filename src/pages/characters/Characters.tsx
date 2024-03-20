@@ -42,7 +42,7 @@ const Characters: FC = () => {
 
     const searchCharactersByName = (event: any) => {
         event.preventDefault();
-        charactersRequests.searchCharacterByName(searchCharacter)
+        charactersRequests.searchCharacterByName(charactersOnPage, searchCharacter)
         .then(data => {
             const charactersArray: ICharacter[]  = data.map(character => {
                 return {
@@ -57,7 +57,7 @@ const Characters: FC = () => {
     }
 
     const searchCharactersByNameDebounce = () => {
-        charactersRequests.searchCharacterByName(searchCharacter)
+        charactersRequests.searchCharacterByName(charactersOnPage, searchCharacter)
             .then(data => {
                 const charactersArray: ICharacter[]  = data.map(character => {
                     return {

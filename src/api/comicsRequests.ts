@@ -25,9 +25,9 @@ export default{
         catch {}
     },
 
-    async searchComicsByTitle(title: string): Promise<any>{
+    async searchComicsByTitle(limit: number, title: string): Promise<any>{
         try{
-            const response = await axios.get("/comics", {params: {limit: 10, titleStartsWith: title}});
+            const response = await axios.get("/comics", {params: {limit: limit, titleStartsWith: title}});
             return response.data.data.results;
         }
         catch {}

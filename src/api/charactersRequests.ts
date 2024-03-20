@@ -25,9 +25,9 @@ export default{
         catch {}
     },
 
-    async searchCharacterByName(name: string): Promise<any>{
+    async searchCharacterByName(limit: number, name: string): Promise<any>{
         try{
-            const response = await axios.get("/characters", {params: {limit: 18, nameStartsWith: name}});
+            const response = await axios.get("/characters", {params: {limit: limit, nameStartsWith: name}});
             return response.data.data.results;
         }
         catch {}
