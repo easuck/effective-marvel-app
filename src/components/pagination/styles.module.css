@@ -16,6 +16,10 @@
     border: none;
     background: none;
 }
+.selected{
+    color: white;
+    background: orange;
+}
 .pageButton:hover{
     color: white;
     background: orange;
@@ -29,9 +33,6 @@
     color: red;
 }
 .button:hover:enabled{
-    color: white;
-    background: orange;}
-.selected{
     color: white;
     background: orange;
 }
