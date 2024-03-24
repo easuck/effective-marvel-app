@@ -5,6 +5,7 @@ class CharactersStore {
     characters: ICharacter[] = [];
     searchCharacter: string = "";
     page: number = 1;
+    loading: boolean = false;
 
     constructor(){
         makeAutoObservable(this);
@@ -20,6 +21,10 @@ class CharactersStore {
 
     setPage = (page: number) => {
         this.page = page;
+    }
+
+    setLoading = (loading: boolean) => {
+        this.loading = loading;
     }
 }
 

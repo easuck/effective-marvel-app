@@ -1,9 +1,16 @@
 import axios from "./axios.ts";
+import CharactersStore from "../stores/CharactersStore.ts";
+
+const charactersStore = new CharactersStore();
 
 export default{
     async getCharacters(limit: number, offset: number): Promise<any>{
         try {
+            charactersStore.setLoading(true);
+            console.log("загрузка началась")
             const response = await axios.get("/characters", {params: {limit: limit, offset: offset}})
+            charactersStore.setLoading(false);
+            console.log("загрузка закончилась")
             return response.data.data.results;
         }
         catch {}

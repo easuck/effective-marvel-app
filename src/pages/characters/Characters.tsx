@@ -6,6 +6,7 @@ import charactersRequests from "../../api/charactersRequests.ts"
 import {ICharacter} from "../../types/ICharacter.tsx";
 import Pagination from "../../components/pagination/Pagination.tsx";
 import useDebounce from "../../hooks/useDebounce.tsx";
+import {ColorRing} from "react-loader-spinner";
 
 type Props = {
     characters: ICharacter[];
@@ -14,11 +15,12 @@ type Props = {
     setSearchCharacter: (searchCharacter: string) => void;
     page: number;
     setPage: (page: number) => void;
+    loading: boolean;
 }
 
 const Characters: FC<Props> =
     ({characters, searchCharacter, page,
-         setCharacters, setSearchCharacter, setPage}) => {
+         setCharacters, setSearchCharacter, setPage, loading}) => {
     const debouncedInput = useDebounce(searchCharacter, 3000);
     const charactersOnPage : number = 18;
     const pagesAmount: number = 5;
@@ -82,12 +84,18 @@ const Characters: FC<Props> =
         <section className={styles.characters}>
             <SearchBar subject="Characters" amount={charactersAmount} inputHandler={inputHandler} callback={searchCharactersByName} searchWord={searchCharacter}/>
             <hr className={styles.divider}/>
-            <div className={styles.charactersGrid}>
-                {characters.map((character) => {
-                    return <Card key={character.id} id={character.id} image={character.image} name={character.name}
-                                 desc={character.desc} link="characters"/>
-                })}
-            </div>
+            {loading ? (
+                <ColorRing colors={["red", "red", "red", "red", "red"]}/>
+                ) : (
+                <div className={styles.charactersGrid}>
+                    {characters.map((character) => {
+                        return <Card key={character.id} id={character.id} image={character.image}
+                                     name={character.name}
+                                     desc={character.desc} link="characters"/>
+                    })}
+                </div>
+                )
+            }
             <Pagination pagesAmount={pagesAmount} page={page} setPage={setPage}/>
         </section>
     )
