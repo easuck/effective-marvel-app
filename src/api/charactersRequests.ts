@@ -1,7 +1,5 @@
 import axios from "./axios.ts";
-import CharactersStore from "../stores/CharactersStore.ts";
-
-const charactersStore = new CharactersStore();
+import charactersStore from "../stores/CharactersStore.ts";
 
 export default{
     async getCharacters(limit: number, offset: number): Promise<any>{

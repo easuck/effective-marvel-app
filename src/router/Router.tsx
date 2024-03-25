@@ -9,12 +9,7 @@ import CharactersStore from "../stores/CharactersStore.ts";
 import {observer} from "mobx-react-lite";
 import ComicsStore from "../stores/ComicsStore.ts";
 
-const charactersStore = new CharactersStore();
-const characterInfoStore = new CharactersStore();
-const comicsStore = new ComicsStore();
-const comicsInfoStore = new ComicsStore();
-
-const Router: FC = observer(() => {
+const Router: FC = () => {
     const element = useRoutes([
         {
             path: "/",
@@ -22,11 +17,11 @@ const Router: FC = observer(() => {
             children:[
                 {
                     index: true,
-                    element: <Characters {...charactersStore}/>},
+                    element: <Characters/>},
                 {
                     path: "characters",
-                    element: <Characters {...charactersStore}/>},
-                {
+                    element: <Characters/>},
+                /*{
                     path: "characters/:id",
                     element: <CharacterInfo characters={characterInfoStore.characters}
                     setCharacters={characterInfoStore.setCharacters}
@@ -43,10 +38,11 @@ const Router: FC = observer(() => {
                     setCharacters={charactersStore.setCharacters}/>},
                 {
                     path: "*",
-                    element: <div>page not found</div>}
+                    element: <div>page not found</div>
+                }*/
             ]
         }
     ])
     return element;
-});
+};
 export default Router;

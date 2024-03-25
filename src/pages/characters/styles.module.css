@@ -1,5 +1,6 @@
 .characters{
     padding: var(--main-padding);
+    width: 100%;
 }
 .charactersGrid{
     display: grid;
@@ -15,4 +16,9 @@
     grid-column-start: 1;
     grid-column-end: 7;
     margin: var(--main-padding) 0;
+}
+.loaderContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

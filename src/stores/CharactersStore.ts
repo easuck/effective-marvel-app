@@ -28,4 +28,6 @@ class CharactersStore {
     }
 }
 
-export default CharactersStore;
+const charactersStore = new CharactersStore();
+
+export default charactersStore;

@@ -7,8 +7,10 @@ import {ICharacter} from "../../types/ICharacter.tsx";
 import Pagination from "../../components/pagination/Pagination.tsx";
 import useDebounce from "../../hooks/useDebounce.tsx";
 import {ColorRing} from "react-loader-spinner";
+import charactersStore from "../../stores/CharactersStore.ts";
+import {observer} from "mobx-react-lite";
 
-type Props = {
+/*type Props = {
     characters: ICharacter[];
     setCharacters: (characters: ICharacter[]) => void;
     searchCharacter: string;
@@ -16,18 +18,18 @@ type Props = {
     page: number;
     setPage: (page: number) => void;
     loading: boolean;
-}
+}*/
 
-const Characters: FC<Props> =
-    ({characters, searchCharacter, page,
-         setCharacters, setSearchCharacter, setPage, loading}) => {
-    const debouncedInput = useDebounce(searchCharacter, 3000);
+const Characters: FC = observer(() => {
+        /*{characters, searchCharacter, page,
+            setCharacters, setSearchCharacter, setPage, loading}*/
+    const debouncedInput = useDebounce(charactersStore.searchCharacter, 3000);
     const charactersOnPage : number = 18;
     const pagesAmount: number = 5;
     const charactersAmount: number = charactersOnPage * pagesAmount;
 
     useEffect(() => {
-        charactersRequests.getCharacters(charactersOnPage, (page - 1) * charactersOnPage)
+        charactersRequests.getCharacters(charactersOnPage, (charactersStore.page - 1) * charactersOnPage)
             .then(data => {
                 const charactersArray: ICharacter[]  = data.map(character => {
                     return {
@@ -37,21 +39,21 @@ const Characters: FC<Props> =
                         image: character.thumbnail.path + "." + character.thumbnail.extension
                     }
                 })
-                setCharacters(charactersArray);
+                charactersStore.setCharacters(charactersArray);
             })
-    }, [page]);
+    }, [charactersStore.page]);
 
     useEffect(() => {
         if (debouncedInput) searchCharactersByNameDebounce();
     }, [debouncedInput]);
 
     const inputHandler = (event: any) => {
-        setSearchCharacter(event.target.value);
+        charactersStore.setSearchCharacter(event.target.value);
     }
 
     const searchCharactersByName = (event: any) => {
         event.preventDefault();
-        charactersRequests.searchCharacterByName(charactersOnPage, searchCharacter)
+        charactersRequests.searchCharacterByName(charactersOnPage, charactersStore.searchCharacter)
         .then(data => {
             const charactersArray: ICharacter[]  = data.map(character => {
                 return {
@@ -61,12 +63,12 @@ const Characters: FC<Props> =
                     image: character.thumbnail.path + "." + character.thumbnail.extension
                 }
             })
-            setCharacters(charactersArray);
+            charactersStore.setCharacters(charactersArray);
         })
     }
 
     const searchCharactersByNameDebounce = () => {
-        charactersRequests.searchCharacterByName(charactersOnPage, searchCharacter)
+        charactersRequests.searchCharacterByName(charactersOnPage, charactersStore.searchCharacter)
             .then(data => {
                 const charactersArray: ICharacter[]  = data.map(character => {
                     return {
@@ -76,19 +78,21 @@ const Characters: FC<Props> =
                         image: character.thumbnail.path + "." + character.thumbnail.extension
                     }
                 })
-                setCharacters(charactersArray);
+                charactersStore.setCharacters(charactersArray);
             })
     }
 
     return(
         <section className={styles.characters}>
-            <SearchBar subject="Characters" amount={charactersAmount} inputHandler={inputHandler} callback={searchCharactersByName} searchWord={searchCharacter}/>
+            <SearchBar subject="Characters" amount={charactersAmount} inputHandler={inputHandler} callback={searchCharactersByName} searchWord={charactersStore.searchCharacter}/>
             <hr className={styles.divider}/>
-            {loading ? (
-                <ColorRing colors={["red", "red", "red", "red", "red"]}/>
+            {charactersStore.loading ? (
+                <div className={styles.loaderContainer}>
+                    <ColorRing colors={["red", "red", "red", "red", "red"]}/>
+                </div>
                 ) : (
                 <div className={styles.charactersGrid}>
-                    {characters.map((character) => {
+                    {charactersStore.characters.map((character) => {
                         return <Card key={character.id} id={character.id} image={character.image}
                                      name={character.name}
                                      desc={character.desc} link="characters"/>
@@ -96,9 +100,9 @@ const Characters: FC<Props> =
                 </div>
                 )
             }
-            <Pagination pagesAmount={pagesAmount} page={page} setPage={setPage}/>
+            <Pagination pagesAmount={pagesAmount} page={charactersStore.page} setPage={charactersStore.setPage}/>
         </section>
     )
-};
+});
 
 export default Characters;
