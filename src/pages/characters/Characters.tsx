@@ -7,19 +7,17 @@ import {ICharacter} from "../../types/ICharacter.tsx";
 import Pagination from "../../components/pagination/Pagination.tsx";
 import useDebounce from "../../hooks/useDebounce.tsx";
 import {ColorRing} from "react-loader-spinner";
-import charactersStore from "../../stores/CharactersStore.ts";
+import {charactersStore as store} from "../../stores/CharactersStore.ts";
 import {observer} from "mobx-react-lite";
 
 const Characters: FC = observer(() => {
-    const debouncedInput = useDebounce(charactersStore.searchCharacter, 3000);
-    const charactersOnPage : number = 18;
-    const pagesAmount: number = 5;
-    const charactersAmount: number = charactersOnPage * pagesAmount;
+    const debouncedInput = useDebounce(store.searchCharacter, 3000);
+    const charactersOnPage : number = 36;
 
     useEffect(() => {
-        charactersRequests.getCharacters(charactersOnPage, (charactersStore.page - 1) * charactersOnPage)
+        charactersRequests.getCharacters(charactersOnPage,(store.page - 1) * charactersOnPage)
             .then(data => {
-                const charactersArray: ICharacter[]  = data.map(character => {
+                const charactersArray: ICharacter[]  = data[0].map(character => {
                     return {
                         id: character.id,
                         name: character.name,
@@ -27,21 +25,23 @@ const Characters: FC = observer(() => {
                         image: character.thumbnail.path + "." + character.thumbnail.extension
                     }
                 })
-                charactersStore.setCharacters(charactersArray);
+                store.setCharacters(charactersArray);
+                store.setCharactersAmount(data[1].total);
+                store.setPagesAmount(Math.ceil(store.charactersAmount / charactersOnPage));
             })
-    }, [charactersStore.page]);
+    }, [store.page]);
 
     useEffect(() => {
         if (debouncedInput) searchCharactersByNameDebounce();
     }, [debouncedInput]);
 
     const inputHandler = (event: any) => {
-        charactersStore.setSearchCharacter(event.target.value);
+        store.setSearchCharacter(event.target.value);
     }
 
     const searchCharactersByName = (event: any) => {
         event.preventDefault();
-        charactersRequests.searchCharacterByName(charactersOnPage, charactersStore.searchCharacter)
+        charactersRequests.searchCharacterByName(charactersOnPage, store.searchCharacter)
         .then(data => {
             const charactersArray: ICharacter[]  = data.map(character => {
                 return {
@@ -51,12 +51,12 @@ const Characters: FC = observer(() => {
                     image: character.thumbnail.path + "." + character.thumbnail.extension
                 }
             })
-            charactersStore.setCharacters(charactersArray);
+            store.setCharacters(charactersArray);
         })
     }
 
     const searchCharactersByNameDebounce = () => {
-        charactersRequests.searchCharacterByName(charactersOnPage, charactersStore.searchCharacter)
+        charactersRequests.searchCharacterByName(charactersOnPage, store.searchCharacter)
             .then(data => {
                 const charactersArray: ICharacter[]  = data.map(character => {
                     return {
@@ -66,21 +66,21 @@ const Characters: FC = observer(() => {
                         image: character.thumbnail.path + "." + character.thumbnail.extension
                     }
                 })
-                charactersStore.setCharacters(charactersArray);
+                store.setCharacters(charactersArray);
             })
     }
 
     return(
         <section className={styles.characters}>
-            <SearchBar subject="Characters" amount={charactersAmount} inputHandler={inputHandler} callback={searchCharactersByName} searchWord={charactersStore.searchCharacter}/>
+            <SearchBar subject="Characters" amount={store.charactersAmount} inputHandler={inputHandler} callback={searchCharactersByName} searchWord={store.searchCharacter}/>
             <hr className={styles.divider}/>
-            {charactersStore.loading ? (
+            {store.loading ? (
                 <div className={styles.loaderContainer}>
                     <ColorRing colors={["red", "red", "red", "red", "red"]}/>
                 </div>
                 ) : (
                 <div className={styles.charactersGrid}>
-                    {charactersStore.characters.map((character) => {
+                    {store.characters.map((character) => {
                         return <Card key={character.id} id={character.id} image={character.image}
                                      name={character.name}
                                      desc={character.desc} link="characters"/>
@@ -88,7 +88,7 @@ const Characters: FC = observer(() => {
                 </div>
                 )
             }
-            <Pagination pagesAmount={pagesAmount} page={charactersStore.page} setPage={charactersStore.setPage}/>
+            <Pagination pagesAmount={store.pagesAmount} page={store.page} setPage={store.setPage}/>
         </section>
     )
 });

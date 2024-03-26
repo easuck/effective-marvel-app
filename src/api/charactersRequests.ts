@@ -10,7 +10,7 @@ export default{
             const response = await axios.get("/characters", {params: {limit: limit, offset: offset}})
             charactersStore.setLoading(false);
             console.log("загрузка закончилась")
-            return response.data.data.results;
+            return [response.data.data.results, response.data.data];
         }
         catch {}
     },

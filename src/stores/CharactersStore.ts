@@ -6,6 +6,8 @@ class CharactersStore {
     searchCharacter: string = "";
     page: number = 1;
     loading: boolean = false;
+    charactersAmount: number = 0;
+    pagesAmount: number = 0;
 
     constructor(){
         makeAutoObservable(this);
@@ -26,8 +28,16 @@ class CharactersStore {
     setLoading = (loading: boolean) => {
         this.loading = loading;
     }
+
+    setCharactersAmount = (charactersAmount: number) => {
+        this.charactersAmount = charactersAmount;
+    }
+
+    setPagesAmount = (pagesAmount: number) => {
+        this.pagesAmount = pagesAmount;
+    }
 }
 
-const charactersStore = new CharactersStore();
+export const charactersStore = new CharactersStore();
 
 export default charactersStore;
