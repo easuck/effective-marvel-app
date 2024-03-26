@@ -15,28 +15,23 @@ const CharacterInfo: FC = observer(() => {
         charactersRequests.getCharacterById(id as unknown as number)
             .then(data => {
                 const charactersArray: ICharacter[] = data.map(character => {
+                    const comicsArray: IComics[] = character.comics.items.map(comics => {
+                        return {
+                            id: comics.resourceURI.split('/').slice(-1).toString(),
+                            title: comics.name
+                        }
+                    })
+                    console.log(comicsArray);
                     return {
                         id: character.id,
                         name: character.name,
                         desc: character.description,
-                        image: character.thumbnail.path + "." + character.thumbnail.extension
+                        image: character.thumbnail.path + "." + character.thumbnail.extension,
+                        comics: comicsArray
                     }
                 })
                 store.setCharacter(charactersArray);
             });
-    }, []);
-
-    useEffect(() => {
-        charactersRequests.getCharacterComicsById(id as unknown as number)
-            .then(data => {
-                const comicsArray: IComics[] = data.map(comics => {
-                    return {
-                        id: comics.id,
-                        title: comics. title
-                    }
-                })
-                store.setComics(comicsArray);
-            })
     }, []);
 
     return(
@@ -55,8 +50,8 @@ const CharacterInfo: FC = observer(() => {
                     </div>
                     <div className={styles.comicsList}>
                         <h3>Comics with this character:</h3>
-                        {store.comics.length == 0 ? <h4>No comics</h4> :
-                            store.comics.map((comics) => {
+                        {store.character[0]?.comics.length == 0 ? <h4>No comics</h4> :
+                            store.character[0]?.comics.map((comics) => {
                                 return <Link key={comics.id} className="link" to={`/comics/${comics.id}`}>
                                     <h4>{comics.title}</h4>
                                 </Link>
