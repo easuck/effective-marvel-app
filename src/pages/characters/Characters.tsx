@@ -10,19 +10,7 @@ import {ColorRing} from "react-loader-spinner";
 import charactersStore from "../../stores/CharactersStore.ts";
 import {observer} from "mobx-react-lite";
 
-/*type Props = {
-    characters: ICharacter[];
-    setCharacters: (characters: ICharacter[]) => void;
-    searchCharacter: string;
-    setSearchCharacter: (searchCharacter: string) => void;
-    page: number;
-    setPage: (page: number) => void;
-    loading: boolean;
-}*/
-
 const Characters: FC = observer(() => {
-        /*{characters, searchCharacter, page,
-            setCharacters, setSearchCharacter, setPage, loading}*/
     const debouncedInput = useDebounce(charactersStore.searchCharacter, 3000);
     const charactersOnPage : number = 18;
     const pagesAmount: number = 5;

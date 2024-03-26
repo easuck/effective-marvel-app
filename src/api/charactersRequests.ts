@@ -1,5 +1,6 @@
 import axios from "./axios.ts";
 import charactersStore from "../stores/CharactersStore.ts";
+import {characterInfoStore} from "../stores/CharacterInfoStore.ts";
 
 export default{
     async getCharacters(limit: number, offset: number): Promise<any>{
@@ -16,7 +17,11 @@ export default{
 
     async getCharacterById(id: number): Promise<any>{
         try{
+            characterInfoStore.setLoading(true);
+            console.log("загрузка началась")
             const response = await axios.get(`/characters/${id}`);
+            characterInfoStore.setLoading(false);
+            console.log("загрузка закончилась")
             return response.data.data.results;
         }
         catch {}

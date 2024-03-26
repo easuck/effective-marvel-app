@@ -21,13 +21,11 @@ const Router: FC = () => {
                 {
                     path: "characters",
                     element: <Characters/>},
-                /*{
-                    path: "characters/:id",
-                    element: <CharacterInfo characters={characterInfoStore.characters}
-                    setCharacters={characterInfoStore.setCharacters}
-                    comics={comicsStore.comics}
-                    setComics={comicsStore.setComics}/>},
                 {
+                    path: "characters/:id",
+                    element: <CharacterInfo/>
+                }
+                /*{
                     path: "comics",
                     element: <Comics {...comicsStore}/>},
                 {
