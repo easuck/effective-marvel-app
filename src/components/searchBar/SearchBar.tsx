@@ -3,7 +3,7 @@ import styles from "./styles.module.css";
 
 const SearchBar: FC<{subject: string, amount: number, inputHandler: (event: any) => void, callback: (event: any) => void,
     searchWord: string, canselDebounce: () => void}> =
-    ({subject, amount, inputHandler, callback, searchWord, canselDebounce}) => {
+    ({subject, amount, inputHandler, callback, searchWord, canselDebounce, elementsOnPage}) => {
     return (
         <section>
             <div className={styles.labelWrapper}>
