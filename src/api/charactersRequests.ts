@@ -1,9 +1,10 @@
 import axios from "./axios.ts";
 import charactersStore from "../stores/CharactersStore.ts";
 import {characterInfoStore} from "../stores/CharacterInfoStore.ts";
+import {ICharacter} from "../types/ICharacter.tsx";
 
 export default{
-    async getCharacters(limit: number, offset: number): Promise<any>{
+    async getCharacters(limit: number, offset: number): Promise<ICharacter[]>{
         try {
             charactersStore.setLoading(true);
             console.log("загрузка началась")
@@ -15,7 +16,7 @@ export default{
         catch {}
     },
 
-    async getCharacterById(id: number): Promise<any>{
+    async getCharacterById(id: number): Promise<ICharacter>{
         try{
             characterInfoStore.setLoading(true);
             console.log("загрузка началась")
@@ -27,7 +28,7 @@ export default{
         catch {}
     },
 
-    async searchCharacterByName(limit: number, name: string): Promise<any>{
+    async searchCharacterByName(limit: number, name: string): Promise<ICharacter[]>{
         try{
             const response = await axios.get("/characters", {params: {limit: limit, nameStartsWith: name}});
             return response.data.data.results;
