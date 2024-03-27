@@ -1,7 +1,7 @@
-import {ICharacter} from "./ICharacter.tsx";
-
 export interface IComics{
     id: number,
-    name: string,
+    image: string,
+    title: string,
+    desc: string,
     characters: number[]
 }
