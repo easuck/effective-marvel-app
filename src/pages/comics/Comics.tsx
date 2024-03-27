@@ -6,6 +6,7 @@ import Pagination from "../../components/pagination/Pagination.tsx";
 import useDebounce from "../../hooks/useDebounce.tsx";
 import {observer} from "mobx-react-lite";
 import {comicsStore as store} from "../../stores/ComicsStore.ts";
+import {ColorRing} from "react-loader-spinner";
 
 const Comics: FC = observer(() => {
     const debouncedInput = useDebounce(store.inputValue, 3000);
@@ -31,13 +32,22 @@ const Comics: FC = observer(() => {
             <SearchBar subject="Comics" amount={store.comicsAmount} inputHandler={inputHandler} callback={store.searchComicsByTitle}
                        searchWord={store.inputValue} canselDebounce={canselDebounce}/>
             <hr className={styles.divider}/>
-            <div className={styles.comicsGrid}>
-                {store.comics.map((comics) => {
-                    return <Card key={comics.id} id={comics.id} image={comics.image} name={comics.title}
-                        desc={comics.desc} link="comics"/>
-                })}
-            </div>
-            <Pagination pagesAmount={store.pagesAmount} page={store.page} setPage={store.setPage}/>
+            {store.loading ? (
+                <div className={styles.loaderContainer}>
+                    <ColorRing colors={["red", "red", "red", "red", "red"]}/>
+                </div>
+                ) : (
+                <>
+                    <div className={styles.comicsGrid}>
+                        {store.comics.map((comics) => {
+                            return <Card key={comics.id} id={comics.id} image={comics.image} name={comics.title}
+                                         desc={comics.desc} link="comics"/>
+                        })}
+                    </div>
+                    <Pagination pagesAmount={store.pagesAmount} page={store.page} setPage={store.setPage}/>
+                </>
+                )
+            }
         </section>
     )
 });

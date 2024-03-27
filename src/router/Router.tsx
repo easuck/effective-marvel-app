@@ -4,6 +4,7 @@ import {useRoutes} from "react-router-dom";
 import CharacterInfo from "../pages/characterInfo/CharacterInfo.tsx";
 import Layout from "../components/layout/Layout.tsx";
 import Comics from "../pages/comics/Comics.tsx";
+import ComicsInfo from "../pages/comicsInfo/ComicsInfo.tsx";
 
 const Router: FC = () => {
     return useRoutes([
@@ -26,16 +27,13 @@ const Router: FC = () => {
                 {
                     path: "comics",
                     element: <Comics/>},
-                /*{
+                {
                     path: "comics/:id",
-                    element: <ComicsInfo comics={comicsInfoStore.comics}
-                    setComics={comicsInfoStore.setComics}
-                    characters={charactersStore.characters}
-                    setCharacters={charactersStore.setCharacters}/>},
+                    element: <ComicsInfo/>},
                 {
                     path: "*",
                     element: <div>page not found</div>
-                }*/
+                }
             ]
         }
     ]);

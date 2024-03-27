@@ -38,16 +38,18 @@ const Characters: FC = observer(() => {
                     <ColorRing colors={["red", "red", "red", "red", "red"]}/>
                 </div>
                 ) : (
-                <div className={styles.charactersGrid}>
-                    {store.characters.map((character) => {
-                        return <Card key={character.id} id={character.id} image={character.image}
-                                     name={character.name}
-                                     desc={character.desc} link="characters"/>
-                    })}
-                </div>
+                <>
+                    <div className={styles.charactersGrid}>
+                        {store.characters.map((character) => {
+                            return <Card key={character.id} id={character.id} image={character.image}
+                                         name={character.name}
+                                         desc={character.desc} link="characters"/>
+                        })}
+                    </div>
+                    <Pagination pagesAmount={store.pagesAmount} page={store.page} setPage={store.setPage}/>
+                </>
                 )
             }
-            <Pagination pagesAmount={store.pagesAmount} page={store.page} setPage={store.setPage}/>
         </section>
     )
 });

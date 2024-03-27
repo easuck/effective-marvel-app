@@ -8,7 +8,8 @@ class ComicsStore {
     page: number = 1;
     pagesAmount: number = 0;
     comicsAmount: number = 0;
-    comicsOnPage : number = 36;
+    comicsOnPage: number = 36;
+    loading: boolean = false;
 
     constructor() {
         makeAutoObservable(this);
@@ -26,12 +27,16 @@ class ComicsStore {
         this.page = page;
     }
 
-    setPagesAMount = (pagesAmount: number) => {
+    setPagesAmount = (pagesAmount: number) => {
         this.pagesAmount = pagesAmount;
     }
 
     setComicsAmount = (comicsAmount: number) => {
         this.comicsAmount = comicsAmount;
+    }
+
+    setLoading = (loading: boolean) => {
+        this.loading = loading;
     }
 
     searchComics = () => {
@@ -47,11 +52,16 @@ class ComicsStore {
                 })
                 this.setComics(comicsArray);
                 this.setComicsAmount(data.data.total);
-                this.setPagesAMount(Math.ceil(this.comicsAmount / this.comicsOnPage));
+                this.setPagesAmount(Math.ceil(this.comicsAmount / this.comicsOnPage));
             })
     }
 
-    searchComicsByTitle = (event: any) => {
+    /*searchComicsByTitle(event: any): void;
+    searchComicsByTitle(): void;*/
+    //почему-то не работает 0_о
+
+    searchComicsByTitle(event: any /*event?: any*/){
+        //if (event) event.preventDefault();
         event.preventDefault();
         comicsRequests.getComicsByTitle(this.comicsOnPage, this.inputValue)
             .then(data => {
@@ -65,7 +75,7 @@ class ComicsStore {
                 })
                 this.setComics(comicsArray);
                 this.setComicsAmount(data.data.total);
-                this.setPagesAMount(Math.ceil(this.comicsAmount / this.comicsOnPage));
+                this.setPagesAmount(Math.ceil(this.comicsAmount / this.comicsOnPage));
             })
     }
 
@@ -82,7 +92,7 @@ class ComicsStore {
                 })
                 this.setComics(comicsArray);
                 this.setComicsAmount(data.data.total);
-                this.setPagesAMount(Math.ceil(this.comicsAmount / this.comicsOnPage));
+                this.setPagesAmount(Math.ceil(this.comicsAmount / this.comicsOnPage));
             })
     }
 }

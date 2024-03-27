@@ -16,3 +16,9 @@
     grid-column-end: 7;
     margin: var(--main-padding) 0;
 }
+.loaderContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20vh;
+}
