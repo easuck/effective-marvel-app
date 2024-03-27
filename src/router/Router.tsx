@@ -1,34 +1,32 @@
 import {FC} from "react";
 import Characters from "../pages/characters/Characters.tsx";
-import Comics from "../pages/comics/Comics.tsx";
 import {useRoutes} from "react-router-dom";
 import CharacterInfo from "../pages/characterInfo/CharacterInfo.tsx";
-import ComicsInfo from "../pages/comicsInfo/ComicsInfo.tsx";
 import Layout from "../components/layout/Layout.tsx";
-import CharactersStore from "../stores/CharactersStore.ts";
-import {observer} from "mobx-react-lite";
-import ComicsStore from "../stores/ComicsStore.ts";
+import Comics from "../pages/comics/Comics.tsx";
 
 const Router: FC = () => {
-    const element = useRoutes([
+    return useRoutes([
         {
             path: "/",
             element: <Layout/>,
-            children:[
+            children: [
                 {
                     index: true,
-                    element: <Characters/>},
+                    element: <Characters/>
+                },
                 {
                     path: "characters",
-                    element: <Characters/>},
+                    element: <Characters/>
+                },
                 {
                     path: "characters/:id",
                     element: <CharacterInfo/>
-                }
-                /*{
-                    path: "comics",
-                    element: <Comics {...comicsStore}/>},
+                },
                 {
+                    path: "comics",
+                    element: <Comics/>},
+                /*{
                     path: "comics/:id",
                     element: <ComicsInfo comics={comicsInfoStore.comics}
                     setComics={comicsInfoStore.setComics}
@@ -40,7 +38,6 @@ const Router: FC = () => {
                 }*/
             ]
         }
-    ])
-    return element;
+    ]);
 };
 export default Router;

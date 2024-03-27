@@ -12,7 +12,7 @@ const Characters: FC = observer(() => {
     const debouncedInput = useDebounce(store.searchCharacter, 3000);
 
     useEffect(() => {
-        store.searchCharacters((store.page - 1) * store.charactersOnPage);
+        store.searchCharacters();
     }, [store.page]);
 
     useEffect(() => {

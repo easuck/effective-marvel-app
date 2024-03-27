@@ -39,8 +39,8 @@ class CharactersStore {
         this.pagesAmount = pagesAmount;
     }
 
-    searchCharacters = (offset: number) => {
-        charactersRequests.getCharacters(this.charactersOnPage, offset)
+    searchCharacters = () => {
+        charactersRequests.getCharacters(this.charactersOnPage, (this.page - 1) * this.charactersOnPage)
         .then(data => {
             const charactersArray: ICharacter[]  = data.data.results.map(character => {
                 return {
@@ -58,7 +58,7 @@ class CharactersStore {
 
     searchCharactersByName = (event: any) => {
         event.preventDefault();
-        charactersRequests.searchCharacterByName(this.charactersOnPage, this.searchCharacter)
+        charactersRequests.getCharactersByName(this.charactersOnPage, this.searchCharacter)
             .then(data => {
                 const charactersArray: ICharacter[]  = data.data.results.map(character => {
                     return {
@@ -69,11 +69,13 @@ class CharactersStore {
                     }
                 })
                 this.setCharacters(charactersArray);
+                this.setCharactersAmount(data.data.total);
+                this.setPagesAmount(Math.ceil(this.charactersAmount / this.charactersOnPage));
             })
     }
 
     searchCharactersByNameDebounce = () => {
-        charactersRequests.searchCharacterByName(this.charactersOnPage, this.searchCharacter)
+        charactersRequests.getCharactersByName(this.charactersOnPage, this.searchCharacter)
             .then(data => {
                 const charactersArray: ICharacter[]  = data.data.results.map(character => {
                     return {
@@ -84,6 +86,8 @@ class CharactersStore {
                     }
                 })
                 this.setCharacters(charactersArray);
+                this.setCharactersAmount(data.data.total);
+                this.setPagesAmount(Math.ceil(this.charactersAmount / this.charactersOnPage));
             })
     }
 }

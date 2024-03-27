@@ -1,34 +1,27 @@
 import axios from "./axios.ts";
+import {IComics} from "../types/IComics.tsx";
 
 export default{
-    async getComics(limit: number, offset: number): Promise<any>{
+    async getComics(limit: number, offset: number): Promise<IComics[]>{
         try{
             const response = await axios.get("/comics", {params: {limit: limit, offset: offset}});
-            return response.data.data.results;
+            return response.data;
         }
         catch {}
     },
 
-    async getComicsById(id: number): Promise<any>{
+    async getComicsById(id: number): Promise<IComics[]>{
         try{
             const response = await axios.get("/comics/" + id);
-            return response.data.data.results;
+            return response.data;
         }
         catch {}
     },
 
-    async getComicsCharactersById(id: number): Promise<any>{
-        try{
-            const response = await axios.get(`/comics/${id}/characters`);
-            return response.data.data.results;
-        }
-        catch {}
-    },
-
-    async searchComicsByTitle(limit: number, title: string): Promise<any>{
+    async getComicsByTitle(limit: number, title: string): Promise<IComics[]>{
         try{
             const response = await axios.get("/comics", {params: {limit: limit, titleStartsWith: title}});
-            return response.data.data.results;
+            return response.data;
         }
         catch {}
     }
