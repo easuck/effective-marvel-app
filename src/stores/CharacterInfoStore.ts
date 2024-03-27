@@ -19,3 +19,4 @@ class CharacterInfoStore {
 }
 
 export const characterInfoStore = new CharacterInfoStore();
+export  default characterInfoStore;

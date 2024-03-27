@@ -1,7 +1,9 @@
 import {FC} from "react";
-import styles from "./styles.module.css"
-const SearchBar: FC<{subject: string, amount: number, inputHandler: (event: any) => void, callback: (event: any) => void, searchWord: string}> =
-    ({subject, amount, inputHandler, callback, searchWord}) => {
+import styles from "./styles.module.css";
+
+const SearchBar: FC<{subject: string, amount: number, inputHandler: (event: any) => void, callback: (event: any) => void,
+    searchWord: string, canselDebounce: () => void}> =
+    ({subject, amount, inputHandler, callback, searchWord, canselDebounce}) => {
     return (
         <section>
             <div className={styles.labelWrapper}>
@@ -10,7 +12,7 @@ const SearchBar: FC<{subject: string, amount: number, inputHandler: (event: any)
             </div>
             <form className={styles.form}>
                 <input value={searchWord} placeholder={"Search for " + subject + " by Name"} onChange={inputHandler}/>
-                <button onClick={callback}>SEARCH</button>
+                <button onClick={(event) => {callback(event); canselDebounce()}}>SEARCH</button>
             </form>
         </section>
     )

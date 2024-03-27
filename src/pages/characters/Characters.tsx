@@ -33,7 +33,12 @@ const Characters: FC = observer(() => {
 
     useEffect(() => {
         if (debouncedInput) searchCharactersByNameDebounce();
+        console.log("debounce");
     }, [debouncedInput]);
+
+    const canselDebounce = () => {
+        store.setSearchCharacter("");
+    }
 
     const inputHandler = (event: any) => {
         store.setSearchCharacter(event.target.value);
@@ -72,7 +77,8 @@ const Characters: FC = observer(() => {
 
     return(
         <section className={styles.characters}>
-            <SearchBar subject="Characters" amount={store.charactersAmount} inputHandler={inputHandler} callback={searchCharactersByName} searchWord={store.searchCharacter}/>
+            <SearchBar subject="Characters" amount={store.charactersAmount} inputHandler={inputHandler} callback={searchCharactersByName}
+                       searchWord={store.searchCharacter} canselDebounce={canselDebounce}/>
             <hr className={styles.divider}/>
             {store.loading ? (
                 <div className={styles.loaderContainer}>
