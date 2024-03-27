@@ -1,9 +1,6 @@
 import {FC, useEffect} from "react";
 import styles from "./styles.module.css"
 import {Link, useParams} from "react-router-dom";
-import {ICharacter} from "../../types/ICharacter.tsx";
-import charactersRequests from "../../api/charactersRequests.ts";
-import {IComics} from "../../types/IComics.tsx";
 import {characterInfoStore as store} from "../../stores/CharacterInfoStore.ts";
 import {observer} from "mobx-react-lite";
 import {ColorRing} from "react-loader-spinner";
@@ -12,25 +9,7 @@ const CharacterInfo: FC = observer(() => {
     const {id} = useParams<"id">();
 
     useEffect(() => {
-        charactersRequests.getCharacterById(id as unknown as number)
-            .then(data => {
-                const charactersArray: ICharacter[] = data.data.results.map(character => {
-                    const comicsArray: IComics[] = character.comics.items.map(comics => {
-                        return {
-                            id: comics.resourceURI.split('/').slice(-1).toString(),
-                            title: comics.name
-                        }
-                    })
-                    return {
-                        id: character.id,
-                        name: character.name,
-                        desc: character.description,
-                        image: character.thumbnail.path + "." + character.thumbnail.extension,
-                        comics: comicsArray
-                    }
-                })
-                store.setCharacter(charactersArray);
-            });
+        store.getCharacterById(id);
     }, []);
 
     return(
