@@ -11,19 +11,19 @@ export default{
             const response = await axios.get("/characters", {params: {limit: limit, offset: offset}})
             charactersStore.setLoading(false);
             console.log("загрузка закончилась")
-            return [response.data.data.results, response.data.data];
+            return response.data;
         }
         catch {}
     },
 
-    async getCharacterById(id: number): Promise<ICharacter>{
+    async getCharacterById(id: number): Promise<ICharacter[]>{
         try{
             characterInfoStore.setLoading(true);
             console.log("загрузка началась")
             const response = await axios.get(`/characters/${id}`);
             characterInfoStore.setLoading(false);
             console.log("загрузка закончилась")
-            return response.data.data.results;
+            return response.data;
         }
         catch {}
     },
@@ -31,7 +31,7 @@ export default{
     async searchCharacterByName(limit: number, name: string): Promise<ICharacter[]>{
         try{
             const response = await axios.get("/characters", {params: {limit: limit, nameStartsWith: name}});
-            return response.data.data.results;
+            return response.data;
         }
         catch {}
     }

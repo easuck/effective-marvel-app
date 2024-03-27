@@ -14,14 +14,13 @@ const CharacterInfo: FC = observer(() => {
     useEffect(() => {
         charactersRequests.getCharacterById(id as unknown as number)
             .then(data => {
-                const charactersArray: ICharacter[] = data.map(character => {
+                const charactersArray: ICharacter[] = data.data.results.map(character => {
                     const comicsArray: IComics[] = character.comics.items.map(comics => {
                         return {
                             id: comics.resourceURI.split('/').slice(-1).toString(),
                             title: comics.name
                         }
                     })
-                    console.log(comicsArray);
                     return {
                         id: character.id,
                         name: character.name,

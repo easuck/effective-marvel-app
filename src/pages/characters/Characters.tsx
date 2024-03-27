@@ -17,7 +17,7 @@ const Characters: FC = observer(() => {
     useEffect(() => {
         charactersRequests.getCharacters(charactersOnPage,(store.page - 1) * charactersOnPage)
             .then(data => {
-                const charactersArray: ICharacter[]  = data[0].map(character => {
+                const charactersArray: ICharacter[]  = data.data.results.map(character => {
                     return {
                         id: character.id,
                         name: character.name,
@@ -26,7 +26,7 @@ const Characters: FC = observer(() => {
                     }
                 })
                 store.setCharacters(charactersArray);
-                store.setCharactersAmount(data[1].total);
+                store.setCharactersAmount(data.data.total);
                 store.setPagesAmount(Math.ceil(store.charactersAmount / charactersOnPage));
             })
     }, [store.page]);
@@ -43,7 +43,7 @@ const Characters: FC = observer(() => {
         event.preventDefault();
         charactersRequests.searchCharacterByName(charactersOnPage, store.searchCharacter)
         .then(data => {
-            const charactersArray: ICharacter[]  = data.map(character => {
+            const charactersArray: ICharacter[]  = data.data.results.map(character => {
                 return {
                     id: character.id,
                     name: character.name,
@@ -58,7 +58,7 @@ const Characters: FC = observer(() => {
     const searchCharactersByNameDebounce = () => {
         charactersRequests.searchCharacterByName(charactersOnPage, store.searchCharacter)
             .then(data => {
-                const charactersArray: ICharacter[]  = data.map(character => {
+                const charactersArray: ICharacter[]  = data.data.results.map(character => {
                     return {
                         id: character.id,
                         name: character.name,
