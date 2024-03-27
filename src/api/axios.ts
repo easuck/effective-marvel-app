@@ -1,8 +1,6 @@
 import axios from "axios";
 import envs from "../config/environments.ts";
 import {toast} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
 
 const instance = axios.create({
     baseURL: envs.baseURL,
