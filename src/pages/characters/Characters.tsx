@@ -17,7 +17,6 @@ const Characters: FC = observer(() => {
 
     useEffect(() => {
         if (debouncedInput) store.searchCharactersByNameDebounce();
-        console.log("debounce");
     }, [debouncedInput]);
 
     const canselDebounce = () => {

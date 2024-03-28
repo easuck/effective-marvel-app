@@ -60,7 +60,7 @@ class ComicsStore {
     searchComicsByTitle(): void;*/
     //почему-то не работает 0_о
 
-    searchComicsByTitle(event: any /*event?: any*/){
+    searchComicsByTitle = (event: any /*event?: any*/) => {
         //if (event) event.preventDefault();
         event.preventDefault();
         comicsRequests.getComicsByTitle(this.comicsOnPage, this.inputValue)
