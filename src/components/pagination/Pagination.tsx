@@ -1,41 +1,49 @@
-import {FC, useEffect, useState} from "react";
-import styles from "./styles.module.css"
+import {FC, useEffect} from "react";
+import styles from "./styles.module.css";
+import {paginationStore as store} from "../../stores/PaginationStore.ts";
+import {observer} from "mobx-react-lite";
 
 const Pagination: FC<{pagesAmount: number, page: number, setPage: (currentPage: number) => void}> =
-    ({pagesAmount, page, setPage}) => {
-    const [activeButton, setActiveButton] = useState<boolean[]>([true]);
-
-    const setHighlighted = (index: number) => {
-        const array: boolean[] = activeButton.map((button) => {
-            button = false;
-            return button;
-        });
-        array[index] = true;
-        setActiveButton(array);
-    }
+    observer(({pagesAmount, page, setPage}) => {
 
     useEffect(() => {
-        Array.from({length: pagesAmount - 1}, () => {
-            setActiveButton(prev => [...prev, false]);
+        store.setPages(pagesAmount);
+
+        store.setPaginationBlocksAmount(pagesAmount);
+        store.setPaginationBlocks();
+        store.paginationBlocks.forEach((value, key) => {
+            console.log(key + " : " + value);
         })
-    }, []);
+    }, [pagesAmount]);
 
     useEffect(() => {
-        setHighlighted(page - 1);
+        store.setCurrentPage(page);
     }, [page]);
 
     return(
         <div className={styles.paginator}>
             <button disabled={page == 1} className={styles.button} onClick={() => setPage(page - 1)}>{"<"}</button>
-            {Array.from({length: pagesAmount}, (_, i) => {
-                return <button className={[styles.pageButton, activeButton[i] ? styles.selected : ""].join(" ")} key={i + 1}
-                               onClick={() => setPage(i + 1)}
-                >
-                    {i + 1}
-                </button>
-            })}
+            {
+                store.paginationBlocks.get(store.currentPaginationBlock)?.map((page) => {
+                    return <button className={[styles.pageButton, store.pages.get(page) ? styles.selected : ""].join(" ")}
+                            onClick={() => setPage(page)}
+                    >
+                        {page}
+                    </button>
+                })
+                /*store.pages.forEach((value, key) => {
+                    //console.log(key + ":" + value + "\n");
+                    <button key={key}
+                        className={[styles.pageButton, store.pages.get(key) ? styles.selected : ""].join(" ")}
+                        onClick={() => setPage(key)}
+                    >
+                        {key}
+                    </button>
+                })*/
+            }
             <button disabled={page == pagesAmount} className={styles.button} onClick={() => setPage(page + 1)}>{">"}</button>
         </div>
-    )}
+    )
+});
 
 export default Pagination;
