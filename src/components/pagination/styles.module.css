@@ -32,7 +32,19 @@
     background: none;
     color: red;
 }
+.blockButton{
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    border: none;
+    background: none;
+    color: red;
+}
 .button:hover:enabled{
+    color: white;
+    background: orange;
+}
+.blockButton:hover:enabled{
     color: white;
     background: orange;
 }

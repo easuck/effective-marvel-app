@@ -20,8 +20,8 @@ class PaginationStore{
     setPaginationBlocks = () => {
         this.paginationBlocks.clear();
         for (let i = 1; i <= this.paginationBlocksAmount; i++){
-            let firstPageInThisBlock: number = (i - 1) * pagesInBlock + 1;
-            let lastPageInThisBlock: number = i == this.paginationBlocksAmount ? this.pages.size : i * pagesInBlock;
+            const firstPageInThisBlock: number = (i - 1) * pagesInBlock + 1;
+            const lastPageInThisBlock: number = i == this.paginationBlocksAmount ? this.pages.size : i * pagesInBlock;
             let pagesInThisBlock: number[] = [];
             for (let i: number = firstPageInThisBlock; i <= lastPageInThisBlock; i++){
                 pagesInThisBlock = [...pagesInThisBlock, i];
@@ -30,8 +30,12 @@ class PaginationStore{
         }
     }
 
-    setCurrentPaginationBlock = (currentPaginationBlock: number) => {
-        //todo
+    previousPaginationBlock = () => {
+        this.currentPaginationBlock = this.currentPaginationBlock - 1;
+    }
+
+    nextPaginationBlock = () => {
+        this.currentPaginationBlock = this.currentPaginationBlock + 1;
     }
 
     setPages = (pagesAmount: number) => {
@@ -48,7 +52,7 @@ class PaginationStore{
     }
 
     setCurrentPage = (current: number) => {
-        for (let [key] of this.pages){
+        for (const [key] of this.pages){
             if (key != current){
                 this.pages.set(key, false);
             }
