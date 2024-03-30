@@ -4,7 +4,7 @@ import charactersRequests from "../api/charactersRequests.ts";
 
 class CharactersStore {
     characters: ICharacter[] = [];
-    searchCharacter: string = "";
+    inputValue: string = "";
     page: number = 1;
     loading: boolean = false;
     charactersAmount: number = 0;
@@ -26,7 +26,7 @@ class CharactersStore {
     }
 
     setSearchCharacter = (searchCharacter: string) => {
-        this.searchCharacter = searchCharacter;
+        this.inputValue = searchCharacter;
     }
 
     setPage = (page: number) => {
@@ -63,7 +63,7 @@ class CharactersStore {
     }
 
     searchCharactersByName = () => {
-        charactersRequests.getCharactersByName(this.charactersOnPage, this.searchCharacter)
+        charactersRequests.getCharactersByName(this.charactersOnPage, this.inputValue)
             .then(data => {
                 const charactersArray: ICharacter[]  = data.data.results.map(character => {
                     return {

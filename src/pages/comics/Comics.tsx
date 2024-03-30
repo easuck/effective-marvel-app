@@ -5,11 +5,12 @@ import Card from "../../components/card/Card.tsx";
 import Pagination from "../../components/pagination/Pagination.tsx";
 import useDebounce from "../../hooks/useDebounce.tsx";
 import {observer} from "mobx-react-lite";
-import {comicsStore as store} from "../../stores/ComicsStore.ts";
+import {comicsStore, comicsStore as store} from "../../stores/ComicsStore.ts";
 import {ColorRing} from "react-loader-spinner";
 
 const Comics: FC = observer(() => {
-    const debouncedInput = useDebounce(store.inputValue, 1500);
+    const {inputValue, comicsAmount, comics, loading, page, pagesAmount} = comicsStore;
+    const debouncedInput = useDebounce(inputValue, 1500);
 
     useEffect(() => {
         store.searchComics();
@@ -34,22 +35,22 @@ const Comics: FC = observer(() => {
 
     return(
         <section className={styles.comicsPage}>
-            <SearchBar subject="Comics" amount={store.comicsAmount} inputHandler={inputHandler} callback={searchComicsByTitleWrapper}
-                       searchWord={store.inputValue} canselDebounce={canselDebounce}/>
+            <SearchBar subject="Comics" amount={comicsAmount} inputHandler={inputHandler} callback={searchComicsByTitleWrapper}
+                       searchWord={inputValue} canselDebounce={canselDebounce}/>
             <hr className={styles.divider}/>
-            {store.loading ? (
+            {loading ? (
                 <div className={styles.loaderContainer}>
                     <ColorRing colors={["red", "red", "red", "red", "red"]}/>
                 </div>
                 ) : (
                 <>
                     <div className={styles.comicsGrid}>
-                        {store.comics.map((comics) => {
+                        {comics.map((comics) => {
                             return <Card key={comics.id} id={comics.id} image={comics.image} name={comics.title}
                                          desc={comics.desc} link="comics"/>
                         })}
                     </div>
-                    <Pagination pagesAmount={store.pagesAmount} page={store.page} setPage={store.setPage}/>
+                    <Pagination pagesAmount={pagesAmount} page={page} setPage={store.setPage}/>
                 </>
                 )
             }
