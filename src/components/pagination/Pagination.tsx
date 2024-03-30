@@ -25,6 +25,7 @@ const Pagination: FC<{pagesAmount: number, page: number, setPage: (currentPage: 
             {
                 store.paginationBlocks.get(store.currentPaginationBlock)?.map((page) => {
                     return <button
+                        key={page}
                         className={[styles.pageButton, store.pages.get(page) ? styles.selected : ""].join(" ")}
                         onClick={() => setPage(page)}
                     >
