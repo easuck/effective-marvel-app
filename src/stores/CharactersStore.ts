@@ -62,25 +62,7 @@ class CharactersStore {
         })
     }
 
-    searchCharactersByName = (event: any) => {
-        event.preventDefault();
-        charactersRequests.getCharactersByName(this.charactersOnPage, this.searchCharacter)
-            .then(data => {
-                const charactersArray: ICharacter[]  = data.data.results.map(character => {
-                    return {
-                        id: character.id,
-                        name: character.name,
-                        desc: character.description,
-                        image: character.thumbnail.path + "." + character.thumbnail.extension
-                    }
-                })
-                this.setCharacters(charactersArray);
-                this.setCharactersAmount(data.data.total);
-                this.setPagesAmount(Math.ceil(this.charactersAmount / this.charactersOnPage));
-            })
-    }
-
-    searchCharactersByNameDebounce = () => {
+    searchCharactersByName = () => {
         charactersRequests.getCharactersByName(this.charactersOnPage, this.searchCharacter)
             .then(data => {
                 const charactersArray: ICharacter[]  = data.data.results.map(character => {

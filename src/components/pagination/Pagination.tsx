@@ -8,12 +8,8 @@ const Pagination: FC<{pagesAmount: number, page: number, setPage: (currentPage: 
 
     useEffect(() => {
         store.setPages(pagesAmount);
-
         store.setPaginationBlocksAmount(pagesAmount);
         store.setPaginationBlocks();
-        store.paginationBlocks.forEach((value, key) => {
-            console.log(key + " : " + value);
-        })
     }, [pagesAmount]);
 
     useEffect(() => {
@@ -35,15 +31,6 @@ const Pagination: FC<{pagesAmount: number, page: number, setPage: (currentPage: 
                         {page}
                     </button>
                 })
-                /*store.pages.forEach((value, key) => {
-                    //console.log(key + ":" + value + "\n");
-                    <button key={key}
-                        className={[styles.pageButton, store.pages.get(key) ? styles.selected : ""].join(" ")}
-                        onClick={() => setPage(key)}
-                    >
-                        {key}
-                    </button>
-                })*/
             }
             <button disabled={page == pagesAmount} className={styles.button}
                     onClick={() => setPage(page + 1)}>{">"}</button>

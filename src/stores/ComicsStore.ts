@@ -62,30 +62,7 @@ class ComicsStore {
             })
     }
 
-    /*searchComicsByTitle(event: any): void;
-    searchComicsByTitle(): void;*/
-    //почему-то не работает 0_о
-
-    searchComicsByTitle = (event: any /*event?: any*/) => {
-        //if (event) event.preventDefault();
-        event.preventDefault();
-        comicsRequests.getComicsByTitle(this.comicsOnPage, this.inputValue)
-            .then(data => {
-                const comicsArray: IComics[]  = data.data.results.map(comics => {
-                    return {
-                        id: comics.id,
-                        title: comics.title,
-                        desc: comics.description,
-                        image: comics.thumbnail.path + "." + comics.thumbnail.extension
-                    }
-                })
-                this.setComics(comicsArray);
-                this.setComicsAmount(data.data.total);
-                this.setPagesAmount(Math.ceil(this.comicsAmount / this.comicsOnPage));
-            })
-    }
-
-    searchComicsByTitleDebounce = () => {
+    searchComicsByTitle = () => {
         comicsRequests.getComicsByTitle(this.comicsOnPage, this.inputValue)
             .then(data => {
                 const comicsArray: IComics[]  = data.data.results.map(comics => {

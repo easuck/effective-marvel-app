@@ -1,4 +1,4 @@
-import {FC, useEffect} from "react";
+import React, {FC, useEffect} from "react";
 import styles from "./styles.module.css"
 import SearchBar from "../../components/searchBar/SearchBar.tsx";
 import Card from "../../components/card/Card.tsx";
@@ -9,18 +9,23 @@ import {comicsStore as store} from "../../stores/ComicsStore.ts";
 import {ColorRing} from "react-loader-spinner";
 
 const Comics: FC = observer(() => {
-    const debouncedInput = useDebounce(store.inputValue, 3000);
+    const debouncedInput = useDebounce(store.inputValue, 1500);
 
     useEffect(() => {
         store.searchComics();
     }, []);
 
     useEffect(() => {
-        if (debouncedInput) store.searchComicsByTitleDebounce();
+        if (debouncedInput) store.searchComicsByTitle();
     }, [debouncedInput]);
 
-    const inputHandler = (event: any) => {
+    const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         store.setInputValue(event.target.value);
+    }
+
+    const searchComicsByTitleWrapper = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        store.searchComicsByTitle();
     }
 
     const canselDebounce = () => {
@@ -29,7 +34,7 @@ const Comics: FC = observer(() => {
 
     return(
         <section className={styles.comicsPage}>
-            <SearchBar subject="Comics" amount={store.comicsAmount} inputHandler={inputHandler} callback={store.searchComicsByTitle}
+            <SearchBar subject="Comics" amount={store.comicsAmount} inputHandler={inputHandler} callback={searchComicsByTitleWrapper}
                        searchWord={store.inputValue} canselDebounce={canselDebounce}/>
             <hr className={styles.divider}/>
             {store.loading ? (

@@ -1,4 +1,4 @@
-import {FC, useEffect} from "react";
+import React, {FC, useEffect} from "react";
 import styles from "./styles.module.css"
 import Card from "../../components/card/Card.tsx";
 import SearchBar from "../../components/searchBar/SearchBar.tsx";
@@ -9,27 +9,32 @@ import {charactersStore as store} from "../../stores/CharactersStore.ts";
 import {observer} from "mobx-react-lite";
 
 const Characters: FC = observer(() => {
-    const debouncedInput = useDebounce(store.searchCharacter, 3000);
+    const debouncedInput = useDebounce(store.searchCharacter, 1500);
 
     useEffect(() => {
         store.searchCharacters();
     }, []);
 
     useEffect(() => {
-        if (debouncedInput) store.searchCharactersByNameDebounce();
+        if (debouncedInput) store.searchCharactersByName();
     }, [debouncedInput]);
+
+    const searchCharactersByNameWrapper = (event?: React.MouseEvent<HTMLButtonElement>) => {
+        if (event) event.preventDefault();
+        store.searchCharactersByName()
+    }
 
     const canselDebounce = () => {
         store.setSearchCharacter("");
     }
 
-    const inputHandler = (event: any) => {
+    const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         store.setSearchCharacter(event.target.value);
     }
 
     return(
         <section className={styles.characters}>
-            <SearchBar subject="Characters" amount={store.charactersAmount} inputHandler={inputHandler} callback={store.searchCharactersByName}
+            <SearchBar subject="Characters" amount={store.charactersAmount} inputHandler={inputHandler} callback={searchCharactersByNameWrapper}
                        searchWord={store.searchCharacter} canselDebounce={canselDebounce}/>
             <hr className={styles.divider}/>
             {store.loading ? (
