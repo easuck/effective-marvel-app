@@ -13,7 +13,7 @@ const Characters: FC = observer(() => {
 
     useEffect(() => {
         store.searchCharacters();
-    }, [store.page]);
+    }, []);
 
     useEffect(() => {
         if (debouncedInput) store.searchCharactersByNameDebounce();

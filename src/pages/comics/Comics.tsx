@@ -13,7 +13,7 @@ const Comics: FC = observer(() => {
 
     useEffect(() => {
         store.searchComics();
-    }, [store.page]);
+    }, []);
 
     useEffect(() => {
         if (debouncedInput) store.searchComicsByTitleDebounce();

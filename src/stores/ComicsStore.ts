@@ -1,5 +1,5 @@
 import {IComics} from "../types/IComics.tsx";
-import {makeAutoObservable} from "mobx";
+import {makeAutoObservable, reaction} from "mobx";
 import comicsRequests from "../api/comicsRequests.ts";
 
 class ComicsStore {
@@ -13,6 +13,12 @@ class ComicsStore {
 
     constructor() {
         makeAutoObservable(this);
+        reaction(
+            () => this.page,
+            (page) => {
+                this.searchComics();
+            }
+        )
     }
 
     setComics = (comics: IComics[]) => {

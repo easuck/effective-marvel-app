@@ -1,5 +1,5 @@
 import {ICharacter} from "../types/ICharacter.tsx";
-import {makeAutoObservable} from "mobx";
+import {makeAutoObservable, reaction} from "mobx";
 import charactersRequests from "../api/charactersRequests.ts";
 
 class CharactersStore {
@@ -13,6 +13,12 @@ class CharactersStore {
 
     constructor(){
         makeAutoObservable(this);
+        reaction(
+            () => this.page,
+            (page) => {
+                this.searchCharacters();
+            }
+        )
     }
 
     setCharacters = (characters: ICharacter[]) => {
