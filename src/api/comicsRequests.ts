@@ -1,5 +1,4 @@
 import axios from "./axios.ts";
-import {IComics} from "../types/IComics.tsx";
 import comicsStore from "../stores/ComicsStore.ts";
 import comicsInfoStore from "../stores/ComicsInfoStore.ts";
 import {DataContainer} from "../types/CharacterDataContainer.tsx";

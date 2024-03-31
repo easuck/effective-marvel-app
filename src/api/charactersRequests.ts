@@ -1,7 +1,6 @@
 import axios from "./axios.ts";
 import charactersStore from "../stores/CharactersStore.ts";
 import {characterInfoStore} from "../stores/CharacterInfoStore.ts";
-import {ICharacter} from "../types/ICharacter.tsx";
 import {DataContainer} from "../types/CharacterDataContainer.tsx";
 
 export default{
