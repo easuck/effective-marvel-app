@@ -22,7 +22,7 @@ class CharacterInfoStore {
     getCharacterById = (id: string) => {
         charactersRequests.getCharacterById(id as unknown as number)
             .then(data => {
-                const charactersArray: ICharacter[] = data.data.results.map(character => {
+                const charactersArray: ICharacter[] = data.results.map(character => {
                     const comicsArray: IComics[] = character.comics.items.map(comics => {
                         return {
                             id: comics.resourceURI.split('/').slice(-1).toString(),

@@ -48,7 +48,7 @@ class ComicsStore {
     searchComics = () => {
         comicsRequests.getComics(this.comicsOnPage, (this.page - 1) * this.comicsOnPage)
             .then(data => {
-                const comicsArray: IComics[] = data.data.results.map(comics => {
+                const comicsArray: IComics[] = data.results.map(comics => {
                     return {
                         id: comics.id,
                         title: comics.title,
@@ -57,7 +57,7 @@ class ComicsStore {
                     }
                 })
                 this.setComics(comicsArray);
-                this.setComicsAmount(data.data.total);
+                this.setComicsAmount(data.total);
                 this.setPagesAmount(Math.ceil(this.comicsAmount / this.comicsOnPage));
             })
     }
@@ -65,7 +65,7 @@ class ComicsStore {
     searchComicsByTitle = () => {
         comicsRequests.getComicsByTitle(this.comicsOnPage, this.inputValue)
             .then(data => {
-                const comicsArray: IComics[]  = data.data.results.map(comics => {
+                const comicsArray: IComics[]  = data.results.map(comics => {
                     return {
                         id: comics.id,
                         title: comics.title,
@@ -74,7 +74,7 @@ class ComicsStore {
                     }
                 })
                 this.setComics(comicsArray);
-                this.setComicsAmount(data.data.total);
+                this.setComicsAmount(data.total);
                 this.setPagesAmount(Math.ceil(this.comicsAmount / this.comicsOnPage));
             })
     }

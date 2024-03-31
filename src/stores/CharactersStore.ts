@@ -48,7 +48,7 @@ class CharactersStore {
     searchCharacters = () => {
         charactersRequests.getCharacters(this.charactersOnPage, (this.page - 1) * this.charactersOnPage)
         .then(data => {
-            const charactersArray: ICharacter[]  = data.data.results.map(character => {
+            const charactersArray: ICharacter[]  = data.results.map(character => {
                 return {
                     id: character.id,
                     name: character.name,
@@ -57,7 +57,7 @@ class CharactersStore {
                 }
             })
             this.setCharacters(charactersArray);
-            this.setCharactersAmount(data.data.total);
+            this.setCharactersAmount(data.total);
             this.setPagesAmount(Math.ceil(this.charactersAmount / this.charactersOnPage));
         })
     }
@@ -65,7 +65,7 @@ class CharactersStore {
     searchCharactersByName = () => {
         charactersRequests.getCharactersByName(this.charactersOnPage, this.inputValue)
             .then(data => {
-                const charactersArray: ICharacter[]  = data.data.results.map(character => {
+                const charactersArray: ICharacter[]  = data.results.map(character => {
                     return {
                         id: character.id,
                         name: character.name,
@@ -74,7 +74,7 @@ class CharactersStore {
                     }
                 })
                 this.setCharacters(charactersArray);
-                this.setCharactersAmount(data.data.total);
+                this.setCharactersAmount(data.total);
                 this.setPagesAmount(Math.ceil(this.charactersAmount / this.charactersOnPage));
             })
     }
