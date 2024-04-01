@@ -1,9 +1,11 @@
 .characters{
     padding: var(--main-padding);
+    width: 100%;
 }
 .charactersGrid{
     display: grid;
     grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 300px;
     grid-column-gap: var(--main-padding);
     grid-row-gap: calc(var(--main-padding) / 2);
 }
@@ -14,4 +16,10 @@
     grid-column-start: 1;
     grid-column-end: 7;
     margin: var(--main-padding) 0;
+}
+.loaderContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20vh;
 }
