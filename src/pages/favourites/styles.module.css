@@ -15,5 +15,20 @@
     height: 1px;
     grid-column-start: 1;
     grid-column-end: 7;
-    margin: var(--main-padding) 0;
+    margin: 0  0 var(--main-padding) 0;
+}
+.labelWrapper{
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+.labelFavourites{
+    font-size: 50px;
+    font-weight: 700;
+}
+.labelAmount{
+    font-size: 30px;
+    font-weight: 700;
+    color: grey;
+    line-height: 60px;
 }
