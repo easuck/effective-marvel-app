@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from "react";
+import React, {FC, useEffect, useState} from "react";
 import styles from "./styles.module.css"
 import Card from "../../components/card/Card.tsx";
 import SearchBar from "../../components/searchBar/SearchBar.tsx";
