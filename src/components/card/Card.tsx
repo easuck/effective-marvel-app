@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import styles from "./styles.module.css"
 import {Link} from "react-router-dom";
 import {AiFillHeart, AiOutlineHeart} from "react-icons/ai";
@@ -10,6 +10,10 @@ const Card: FC<{id: number, image: string, name: string, desc: string, link: str
     const [isFavourite, setIsFavourite] = useState<boolean>(false);
     const [isMouseOver, setIsMouseOver] = useState<boolean>(false);
     const {getItem, setItem, removeItem} = useLocalStorage();
+
+    useEffect(() => {
+        if (getItem(id.toString())) setIsFavourite(true)
+    }, []);
 
     const onMouseEnter = () => {
         setIsMouseOver(true);

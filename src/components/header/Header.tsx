@@ -10,6 +10,7 @@ const Header: FC = () => {
                 <nav className={styles.nav}>
                     <Link to="characters">Characters</Link>
                     <Link to="comics">Comics</Link>
+                    <Link to="favourites">Favourites</Link>
                 </nav>
             </header>
         </>
