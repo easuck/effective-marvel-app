@@ -1,6 +1,7 @@
-const useLocalStorage = () => {
+const useLocalStorage = (setFavouritesAmount: (amount: number) => void, favouritesAmount: number) => {
     const setItem = (key: string, value: unknown) => {
         localStorage.setItem(key, JSON.stringify(value));
+        //setFavouritesAmount(favouritesAmount + 1); вылетает ошибка "setFavouritesAmount is not a function"
     }
 
     const getItem = (key: string) => {
@@ -10,6 +11,7 @@ const useLocalStorage = () => {
 
     const removeItem = (key: string) => {
         localStorage.removeItem(key);
+        setFavouritesAmount(favouritesAmount - 1);
     }
 
     return {setItem, getItem, removeItem};
