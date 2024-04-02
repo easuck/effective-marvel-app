@@ -3,4 +3,5 @@ export interface LocalStorageEntity {
     image: string,
     name: string,
     desc: string,
+    type: string
 }

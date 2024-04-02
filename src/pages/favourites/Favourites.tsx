@@ -28,7 +28,7 @@ const Favourites: FC = () => {
                     const item: LocalStorageEntity = JSON.parse(localStorage.getItem(key));
                     return <Card key={item.id} id={item.id} image={item.image}
                                  name={item.name}
-                                 desc={item.desc} link="characters"
+                                 desc={item.desc} link={item.type}
                                  favouritesAmount={favouritesAmount} setFavouritesAmount={setFavouritesAmount}/>
                 })}
             </div>

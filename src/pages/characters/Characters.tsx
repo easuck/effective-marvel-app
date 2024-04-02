@@ -48,7 +48,8 @@ const Characters: FC = observer(() => {
                         {characters.map((character) => {
                             return <Card key={character.id} id={character.id} image={character.image}
                                          name={character.name}
-                                         desc={character.desc} link="characters"/>
+                                         desc={character.desc} link="characters"
+                                         favouritesAmount={null} setFavouritesAmount={null}/>
                         })}
                     </div>
                     <Pagination pagesAmount={pagesAmount} page={page} setPage={store.setPage}/>

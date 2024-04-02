@@ -6,7 +6,7 @@ import {IconContext} from "react-icons";
 import useLocalStorage from "../../hooks/useLocalStorage.ts";
 
 const Card: FC<{id: number, image: string, name: string, desc: string, link: string,
-    setFavouritesAmount: (amount: number) => void, favouritesAmount: number}> =
+    setFavouritesAmount: (amount: number) => void | null, favouritesAmount: number | null}> =
     ({id, image, name, desc, link, setFavouritesAmount, favouritesAmount}) => {
     const [isFavourite, setIsFavourite] = useState<boolean>(false);
     const [isMouseOver, setIsMouseOver] = useState<boolean>(false);
@@ -33,7 +33,7 @@ const Card: FC<{id: number, image: string, name: string, desc: string, link: str
             <div className={isMouseOver ? styles.favourite : styles.favouriteHidden}
                  onClick={() => {
                      isFavourite ? removeItem(id.toString()) :
-                         setItem(id.toString(), {id: id, image: image, name: name, desc: desc});
+                         setItem(id.toString(), {id: id, image: image, name: name, desc: desc, type: link});
                      changeFavourite();
                  }}>
                 <IconContext.Provider value={{size: "40px", color: "red"}}>
