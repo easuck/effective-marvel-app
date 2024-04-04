@@ -6,12 +6,10 @@ import Pagination from "../../components/pagination/Pagination.tsx";
 import useDebounce from "../../hooks/useDebounce.tsx";
 import {ColorRing} from "react-loader-spinner";
 import {observer} from "mobx-react-lite";
-import favouritesStore from "../../stores/FavouritesStore.ts";
 import charactersStore from "../../stores/CharactersStore.ts";
 
 const Characters: FC = observer(() => {
     const {inputValue, charactersAmount, loading, characters, page, pagesAmount } = charactersStore;
-    const {favouritesAmount} = favouritesStore;
     const debouncedInput = useDebounce(inputValue, 1500);
 
     useEffect(() => {
@@ -50,8 +48,7 @@ const Characters: FC = observer(() => {
                         {characters.map((character) => {
                             return <Card key={character.id} id={character.id} image={character.image}
                                          name={character.name}
-                                         desc={character.desc} link="characters"
-                                         favouritesAmount={favouritesAmount} setFavouritesAmount={favouritesStore.setFavouritesAmount}/>
+                                         desc={character.desc} link="characters"/>
                         })}
                     </div>
                     <Pagination pagesAmount={pagesAmount} page={page} setPage={charactersStore.setPage}/>

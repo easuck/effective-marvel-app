@@ -1,6 +1,7 @@
 const useLocalStorage = (setFavouritesAmount: (amount: number) => void, favouritesAmount: number) => {
     const setItem = (key: string, value: unknown) => {
         localStorage.setItem(key, JSON.stringify(value));
+        setFavouritesAmount(favouritesAmount + 1);
     }
 
     const getItem = (key: string) => {

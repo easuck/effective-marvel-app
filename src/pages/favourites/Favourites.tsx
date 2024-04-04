@@ -1,16 +1,12 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {FC, useEffect} from "react";
 import Card from "../../components/card/Card.tsx";
 import styles from "./styles.module.css"
 import {LocalStorageEntity} from "../../types/LocalStorageEntity.tsx";
+import favouritesStore from "../../stores/FavouritesStore.ts";
+import {observer} from "mobx-react-lite";
 
-const Favourites: FC = () => {
-    const [favouritesAmount, setFavouritesAmount] = useState<number>(0);
-
-    useEffect(() => {
-        Object.keys(localStorage).forEach(() => {
-            setFavouritesAmount(prev => prev + 1);
-        })
-    }, []);
+const Favourites: FC = observer(() => {
+    const {favouritesAmount} = favouritesStore;
 
     useEffect(() => {
         //просто useEffect для ререндера. так вообще можно?
@@ -29,11 +25,11 @@ const Favourites: FC = () => {
                     return <Card key={item.id} id={item.id} image={item.image}
                                  name={item.name}
                                  desc={item.desc} link={item.type}
-                                 favouritesAmount={favouritesAmount} setFavouritesAmount={setFavouritesAmount}/>
+                                 favouritesAmount={favouritesAmount} setFavouritesAmount={favouritesStore.setFavouritesAmount}/>
                 })}
             </div>
         </section>
     )
-}
+});
 
 export default Favourites;

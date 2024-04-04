@@ -4,13 +4,14 @@ import {Link} from "react-router-dom";
 import {AiFillHeart, AiOutlineHeart} from "react-icons/ai";
 import {IconContext} from "react-icons";
 import useLocalStorage from "../../hooks/useLocalStorage.ts";
+import favouritesStore from "../../stores/FavouritesStore.ts";
 
-const Card: FC<{id: number, image: string, name: string, desc: string, link: string,
-    setFavouritesAmount: (amount: number) => void | null, favouritesAmount: number | null}> =
-    ({id, image, name, desc, link, setFavouritesAmount, favouritesAmount}) => {
+const Card: FC<{id: number, image: string, name: string, desc: string, link: string}> =
+    ({id, image, name, desc, link}) => {
     const [isFavourite, setIsFavourite] = useState<boolean>(false);
     const [isMouseOver, setIsMouseOver] = useState<boolean>(false);
-    const {getItem, setItem, removeItem} = useLocalStorage(setFavouritesAmount, favouritesAmount);
+    const {favouritesAmount} = favouritesStore;
+    const {getItem, setItem, removeItem} = useLocalStorage(favouritesStore.setFavouritesAmount, favouritesAmount);
 
     useEffect(() => {
         if (getItem(id.toString())) setIsFavourite(true)
