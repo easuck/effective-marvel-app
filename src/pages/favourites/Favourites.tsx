@@ -9,8 +9,8 @@ const Favourites: FC = observer(() => {
     const {favouritesAmount} = favouritesStore;
 
     useEffect(() => {
-        //просто useEffect для ререндера. так вообще можно?
-    }, [favouritesAmount]);
+        favouritesStore.setFavouritesAmount(localStorage.length);
+    }, []);
 
     return (
         <section className={styles.favourites}>
