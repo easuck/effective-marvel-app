@@ -11,8 +11,8 @@ const Card: FC<{id: number, image: string, name: string, desc: string, link: str
     ({id, image, name, desc, link}) => {
     const [isFavourite, setIsFavourite] = useState<boolean>(false);
     const [isMouseOver, setIsMouseOver] = useState<boolean>(false);
-    const {favouritesAmount, favourites} = favouritesStore;
-    const {getItem, setItem, removeItem} = useLocalStorage(favouritesStore.setFavouritesAmount, favouritesAmount);
+    const {favourites} = favouritesStore;
+    const {getItem, setItem, removeItem} = useLocalStorage();
 
     useEffect(() => {
         if (getItem("favourites")?.find(item => item.id == id)){
@@ -41,7 +41,7 @@ const Card: FC<{id: number, image: string, name: string, desc: string, link: str
                      }
                      else {
                          const newFavourite: LocalStorageEntity = {id: id, image: image, name: name, desc: desc, type: link};
-                         //favouritesStore.setFavourites() не знаю как через сеттер присвоить массив
+                         //favouritesStore.setFavourites() || не знаю как через сеттер присвоить массив
                          favourites.push(newFavourite);
                          setItem("favourites", favourites)
                      }

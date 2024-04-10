@@ -2,21 +2,18 @@ import {makeAutoObservable, reaction} from "mobx";
 import {LocalStorageEntity} from "../types/LocalStorageEntity.tsx";
 
 class FavouritesStore{
-    favouritesAmount: number = 0;
     favourites: LocalStorageEntity[] = [];
 
     constructor() {
         makeAutoObservable(this);
         reaction(
-            () => this.favouritesAmount,
-            (favouritesAmount) => {
-                this.setFavouritesAmount(localStorage.length);
-            }
+            () => this.favourites,
+            () => this.setFavouritesAmount()
         )
     }
 
-    setFavouritesAmount = (favouritesAmount: number) => {
-        this.favouritesAmount = favouritesAmount;
+    setFavouritesAmount = () => {
+        this.setFavourites(JSON.parse(localStorage.getItem("favourites")));
     }
 
     setFavourites = (favourites: LocalStorageEntity[]) => {
