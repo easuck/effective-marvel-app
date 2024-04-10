@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from "react";
+import {FC, useState} from "react";
 import styles from "./styles.module.css"
 import {Link} from "react-router-dom";
 import {AiFillHeart, AiOutlineHeart} from "react-icons/ai";
@@ -6,19 +6,13 @@ import {IconContext} from "react-icons";
 import favouritesStore from "../../stores/FavouritesStore.ts";
 import {LocalStorageEntity} from "../../types/LocalStorageEntity.tsx";
 import localStorageInteraction from "../../helpers/localStorageInteraction.ts";
+import {observer} from "mobx-react-lite";
 
 const Card: FC<{id: number, image: string, name: string, desc: string, link: string}> =
-    ({id, image, name, desc, link}) => {
-    const [isFavourite, setIsFavourite] = useState<boolean>(false);
+    observer(({id, image, name, desc, link}) => {
     const [isMouseOver, setIsMouseOver] = useState<boolean>(false);
     const {favourites} = favouritesStore;
     const {getItem, setItem, removeItem} = localStorageInteraction;
-
-    useEffect(() => {
-        if (getItem("favourites")?.find(item => item.id == id)){
-            setIsFavourite(true);
-        }
-    }, []);
 
     const onMouseEnter = () => {
         setIsMouseOver(true);
@@ -28,15 +22,11 @@ const Card: FC<{id: number, image: string, name: string, desc: string, link: str
         setIsMouseOver(false);
     }
 
-    const changeFavourite = () => {
-        setIsFavourite(prev => !prev);
-    }
-
     return(
         <div className={styles.card} onMouseEnter={() => onMouseEnter()} onMouseLeave={() => onMouseLeave()}>
             <div className={isMouseOver ? styles.favourite : styles.favouriteHidden}
                  onClick={() => {
-                     if (isFavourite) {
+                     if (favourites.find(item => item.id == id)) {
                          const newFavourites: LocalStorageEntity[] = getItem("favourites").filter(item => item.id != id);
                          favouritesStore.setFavourites(newFavourites);
                          removeItem("favourites", id.toString());
@@ -48,10 +38,9 @@ const Card: FC<{id: number, image: string, name: string, desc: string, link: str
                          favouritesStore.setFavourites(newFavourites);
                          setItem("favourites", newFavourites);
                      }
-                     changeFavourite();
                  }}>
                 <IconContext.Provider value={{size: "40px", color: "red"}}>
-                    {isFavourite ? <AiFillHeart/> : <AiOutlineHeart/>}
+                    {favourites.find(item => item.id == id) ? <AiFillHeart/> : <AiOutlineHeart/>}
                 </IconContext.Provider>
             </div>
             <Link className={styles.link} to={`/${link}/` + id}>
@@ -63,6 +52,6 @@ const Card: FC<{id: number, image: string, name: string, desc: string, link: str
             </div>
         </div>
     )
-}
+});
 
 export default Card;
