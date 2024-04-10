@@ -1,13 +1,11 @@
-import React, {FC, useEffect} from "react";
+import React, {FC} from "react";
 import Card from "../../components/card/Card.tsx";
 import styles from "./styles.module.css"
 import {observer} from "mobx-react-lite";
 import favouritesStore from "../../stores/FavouritesStore.ts";
 
 const Favourites: FC = observer(() => {
-    useEffect(() => {
-        favouritesStore.setFavouritesAmount(); //метод дублирует функционал при изменении массива(?)
-    }, []);
+    const {favourites} = favouritesStore;
 
     return (
         <section className={styles.favourites}>
@@ -17,7 +15,7 @@ const Favourites: FC = observer(() => {
             </div>
             <hr className={styles.divider}/>
             <div className={styles.favouritesGrid}>
-                {JSON.parse(localStorage.getItem("favourites"))?.map((item) => {
+                {favourites.map((item) => {
                     return <Card key={item.id} id={item.id} image={item.image}
                                  name={item.name}
                                  desc={item.desc} link={item.type}/>
