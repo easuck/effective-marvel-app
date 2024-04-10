@@ -41,9 +41,10 @@ const Card: FC<{id: number, image: string, name: string, desc: string, link: str
                      }
                      else {
                          const newFavourite: LocalStorageEntity = {id: id, image: image, name: name, desc: desc, type: link};
-                         //favouritesStore.setFavourites() || не знаю как через сеттер присвоить массив
-                         favourites.push(newFavourite);
-                         setItem("favourites", favourites)
+                         let newFavourites: LocalStorageEntity[] = JSON.parse(localStorage.getItem("favourites"));
+                         newFavourites = [...newFavourites, newFavourite];
+                         favouritesStore.setFavourites(newFavourites);
+                         setItem("favourites", newFavourites)
                      }
                      changeFavourite();
                  }}>
