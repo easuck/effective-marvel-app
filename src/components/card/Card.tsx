@@ -37,6 +37,8 @@ const Card: FC<{id: number, image: string, name: string, desc: string, link: str
             <div className={isMouseOver ? styles.favourite : styles.favouriteHidden}
                  onClick={() => {
                      if (isFavourite) {
+                         const newFavourites: LocalStorageEntity[] = getItem("favourites").filter(item => item.id != id);
+                         favouritesStore.setFavourites(newFavourites);
                          removeItem("favourites", id.toString());
                      }
                      else {
@@ -44,7 +46,7 @@ const Card: FC<{id: number, image: string, name: string, desc: string, link: str
                          let newFavourites: LocalStorageEntity[] = JSON.parse(localStorage.getItem("favourites"));
                          newFavourites = [...newFavourites, newFavourite];
                          favouritesStore.setFavourites(newFavourites);
-                         setItem("favourites", newFavourites)
+                         setItem("favourites", newFavourites);
                      }
                      changeFavourite();
                  }}>
