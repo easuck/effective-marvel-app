@@ -1,7 +1,7 @@
-import {LocalStorageEntity} from "../types/LocalStorageEntity.tsx";
 import favouritesStore from "../stores/FavouritesStore.ts";
+import {LocalStorageEntity} from "../types/LocalStorageEntity.tsx";
 
-const useLocalStorage = () => {
+const localStorageInteraction = () => {
     const setItem = (key: string, value: unknown) => {
         localStorage.setItem(key, JSON.stringify(value));
         favouritesStore.setFavourites(value as LocalStorageEntity[]);
@@ -21,4 +21,4 @@ const useLocalStorage = () => {
     return {setItem, getItem, removeItem};
 }
 
-export default useLocalStorage;
+export default localStorageInteraction();

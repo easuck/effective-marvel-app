@@ -3,16 +3,16 @@ import styles from "./styles.module.css"
 import {Link} from "react-router-dom";
 import {AiFillHeart, AiOutlineHeart} from "react-icons/ai";
 import {IconContext} from "react-icons";
-import useLocalStorage from "../../hooks/useLocalStorage.ts";
 import favouritesStore from "../../stores/FavouritesStore.ts";
 import {LocalStorageEntity} from "../../types/LocalStorageEntity.tsx";
+import localStorageInteraction from "../../helpers/localStorageInteraction.ts";
 
 const Card: FC<{id: number, image: string, name: string, desc: string, link: string}> =
     ({id, image, name, desc, link}) => {
     const [isFavourite, setIsFavourite] = useState<boolean>(false);
     const [isMouseOver, setIsMouseOver] = useState<boolean>(false);
     const {favourites} = favouritesStore;
-    const {getItem, setItem, removeItem} = useLocalStorage();
+    const {getItem, setItem, removeItem} = localStorageInteraction;
 
     useEffect(() => {
         if (getItem("favourites")?.find(item => item.id == id)){
