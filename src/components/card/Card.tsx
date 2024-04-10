@@ -5,16 +5,19 @@ import {AiFillHeart, AiOutlineHeart} from "react-icons/ai";
 import {IconContext} from "react-icons";
 import useLocalStorage from "../../hooks/useLocalStorage.ts";
 import favouritesStore from "../../stores/FavouritesStore.ts";
+import {LocalStorageEntity} from "../../types/LocalStorageEntity.tsx";
 
 const Card: FC<{id: number, image: string, name: string, desc: string, link: string}> =
     ({id, image, name, desc, link}) => {
     const [isFavourite, setIsFavourite] = useState<boolean>(false);
     const [isMouseOver, setIsMouseOver] = useState<boolean>(false);
-    const {favouritesAmount} = favouritesStore;
+    const {favouritesAmount, favourites} = favouritesStore;
     const {getItem, setItem, removeItem} = useLocalStorage(favouritesStore.setFavouritesAmount, favouritesAmount);
 
     useEffect(() => {
-        if (getItem(id.toString())) setIsFavourite(true)
+        if (getItem("favourites")?.find(item => item.id == id)){
+            setIsFavourite(true);
+        }
     }, []);
 
     const onMouseEnter = () => {
@@ -33,8 +36,15 @@ const Card: FC<{id: number, image: string, name: string, desc: string, link: str
         <div className={styles.card} onMouseEnter={() => onMouseEnter()} onMouseLeave={() => onMouseLeave()}>
             <div className={isMouseOver ? styles.favourite : styles.favouriteHidden}
                  onClick={() => {
-                     isFavourite ? removeItem(id.toString()) :
-                         setItem(id.toString(), {id: id, image: image, name: name, desc: desc, type: link});
+                     if (isFavourite) {
+                         removeItem("favourites", id.toString());
+                     }
+                     else {
+                         const newFavourite: LocalStorageEntity = {id: id, image: image, name: name, desc: desc, type: link};
+                         //favouritesStore.setFavourites() не знаю как через сеттер присвоить массив
+                         favourites.push(newFavourite);
+                         setItem("favourites", favourites)
+                     }
                      changeFavourite();
                  }}>
                 <IconContext.Provider value={{size: "40px", color: "red"}}>

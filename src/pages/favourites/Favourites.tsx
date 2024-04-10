@@ -20,8 +20,15 @@ const Favourites: FC = observer(() => {
             </div>
             <hr className={styles.divider}/>
             <div className={styles.favouritesGrid}>
-                {Object.keys(localStorage).map((key) => {
+                {/*{Object.keys(localStorage).map((key) => {
                     const item: LocalStorageEntity = JSON.parse(localStorage.getItem(key));
+                    return <Card key={item.id} id={item.id} image={item.image}
+                                 name={item.name}
+                                 desc={item.desc} link={item.type}
+                                 favouritesAmount={favouritesAmount} setFavouritesAmount={favouritesStore.setFavouritesAmount}/>
+                })}*/}
+                {JSON.parse(localStorage.getItem("favourites"))?.map((item) => {
+                    //const item: LocalStorageEntity = JSON.parse(localStorage.getItem(key));
                     return <Card key={item.id} id={item.id} image={item.image}
                                  name={item.name}
                                  desc={item.desc} link={item.type}
