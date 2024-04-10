@@ -1,6 +1,6 @@
 import {ICharacter} from "../types/ICharacter.tsx";
 import {makeAutoObservable, reaction} from "mobx";
-import charactersRequests from "../api/charactersRequests.ts";
+import api from "../api/index.ts"
 
 class CharactersStore {
     characters: ICharacter[] = [];
@@ -46,7 +46,7 @@ class CharactersStore {
     }
 
     searchCharacters = () => {
-        charactersRequests.getCharacters(this.charactersOnPage, (this.page - 1) * this.charactersOnPage)
+        api.charactersRequests.getCharacters(this.charactersOnPage, (this.page - 1) * this.charactersOnPage)
         .then(data => {
             const charactersArray: ICharacter[]  = data.results.map(character => {
                 return {
@@ -63,7 +63,7 @@ class CharactersStore {
     }
 
     searchCharactersByName = () => {
-        charactersRequests.getCharactersByName(this.charactersOnPage, this.inputValue)
+        api.charactersRequests.getCharactersByName(this.charactersOnPage, this.inputValue)
             .then(data => {
                 const charactersArray: ICharacter[]  = data.results.map(character => {
                     return {
