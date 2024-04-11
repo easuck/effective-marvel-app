@@ -1,7 +1,6 @@
 import {IComics} from "../types/IComics.tsx";
 import {makeAutoObservable, reaction} from "mobx";
-import comicsRequests from "../api/comicsRequests.ts";
-
+import api from "../api/index.ts";
 class ComicsStore {
     comics: IComics[] = [];
     inputValue: string = "";
@@ -46,7 +45,7 @@ class ComicsStore {
     }
 
     searchComics = () => {
-        comicsRequests.getComics(this.comicsOnPage, (this.page - 1) * this.comicsOnPage)
+        api.comicsRequests.getComics(this.comicsOnPage, (this.page - 1) * this.comicsOnPage)
             .then(data => {
                 const comicsArray: IComics[] = data.results.map(comics => {
                     return {
@@ -63,7 +62,7 @@ class ComicsStore {
     }
 
     searchComicsByTitle = () => {
-        comicsRequests.getComicsByTitle(this.comicsOnPage, this.inputValue)
+        api.comicsRequests.getComicsByTitle(this.comicsOnPage, this.inputValue)
             .then(data => {
                 const comicsArray: IComics[]  = data.results.map(comics => {
                     return {

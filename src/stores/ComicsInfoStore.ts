@@ -1,7 +1,7 @@
 import {IComics} from "../types/IComics.tsx";
 import {makeAutoObservable} from "mobx";
-import comicsRequests from "../api/comicsRequests.ts";
 import {ICharacter} from "../types/ICharacter.tsx";
+import api from "../api/index.ts";
 
 class ComicsInfoStore{
     comics: IComics[] = [];
@@ -20,7 +20,7 @@ class ComicsInfoStore{
     }
 
     getComicsById = (id: string) => {
-        comicsRequests.getComicsById(id as unknown as number)
+        api.comicsRequests.getComicsById(id as unknown as number)
             .then(data => {
                 const comicsArray = data.results.map(comics => {
                     const charactersArray: ICharacter[] = comics.characters.items.map(character => {

@@ -5,32 +5,32 @@ import Card from "../../components/card/Card.tsx";
 import Pagination from "../../components/pagination/Pagination.tsx";
 import useDebounce from "../../hooks/useDebounce.tsx";
 import {observer} from "mobx-react-lite";
-import {comicsStore, comicsStore as store} from "../../stores/ComicsStore.ts";
 import {ColorRing} from "react-loader-spinner";
+import comicsStore from "../../stores/ComicsStore.ts";
 
 const Comics: FC = observer(() => {
     const {inputValue, comicsAmount, comics, loading, page, pagesAmount} = comicsStore;
     const debouncedInput = useDebounce(inputValue, 1500);
 
     useEffect(() => {
-        store.searchComics();
+        comicsStore.searchComics();
     }, []);
 
     useEffect(() => {
-        if (debouncedInput) store.searchComicsByTitle();
+        if (debouncedInput) comicsStore.searchComicsByTitle();
     }, [debouncedInput]);
 
     const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        store.setInputValue(event.target.value);
+        comicsStore.setInputValue(event.target.value);
     }
 
     const searchComicsByTitleWrapper = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
-        store.searchComicsByTitle();
+        comicsStore.searchComicsByTitle();
     }
 
     const canselDebounce = () => {
-        store.setInputValue("");
+        comicsStore.setInputValue("");
     }
 
     return(
@@ -50,7 +50,7 @@ const Comics: FC = observer(() => {
                                          desc={comics.desc} link="comics"/>
                         })}
                     </div>
-                    <Pagination pagesAmount={pagesAmount} page={page} setPage={store.setPage}/>
+                    <Pagination pagesAmount={pagesAmount} page={page} setPage={comicsStore.setPage}/>
                 </>
                 )
             }

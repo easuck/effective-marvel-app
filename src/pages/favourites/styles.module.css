@@ -1,0 +1,34 @@
+.favourites{
+    padding: var(--main-padding);
+    width: 100%;
+}
+.favouritesGrid{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 300px;
+    grid-column-gap: var(--main-padding);
+    grid-row-gap: calc(var(--main-padding) / 2);
+}
+.divider{
+    border: none;
+    background: grey;
+    height: 1px;
+    grid-column-start: 1;
+    grid-column-end: 7;
+    margin: 0  0 var(--main-padding) 0;
+}
+.labelWrapper{
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+.labelFavourites{
+    font-size: 50px;
+    font-weight: 700;
+}
+.labelAmount{
+    font-size: 30px;
+    font-weight: 700;
+    color: grey;
+    line-height: 60px;
+}

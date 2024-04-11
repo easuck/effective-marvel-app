@@ -5,6 +5,7 @@ import CharacterInfo from "../pages/characterInfo/CharacterInfo.tsx";
 import Layout from "../components/layout/Layout.tsx";
 import Comics from "../pages/comics/Comics.tsx";
 import ComicsInfo from "../pages/comicsInfo/ComicsInfo.tsx";
+import Favourites from "../pages/favourites/Favourites.tsx";
 
 const Router: FC = () => {
     return useRoutes([
@@ -30,6 +31,10 @@ const Router: FC = () => {
                 {
                     path: "comics/:id",
                     element: <ComicsInfo/>},
+                {
+                    path: "favourites",
+                    element: <Favourites/>
+                },
                 {
                     path: "*",
                     element: <div>page not found</div>

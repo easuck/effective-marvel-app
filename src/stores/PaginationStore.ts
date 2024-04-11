@@ -14,7 +14,6 @@ class PaginationStore{
 
     setPaginationBlocksAmount = (elementsAmount: number) => {
         this.paginationBlocksAmount = Math.ceil(elementsAmount / pagesInBlock);
-        console.log("set pagination blocks amount отработал");
     }
 
     setPaginationBlocks = () => {
@@ -48,7 +47,6 @@ class PaginationStore{
                 this.pages.set(i, false);
             }
         }
-        console.log("set pages отработал");
     }
 
     setCurrentPage = (current: number) => {

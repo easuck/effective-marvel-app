@@ -5,32 +5,32 @@ import SearchBar from "../../components/searchBar/SearchBar.tsx";
 import Pagination from "../../components/pagination/Pagination.tsx";
 import useDebounce from "../../hooks/useDebounce.tsx";
 import {ColorRing} from "react-loader-spinner";
-import {charactersStore, charactersStore as store} from "../../stores/CharactersStore.ts";
 import {observer} from "mobx-react-lite";
+import charactersStore from "../../stores/CharactersStore.ts";
 
 const Characters: FC = observer(() => {
     const {inputValue, charactersAmount, loading, characters, page, pagesAmount } = charactersStore;
     const debouncedInput = useDebounce(inputValue, 1500);
 
     useEffect(() => {
-        store.searchCharacters();
+        charactersStore.searchCharacters();
     }, []);
 
     useEffect(() => {
-        if (debouncedInput) store.searchCharactersByName();
+        if (debouncedInput) charactersStore.searchCharactersByName();
     }, [debouncedInput]);
 
     const searchCharactersByNameWrapper = (event?: React.MouseEvent<HTMLButtonElement>) => {
         if (event) event.preventDefault();
-        store.searchCharactersByName()
+        charactersStore.searchCharactersByName()
     }
 
     const canselDebounce = () => {
-        store.setSearchCharacter("");
+        charactersStore.setSearchCharacter("");
     }
 
     const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        store.setSearchCharacter(event.target.value);
+        charactersStore.setSearchCharacter(event.target.value);
     }
 
     return(
@@ -51,7 +51,7 @@ const Characters: FC = observer(() => {
                                          desc={character.desc} link="characters"/>
                         })}
                     </div>
-                    <Pagination pagesAmount={pagesAmount} page={page} setPage={store.setPage}/>
+                    <Pagination pagesAmount={pagesAmount} page={page} setPage={charactersStore.setPage}/>
                 </>
                 )
             }
