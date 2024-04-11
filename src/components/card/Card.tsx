@@ -33,8 +33,7 @@ const Card: FC<{id: number, image: string, name: string, desc: string, link: str
                      }
                      else {
                          const newFavourite: LocalStorageEntity = {id: id, image: image, name: name, desc: desc, type: link};
-                         let newFavourites: LocalStorageEntity[] = JSON.parse(localStorage.getItem("favourites"));
-                         newFavourites = [...newFavourites, newFavourite];
+                         const newFavourites = [...favourites, newFavourite];
                          favouritesStore.setFavourites(newFavourites);
                          setItem("favourites", newFavourites);
                      }
