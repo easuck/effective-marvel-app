@@ -1,6 +1,5 @@
 .characters{
     padding: var(--main-padding);
-    width: 100%;
 }
 .charactersGrid{
     display: grid;
