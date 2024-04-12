@@ -2,6 +2,7 @@
     width: 100px;
 }
 .header{
+    position: relative;
     width: 100%;
     background: red;
     display: flex;
@@ -9,10 +10,13 @@
     align-items: center;
     padding: 20px 20px;
 }
+.nav{
+    display: flex;
+    gap: 20px;
+}
 .nav *{
     text-decoration: none;
     display: inline;
-    padding: 20px 20px;
     color: orange;
     font-size: 20px;
     font-weight: 700;
@@ -20,8 +24,14 @@
 .nav *:hover{
     text-decoration: underline;
 }
-@media(max-width: 550px){
-    .nav *{
-        display: none;
+@media (max-width: 550px) {
+    .nav{
+        padding: 20px;
+        background: darkred;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        z-index: 10;
     }
 }
