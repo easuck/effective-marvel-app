@@ -20,3 +20,8 @@
 .nav *:hover{
     text-decoration: underline;
 }
+@media(max-width: 550px){
+    .nav *{
+        display: none;
+    }
+}

@@ -6,7 +6,6 @@
 :root{
   --main-padding: 40px;
   --sub-padding: 20px;
-  --footer-height: 15vh;
 }
 .link{
   text-decoration: none;
