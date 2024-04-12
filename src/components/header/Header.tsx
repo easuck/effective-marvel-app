@@ -5,26 +5,25 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import {IconContext} from "react-icons";
 
 const Header: FC = () => {
-    const [matches, setMatches] =
+    const [highResolution, setHighResolution] =
         useState<boolean>(window.matchMedia("(min-width: 550px)").matches);
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
     useEffect(() => {
         window
             .matchMedia("(min-width: 550px)")
-            .addEventListener("change", e => setMatches(e.matches));
+            .addEventListener("change", e => {
+                setHighResolution(e.matches);
+                setIsMenuOpen(false);
+            })
     }, []);
-
-    useEffect(() => {
-
-    }, [isMenuOpen]);
 
     return (
         <>
             <header className={styles.header}>
                 <img className={styles.logo} src="/marvel_logo.svg" alt="logo"/>
                 {
-                    matches ? (
+                    highResolution ? (
                         <nav className={styles.nav}>
                             <Link to="characters">Characters</Link>
                             <Link to="comics">Comics</Link>
