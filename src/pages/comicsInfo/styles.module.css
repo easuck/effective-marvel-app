@@ -40,3 +40,31 @@
     align-items: center;
     margin-top: 30vh;
 }
+@media (max-width: 768px){
+    .descriptionWrapper{
+        font-size: 25px;
+    }
+    .descriptionWrapper h4{
+        font-size: 18px;
+    }
+    .charactersList{
+        font-size: 25px;
+    }
+    .charactersList h4{
+        font-size: 18px;
+    }
+}
+@media (max-width: 425px){
+    .descriptionWrapper{
+        font-size: 20px;
+    }
+    .descriptionWrapper h4{
+        font-size: 15px;
+    }
+    .charactersList{
+        font-size: 20px;
+    }
+    .charactersList h4{
+        font-size: 15px;
+    }
+}
