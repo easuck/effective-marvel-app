@@ -1,6 +1,5 @@
 .favourites{
     padding: var(--main-padding);
-    width: 100%;
 }
 .favouritesGrid{
     display: grid;
@@ -13,8 +12,6 @@
     border: none;
     background: grey;
     height: 1px;
-    grid-column-start: 1;
-    grid-column-end: 7;
     margin: 0  0 var(--main-padding) 0;
 }
 .labelWrapper{
@@ -31,4 +28,26 @@
     font-weight: 700;
     color: grey;
     line-height: 60px;
+}
+@media(max-width: 1024px){
+    .favouritesGrid{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media(max-width: 550px){
+    .favouritesGrid{
+        grid-template-columns: 100%;
+    }
+    .divider{
+        margin: var(--sub-padding) 0;
+    }
+}
+@media (max-width: 550px) {
+    .labelFavourites{
+        font-size:35px;
+    }
+    .labelAmount{
+        font-size: 22px;
+        line-height: 40px;
+    }
 }

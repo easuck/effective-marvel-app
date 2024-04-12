@@ -1,6 +1,6 @@
 import {makeAutoObservable} from "mobx";
 
-const pagesInBlock: number = 10;
+const pagesInBlock: number = 5;
 
 class PaginationStore{
     paginationBlocksAmount: number = 1;

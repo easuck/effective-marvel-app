@@ -40,3 +40,32 @@
     align-items: center;
     margin-top: 30vh;
 }
+@media (max-width: 768px){
+    .descriptionWrapper{
+        font-size: 25px;
+    }
+    .descriptionWrapper h4{
+        font-size: 18px;
+    }
+    .comicsList{
+        font-size: 25px;
+    }
+    .comicsList h4{
+        font-size: 18px;
+    }
+}
+@media (max-width: 425px){
+    .descriptionWrapper{
+        font-size: 20px;
+    }
+    .descriptionWrapper h4{
+        font-size: 15px;
+    }
+    .comicsList{
+        font-size: 20px;
+    }
+    .comicsList h4{
+        font-size: 15px;
+    }
+}
+

@@ -1,5 +1,5 @@
 .footer{
-    height: var(--footer-height);
+    height: 150px;
     width: 100%;
     display: flex;
     flex-direction: column;
