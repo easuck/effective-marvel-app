@@ -3,13 +3,13 @@ import styles from "./styles.module.css"
 import Card from "../../components/card/Card.tsx";
 import SearchBar from "../../components/searchBar/SearchBar.tsx";
 import useDebounce from "../../hooks/useDebounce.tsx";
-import {ColorRing} from "react-loader-spinner";
 import {observer} from "mobx-react-lite";
 import charactersStore from "../../stores/CharactersStore.ts";
 import {VirtuosoGrid} from "react-virtuoso";
+import {Loader, Loader as Footer} from "../../components/loader/Loader.tsx";
 
 const Characters: FC = observer(() => {
-    const {inputValue, charactersAmount, loading, characters } = charactersStore;
+    const {inputValue, charactersAmount, loading, characters, page } = charactersStore;
     const debouncedInput = useDebounce(inputValue, 1500);
 
     useEffect(() => {
@@ -33,20 +33,23 @@ const Characters: FC = observer(() => {
         charactersStore.setSearchCharacter(event.target.value);
     }
 
-    return(
+    const loadMore = () => {
+        charactersStore.setPage(page + 1);
+        charactersStore.addNextCharacters();
+    }
+
+    return (
         <section className={styles.characters}>
             <SearchBar subject="Characters" amount={charactersAmount} inputHandler={inputHandler} callback={searchCharactersByNameWrapper}
                        searchWord={inputValue} canselDebounce={canselDebounce}/>
             <hr className={styles.divider}/>
-            {loading ? (
-                <div className={styles.loaderContainer}>
-                    <ColorRing colors={["red", "red", "red", "red", "red"]}/>
-                </div>
-                ) : (
+            {loading ? <Loader/> : (
                     <VirtuosoGrid
                         listClassName={styles.charactersGrid}
                         useWindowScroll={true}
                         totalCount={characters.length}
+                        endReached={loadMore}
+                        components={{Footer}}
                         itemContent={(index) => <Card key={characters[index].id} id={characters[index].id} image={characters[index].image}
                                                       name={characters[index].name}
                                                       desc={characters[index].desc} link="characters"/>}

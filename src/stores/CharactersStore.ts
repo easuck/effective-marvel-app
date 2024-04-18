@@ -1,6 +1,7 @@
 import {ICharacter} from "../types/ICharacter.tsx";
 import {makeAutoObservable, reaction} from "mobx";
 import api from "../api/index.ts"
+import characters from "../pages/characters/Characters.tsx";
 
 class CharactersStore {
     characters: ICharacter[] = [];
@@ -8,17 +9,10 @@ class CharactersStore {
     page: number = 1;
     loading: boolean = false;
     charactersAmount: number = 0;
-    pagesAmount: number = 0;
     charactersOnPage : number = 36;
 
     constructor(){
         makeAutoObservable(this);
-        reaction(
-            () => this.page,
-            (page) => {
-                this.searchCharacters();
-            }
-        )
     }
 
     setCharacters = (characters: ICharacter[]) => {
@@ -41,8 +35,20 @@ class CharactersStore {
         this.charactersAmount = charactersAmount;
     }
 
-    setPagesAmount = (pagesAmount: number) => {
-        this.pagesAmount = pagesAmount;
+    addNextCharacters = () => {
+        api.charactersRequests.getCharactersWithoutLoad(this.charactersOnPage, (this.page - 1) * this.charactersOnPage)
+            .then(data => {
+                const charactersArray: ICharacter[]  = data.results.map(character => {
+                    return {
+                        id: character.id,
+                        name: character.name,
+                        desc: character.description,
+                        image: character.thumbnail.path + "." + character.thumbnail.extension
+                    }
+                })
+                const newCharacters: ICharacter[] = this.characters.concat(charactersArray);
+                this.setCharacters(newCharacters);
+            })
     }
 
     searchCharacters = () => {
@@ -58,7 +64,7 @@ class CharactersStore {
             })
             this.setCharacters(charactersArray);
             this.setCharactersAmount(data.total);
-            this.setPagesAmount(Math.ceil(this.charactersAmount / this.charactersOnPage));
+            /*this.setPagesAmount(Math.ceil(this.charactersAmount / this.charactersOnPage));*/
         })
     }
 
@@ -75,7 +81,7 @@ class CharactersStore {
                 })
                 this.setCharacters(charactersArray);
                 this.setCharactersAmount(data.total);
-                this.setPagesAmount(Math.ceil(this.charactersAmount / this.charactersOnPage));
+                /*this.setPagesAmount(Math.ceil(this.charactersAmount / this.charactersOnPage));*/
             })
     }
 }

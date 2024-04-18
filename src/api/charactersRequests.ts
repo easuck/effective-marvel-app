@@ -14,6 +14,14 @@ export default{
         catch {}
     },
 
+    async getCharactersWithoutLoad(limit: number, offset: number): Promise<DataContainer>{
+        try{
+            const response = await axios.get("/characters", {params: {limit: limit, offset: offset}})
+            return response.data.data;
+        }
+        catch {}
+    },
+
     async getCharacterById(id: number): Promise<DataContainer>{
         try{
             characterInfoStore.setLoading(true);
