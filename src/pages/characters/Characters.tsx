@@ -6,7 +6,7 @@ import useDebounce from "../../hooks/useDebounce.tsx";
 import {observer} from "mobx-react-lite";
 import charactersStore from "../../stores/CharactersStore.ts";
 import {VirtuosoGrid} from "react-virtuoso";
-import {Loader, Loader as Footer} from "../../components/loader/Loader.tsx";
+import Loader from "../../components/loader/Loader.tsx";
 
 const Characters: FC = observer(() => {
     const {inputValue, charactersAmount, loading, characters, page, searchValue } = charactersStore;
@@ -49,7 +49,7 @@ const Characters: FC = observer(() => {
                         useWindowScroll={true}
                         totalCount={characters.length}
                         endReached={loadMore}
-                        components={{Footer}}
+                        components={{Footer: Loader}}
                         itemContent={(index) => <Card key={characters[index].id} id={characters[index].id} image={characters[index].image}
                                                       name={characters[index].name}
                                                       desc={characters[index].desc} link="characters"/>}
