@@ -5,7 +5,7 @@ const SearchBar: FC<{subject: string, amount: number,
     inputHandler: (event: React.ChangeEvent<HTMLInputElement>) => void,
     callback: (event: React.MouseEvent<HTMLButtonElement>) => void,
     searchWord: string, canselDebounce: () => void}> =
-    ({subject, amount, inputHandler, callback, searchWord, canselDebounce, elementsOnPage}) => {
+    ({subject, amount, inputHandler, callback, searchWord, canselDebounce}) => {
     return (
         <section>
             <div className={styles.labelWrapper}>

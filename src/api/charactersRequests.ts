@@ -32,9 +32,19 @@ export default{
         catch {}
     },
 
-    async getCharactersByName(limit: number, name: string): Promise<DataContainer>{
+    async getCharactersByName(limit: number, offset: number, name: string): Promise<DataContainer>{
         try{
-            const response = await axios.get("/characters", {params: {limit: limit, nameStartsWith: name}});
+            charactersStore.setLoading(true);
+            const response = await axios.get("/characters", {params: {limit: limit, offset: offset, nameStartsWith: name}});
+            charactersStore.setLoading(false);
+            return response.data.data;
+        }
+        catch {}
+    },
+
+    async getCharactersByNameWithoutLoad(limit: number, offset: number, name: string): Promise<DataContainer>{
+        try{
+            const response = await axios.get("/characters", {params: {limit: limit, offset: offset, nameStartsWith: name}});
             return response.data.data;
         }
         catch {}

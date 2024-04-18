@@ -9,7 +9,7 @@ import {VirtuosoGrid} from "react-virtuoso";
 import {Loader, Loader as Footer} from "../../components/loader/Loader.tsx";
 
 const Characters: FC = observer(() => {
-    const {inputValue, charactersAmount, loading, characters, page } = charactersStore;
+    const {inputValue, charactersAmount, loading, characters, page, searchValue } = charactersStore;
     const debouncedInput = useDebounce(inputValue, 1500);
 
     useEffect(() => {
@@ -22,20 +22,20 @@ const Characters: FC = observer(() => {
 
     const searchCharactersByNameWrapper = (event?: React.MouseEvent<HTMLButtonElement>) => {
         if (event) event.preventDefault();
-        charactersStore.searchCharactersByName()
+        charactersStore.searchCharactersByName();
     }
 
     const canselDebounce = () => {
-        charactersStore.setSearchCharacter("");
+        charactersStore.setInputValue("");
     }
 
     const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        charactersStore.setSearchCharacter(event.target.value);
+        charactersStore.setInputValue(event.target.value);
     }
 
     const loadMore = () => {
         charactersStore.setPage(page + 1);
-        charactersStore.addNextCharacters();
+        !searchValue ? charactersStore.addNextCharacters() : charactersStore.addNextCharactersByName();
     }
 
     return (
