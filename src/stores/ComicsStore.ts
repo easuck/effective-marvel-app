@@ -1,23 +1,18 @@
 import {IComics} from "../types/IComics.tsx";
-import {makeAutoObservable, reaction} from "mobx";
+import {makeAutoObservable} from "mobx";
 import api from "../api/index.ts";
+
 class ComicsStore {
     comics: IComics[] = [];
     inputValue: string = "";
+    searchValue: string = "";
     page: number = 1;
-    pagesAmount: number = 0;
     comicsAmount: number = 0;
     comicsOnPage: number = 36;
     loading: boolean = false;
 
     constructor() {
         makeAutoObservable(this);
-        reaction(
-            () => this.page,
-            (page) => {
-                this.searchComics();
-            }
-        )
     }
 
     setComics = (comics: IComics[]) => {
@@ -28,12 +23,13 @@ class ComicsStore {
         this.inputValue = inputValue;
     }
 
-    setPage = (page: number) => {
-        this.page = page;
+    setSearchValue = (searchValue: string) => {
+        this.searchValue = searchValue;
     }
 
-    setPagesAmount = (pagesAmount: number) => {
-        this.pagesAmount = pagesAmount;
+
+    setPage = (page: number) => {
+        this.page = page;
     }
 
     setComicsAmount = (comicsAmount: number) => {
@@ -44,7 +40,39 @@ class ComicsStore {
         this.loading = loading;
     }
 
+    addNextComics = () => {
+        api.comicsRequests.getComicsWithoutLoad(this.comicsOnPage, (this.page - 1) * this.comicsOnPage)
+            .then(data => {
+                const comicsArray: IComics[] = data.results.map(comics => {
+                    return {
+                        id: comics.id,
+                        title: comics.title,
+                        desc: comics.description,
+                        image: comics.thumbnail.path + "." + comics.thumbnail.extension
+                    }
+                })
+                this.setComics(this.comics.concat(comicsArray));
+            })
+    }
+
+    addNextComicsByTitle = () => {
+        api.comicsRequests.getComicsByTitleWithoutLoad(this.comicsOnPage, (this.page - 1) * this.comicsOnPage, this.inputValue)
+            .then(data => {
+                const comicsArray: IComics[]  = data.results.map(comics => {
+                    return {
+                        id: comics.id,
+                        title: comics.title,
+                        desc: comics.description,
+                        image: comics.thumbnail.path + "." + comics.thumbnail.extension
+                    }
+                })
+                this.setComics(this.comics.concat(comicsArray));
+            })
+    }
+
     searchComics = () => {
+        this.setPage(1);
+        this.setSearchValue("");
         api.comicsRequests.getComics(this.comicsOnPage, (this.page - 1) * this.comicsOnPage)
             .then(data => {
                 const comicsArray: IComics[] = data.results.map(comics => {
@@ -57,12 +85,13 @@ class ComicsStore {
                 })
                 this.setComics(comicsArray);
                 this.setComicsAmount(data.total);
-                this.setPagesAmount(Math.ceil(this.comicsAmount / this.comicsOnPage));
             })
     }
 
     searchComicsByTitle = () => {
-        api.comicsRequests.getComicsByTitle(this.comicsOnPage, this.inputValue)
+        this.setPage(1);
+        this.setSearchValue(this.inputValue);
+        api.comicsRequests.getComicsByTitle(this.comicsOnPage, (this.page - 1) * this.comicsOnPage, this.inputValue)
             .then(data => {
                 const comicsArray: IComics[]  = data.results.map(comics => {
                     return {
@@ -74,7 +103,6 @@ class ComicsStore {
                 })
                 this.setComics(comicsArray);
                 this.setComicsAmount(data.total);
-                this.setPagesAmount(Math.ceil(this.comicsAmount / this.comicsOnPage));
             })
     }
 }

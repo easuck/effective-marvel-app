@@ -14,6 +14,14 @@ export default{
         catch {}
     },
 
+    async getComicsWithoutLoad(limit: number, offset: number): Promise<DataContainer>{
+        try{
+            const response = await axios.get("/comics", {params: {limit: limit, offset: offset}});
+            return response.data.data;
+        }
+        catch {}
+    },
+
     async getComicsById(id: number): Promise<DataContainer>{
         try{
             comicsInfoStore.setLoading(true);
@@ -24,9 +32,17 @@ export default{
         catch {}
     },
 
-    async getComicsByTitle(limit: number, title: string): Promise<DataContainer>{
+    async getComicsByTitle(limit: number, offset: number, title: string): Promise<DataContainer>{
         try{
-            const response = await axios.get("/comics", {params: {limit: limit, titleStartsWith: title}});
+            const response = await axios.get("/comics", {params: {limit: limit, offset: offset, titleStartsWith: title}});
+            return response.data.data;
+        }
+        catch {}
+    },
+
+    async getComicsByTitleWithoutLoad(limit: number, offset: number, title: string): Promise<DataContainer>{
+        try{
+            const response = await axios.get("/comics", {params: {limit: limit, offset: offset, titleStartsWith: title}});
             return response.data.data;
         }
         catch {}
