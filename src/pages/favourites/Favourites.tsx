@@ -3,6 +3,7 @@ import Card from "../../components/card/Card.tsx";
 import styles from "./styles.module.css"
 import {observer} from "mobx-react-lite";
 import favouritesStore from "../../stores/FavouritesStore.ts";
+import {VirtuosoGrid} from "react-virtuoso";
 
 const Favourites: FC = observer(() => {
     const {favourites} = favouritesStore;
@@ -14,13 +15,21 @@ const Favourites: FC = observer(() => {
                 <h3 className={styles.labelAmount}>({favouritesStore.favourites.length})</h3>
             </div>
             <hr className={styles.divider}/>
-            <div className={styles.favouritesGrid}>
+            {/*<div className={styles.favouritesGrid}>
                 {favourites.map((item) => {
                     return <Card key={item.id} id={item.id} image={item.image}
                                  name={item.name}
                                  desc={item.desc} link={item.type}/>
                 })}
-            </div>
+            </div>*/}
+            <VirtuosoGrid
+                listClassName={styles.favouritesGrid}
+                useWindowScroll={true}
+                totalCount={favourites.length}
+                itemContent={(index) => <Card key={favourites[index].id} id={favourites[index].id} image={favourites[index].image}
+                                              name={favourites[index].name}
+                                              desc={favourites[index].desc} link={favourites[index].type}/>}
+            />
         </section>
     )
 });
