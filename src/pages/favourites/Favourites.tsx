@@ -15,13 +15,6 @@ const Favourites: FC = observer(() => {
                 <h3 className={styles.labelAmount}>({favouritesStore.favourites.length})</h3>
             </div>
             <hr className={styles.divider}/>
-            {/*<div className={styles.favouritesGrid}>
-                {favourites.map((item) => {
-                    return <Card key={item.id} id={item.id} image={item.image}
-                                 name={item.name}
-                                 desc={item.desc} link={item.type}/>
-                })}
-            </div>*/}
             <VirtuosoGrid
                 listClassName={styles.favouritesGrid}
                 useWindowScroll={true}
