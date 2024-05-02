@@ -41,7 +41,7 @@ class CharactersStore {
     }
 
     addNextCharacters = () => {
-        api.charactersRequests.getCharactersWithoutLoad(this.charactersOnPage, (this.page - 1) * this.charactersOnPage)
+        api.charactersRequests.getCharacters(this.charactersOnPage, (this.page - 1) * this.charactersOnPage)
             .then(data => {
                 const charactersArray: ICharacter[]  = data.results.map(character => {
                     return {
@@ -57,7 +57,7 @@ class CharactersStore {
 
     addNextCharactersByName = () => {
         /*if (this.charactersAmount != this.characters.length){*/
-            api.charactersRequests.getCharactersByNameWithoutLoad(this.charactersOnPage, (this.page - 1) * this.charactersOnPage, this.searchValue)
+            api.charactersRequests.getCharactersByName(this.charactersOnPage, (this.page - 1) * this.charactersOnPage, this.searchValue)
                 .then(data => {
                     const charactersArray: ICharacter[]  = data.results.map(character => {
                         return {
