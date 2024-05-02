@@ -14,6 +14,10 @@ const Comics: FC = observer(() => {
 
     useEffect(() => {
         comicsStore.searchComics();
+        return () => {
+            comicsStore.setComics([]);
+            comicsStore.setComicsAmount(null);
+        }
     }, []);
 
     useEffect(() => {

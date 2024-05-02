@@ -14,6 +14,10 @@ const Characters: FC = observer(() => {
 
     useEffect(() => {
         charactersStore.searchCharacters();
+        return () => {
+            charactersStore.setCharacters([]);
+            charactersStore.setCharactersAmount(null)
+        }
     }, []);
 
     useEffect(() => {

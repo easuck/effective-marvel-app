@@ -7,7 +7,7 @@ class ComicsStore {
     inputValue: string = "";
     searchValue: string = "";
     page: number = 1;
-    comicsAmount: number = 0;
+    comicsAmount: number = null;
     comicsOnPage: number = 36;
     loading: boolean = false;
 
@@ -77,6 +77,7 @@ class ComicsStore {
     searchComics = () => {
         this.setPage(1);
         this.setSearchValue("");
+        this.setComics([]);
         this.setLoading(true);
         api.comicsRequests.getComics(this.comicsOnPage, (this.page - 1) * this.comicsOnPage)
             .then(data => {
@@ -97,6 +98,7 @@ class ComicsStore {
     searchComicsByTitle = () => {
         this.setPage(1);
         this.setSearchValue(this.inputValue);
+        this.setComics([]);
         this.setLoading(true);
         api.comicsRequests.getComicsByTitle(this.comicsOnPage, (this.page - 1) * this.comicsOnPage, this.searchValue)
             .then(data => {

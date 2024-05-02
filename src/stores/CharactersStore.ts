@@ -8,7 +8,7 @@ class CharactersStore {
     searchValue: string = "";
     page: number = 1;
     loading: boolean = false;
-    charactersAmount: number = 0;
+    charactersAmount: number = null;
     charactersOnPage : number = 36;
 
     constructor(){
@@ -77,6 +77,7 @@ class CharactersStore {
     searchCharacters = () => {
         this.setPage(1);
         this.setSearchValue("");
+        this.setCharacters([]);
         this.setLoading(true);
         api.charactersRequests.getCharacters(this.charactersOnPage, (this.page - 1) * this.charactersOnPage)
         .then(data => {
@@ -97,6 +98,7 @@ class CharactersStore {
     searchCharactersByName = () => {
         this.setPage(1);
         this.setSearchValue(this.inputValue);
+        this.setCharacters([]);
         this.setLoading(true);
         api.charactersRequests.getCharactersByName(this.charactersOnPage, (this.page - 1) * this.charactersOnPage, this.searchValue)
             .then(data => {
