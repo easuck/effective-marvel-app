@@ -4,7 +4,7 @@ import Card from "../../components/card/Card.tsx";
 import SearchBar from "../../components/searchBar/SearchBar.tsx";
 import useDebounce from "../../hooks/useDebounce.tsx";
 import {observer} from "mobx-react-lite";
-import charactersStore from "../../stores/CharactersStore.ts";
+import {charactersStore} from "../../stores/CharactersStore.ts";
 import {VirtuosoGrid} from "react-virtuoso";
 import Loader from "../../components/loader/Loader.tsx";
 

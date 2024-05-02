@@ -41,7 +41,7 @@ class ComicsStore {
     }
 
     addNextComics = () => {
-        api.comicsRequests.getComicsWithoutLoad(this.comicsOnPage, (this.page - 1) * this.comicsOnPage)
+        api.comicsRequests.getComics(this.comicsOnPage, (this.page - 1) * this.comicsOnPage)
             .then(data => {
                 const comicsArray: IComics[] = data.results.map(comics => {
                     return {
@@ -56,7 +56,7 @@ class ComicsStore {
     }
 
     addNextComicsByTitle = () => {
-        api.comicsRequests.getComicsByTitleWithoutLoad(this.comicsOnPage, (this.page - 1) * this.comicsOnPage, this.inputValue)
+        api.comicsRequests.getComicsByTitle(this.comicsOnPage, (this.page - 1) * this.comicsOnPage, this.inputValue)
             .then(data => {
                 const comicsArray: IComics[]  = data.results.map(comics => {
                     return {
@@ -73,6 +73,7 @@ class ComicsStore {
     searchComics = () => {
         this.setPage(1);
         this.setSearchValue("");
+        this.setLoading(true);
         api.comicsRequests.getComics(this.comicsOnPage, (this.page - 1) * this.comicsOnPage)
             .then(data => {
                 const comicsArray: IComics[] = data.results.map(comics => {
@@ -85,12 +86,14 @@ class ComicsStore {
                 })
                 this.setComics(comicsArray);
                 this.setComicsAmount(data.total);
+                this.setLoading(false);
             })
     }
 
     searchComicsByTitle = () => {
         this.setPage(1);
         this.setSearchValue(this.inputValue);
+        this.setLoading(true);
         api.comicsRequests.getComicsByTitle(this.comicsOnPage, (this.page - 1) * this.comicsOnPage, this.inputValue)
             .then(data => {
                 const comicsArray: IComics[]  = data.results.map(comics => {
@@ -103,10 +106,9 @@ class ComicsStore {
                 })
                 this.setComics(comicsArray);
                 this.setComicsAmount(data.total);
+                this.setLoading(false);
             })
     }
 }
 
 export const comicsStore = new ComicsStore();
-
-export default comicsStore;

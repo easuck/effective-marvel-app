@@ -115,5 +115,3 @@ class CharactersStore {
 
 
 export const charactersStore = new CharactersStore();
-
-export default charactersStore;

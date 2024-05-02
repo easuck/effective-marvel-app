@@ -1,7 +1,7 @@
 import {FC, useEffect} from "react";
 import styles from "./styles.module.css"
 import {Link, useParams} from "react-router-dom";
-import {characterInfoStore, characterInfoStore as store} from "../../stores/CharacterInfoStore.ts";
+import {characterInfoStore} from "../../stores/CharacterInfoStore.ts";
 import {observer} from "mobx-react-lite";
 import {ColorRing} from "react-loader-spinner";
 
@@ -10,7 +10,7 @@ const CharacterInfo: FC = observer(() => {
     const {character, loading} = characterInfoStore;
 
     useEffect(() => {
-        store.getCharacterById(id);
+        characterInfoStore.getCharacterById(id);
     }, []);
 
     return(
