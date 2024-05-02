@@ -9,6 +9,9 @@
     font-size: 16px;
     font-weight: 500;
 }
+.form input:focus{
+    outline: none;
+}
 .form button{
     height: 100%;
     flex: 1;

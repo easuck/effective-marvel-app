@@ -1,7 +1,7 @@
 import {FC, useEffect} from "react";
 import styles from "./styles.module.css"
 import {Link, useParams} from "react-router-dom";
-import {comicsInfoStore, comicsInfoStore as store} from "../../stores/ComicsInfoStore.ts";
+import {comicsInfoStore} from "../../stores/ComicsInfoStore.ts";
 import {ColorRing} from "react-loader-spinner";
 import {observer} from "mobx-react-lite";
 
@@ -10,7 +10,7 @@ const ComicsInfo: FC = observer(() => {
     const {comics, loading} = comicsInfoStore;
 
     useEffect(() => {
-        store.getComicsById(id);
+        comicsInfoStore.getComicsById(id);
     }, []);
 
     return(

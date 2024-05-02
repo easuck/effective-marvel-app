@@ -1,5 +1,6 @@
 .characters{
     padding: var(--main-padding);
+    margin-bottom: 40px;
 }
 .charactersGrid{
     display: grid;
@@ -13,12 +14,6 @@
     background: grey;
     height: 1px;
     margin: var(--main-padding) 0;
-}
-.loaderContainer{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20vh;
 }
 @media(max-width: 1024px){
     .charactersGrid{

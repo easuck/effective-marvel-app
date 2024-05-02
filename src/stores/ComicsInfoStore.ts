@@ -20,6 +20,7 @@ class ComicsInfoStore{
     }
 
     getComicsById = (id: string) => {
+        this.setLoading(true);
         api.comicsRequests.getComicsById(id as unknown as number)
             .then(data => {
                 const comicsArray = data.results.map(comics => {
@@ -38,9 +39,9 @@ class ComicsInfoStore{
                     }
                 })
                 this.setComics(comicsArray);
+                this.setLoading(false);
             })
     }
 }
 
 export const comicsInfoStore = new ComicsInfoStore();
-export default comicsInfoStore;
