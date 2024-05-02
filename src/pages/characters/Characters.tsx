@@ -34,8 +34,10 @@ const Characters: FC = observer(() => {
     }
 
     const loadMore = () => {
-        charactersStore.setPage(page + 1);
-        searchValue ? charactersStore.addNextCharactersByName() : charactersStore.addNextCharacters();
+        if (charactersAmount != characters.length){
+            charactersStore.setPage(page + 1);
+            searchValue ? charactersStore.addNextCharactersByName() : charactersStore.addNextCharacters();
+        }
     }
 
     return (
@@ -43,19 +45,16 @@ const Characters: FC = observer(() => {
             <SearchBar subject="Characters" amount={charactersAmount} inputHandler={inputHandler} callback={searchCharactersByNameWrapper}
                        searchWord={inputValue} canselDebounce={canselDebounce}/>
             <hr className={styles.divider}/>
-            {loading ? <Loader/> : (
-                <VirtuosoGrid
-                    listClassName={styles.charactersGrid}
-                    useWindowScroll={true}
-                    totalCount={characters.length}
-                    endReached={loadMore}
-                    components={{Footer: Loader}}
-                    itemContent={(index) => <Card key={characters[index].id} id={characters[index].id} image={characters[index].image}
-                                                  name={characters[index].name}
-                                                  desc={characters[index].desc} link="characters"/>}
-                />
-                )
-            }
+            <VirtuosoGrid
+                listClassName={styles.charactersGrid}
+                useWindowScroll={true}
+                totalCount={characters.length}
+                endReached={loadMore}
+                components={{Footer: loading ? Loader : null}}
+                itemContent={(index) => <Card key={characters[index].id} id={characters[index].id} image={characters[index].image}
+                                              name={characters[index].name}
+                                              desc={characters[index].desc} link="characters"/>}
+            />
         </section>
     )
 });

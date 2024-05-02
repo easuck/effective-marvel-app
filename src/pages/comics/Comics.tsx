@@ -34,8 +34,10 @@ const Comics: FC = observer(() => {
     }
 
     const loadMore = () => {
-        comicsStore.setPage(page + 1);
-        searchValue ? comicsStore.addNextComicsByTitle() : comicsStore.addNextComics();
+        if (comicsAmount != comics.length){
+            comicsStore.setPage(page + 1);
+            searchValue ? comicsStore.addNextComicsByTitle() : comicsStore.addNextComics();
+        }
     }
 
     return(
@@ -43,19 +45,16 @@ const Comics: FC = observer(() => {
             <SearchBar subject="Comics" amount={comicsAmount} inputHandler={inputHandler} callback={searchComicsByTitleWrapper}
                        searchWord={inputValue} canselDebounce={canselDebounce}/>
             <hr className={styles.divider}/>
-            {loading ? <Loader/> : (
-                <VirtuosoGrid
-                    listClassName={styles.comicsGrid}
-                    useWindowScroll={true}
-                    totalCount={comics.length}
-                    endReached={loadMore}
-                    components={{Footer: Loader}}
-                    itemContent={(index) => <Card key={comics[index].id} id={comics[index].id} image={comics[index].image}
-                                                  name={comics[index].title}
-                                                  desc={comics[index].desc} link="comics"/>}
-                />
-                )
-            }
+            <VirtuosoGrid
+                listClassName={styles.comicsGrid}
+                useWindowScroll={true}
+                totalCount={comics.length}
+                endReached={loadMore}
+                components={{Footer: loading ? Loader : null}}
+                itemContent={(index) => <Card key={comics[index].id} id={comics[index].id} image={comics[index].image}
+                                              name={comics[index].title}
+                                              desc={comics[index].desc} link="comics"/>}
+            />
         </section>
     )
 });

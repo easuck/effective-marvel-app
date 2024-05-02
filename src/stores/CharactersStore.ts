@@ -41,6 +41,7 @@ class CharactersStore {
     }
 
     addNextCharacters = () => {
+        this.setLoading(true);
         api.charactersRequests.getCharacters(this.charactersOnPage, (this.page - 1) * this.charactersOnPage)
             .then(data => {
                 const charactersArray: ICharacter[]  = data.results.map(character => {
@@ -52,24 +53,25 @@ class CharactersStore {
                     }
                 })
                 this.setCharacters(this.characters.concat(charactersArray));
+                this.setLoading(false);
             })
     }
 
     addNextCharactersByName = () => {
-        /*if (this.charactersAmount != this.characters.length){*/
-            api.charactersRequests.getCharactersByName(this.charactersOnPage, (this.page - 1) * this.charactersOnPage, this.searchValue)
-                .then(data => {
-                    const charactersArray: ICharacter[]  = data.results.map(character => {
-                        return {
-                            id: character.id,
-                            name: character.name,
-                            desc: character.description,
-                            image: character.thumbnail.path + "." + character.thumbnail.extension
-                        }
-                    })
-                    this.setCharacters(this.characters.concat(charactersArray));
+        this.setLoading(true);
+        api.charactersRequests.getCharactersByName(this.charactersOnPage, (this.page - 1) * this.charactersOnPage, this.searchValue)
+            .then(data => {
+                const charactersArray: ICharacter[]  = data.results.map(character => {
+                    return {
+                        id: character.id,
+                        name: character.name,
+                        desc: character.description,
+                        image: character.thumbnail.path + "." + character.thumbnail.extension
+                    }
                 })
-        //}
+                this.setCharacters(this.characters.concat(charactersArray));
+                this.setLoading(false);
+            })
     }
 
     searchCharacters = () => {
@@ -96,7 +98,7 @@ class CharactersStore {
         this.setPage(1);
         this.setSearchValue(this.inputValue);
         this.setLoading(true);
-        api.charactersRequests.getCharactersByName(this.charactersOnPage, (this.page - 1) * this.charactersOnPage, this.inputValue)
+        api.charactersRequests.getCharactersByName(this.charactersOnPage, (this.page - 1) * this.charactersOnPage, this.searchValue)
             .then(data => {
                 const charactersArray: ICharacter[]  = data.results.map(character => {
                     return {

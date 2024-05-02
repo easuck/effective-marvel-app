@@ -41,6 +41,7 @@ class ComicsStore {
     }
 
     addNextComics = () => {
+        this.setLoading(true);
         api.comicsRequests.getComics(this.comicsOnPage, (this.page - 1) * this.comicsOnPage)
             .then(data => {
                 const comicsArray: IComics[] = data.results.map(comics => {
@@ -52,11 +53,13 @@ class ComicsStore {
                     }
                 })
                 this.setComics(this.comics.concat(comicsArray));
+                this.setLoading(false);
             })
     }
 
     addNextComicsByTitle = () => {
-        api.comicsRequests.getComicsByTitle(this.comicsOnPage, (this.page - 1) * this.comicsOnPage, this.inputValue)
+        this.setLoading(true);
+        api.comicsRequests.getComicsByTitle(this.comicsOnPage, (this.page - 1) * this.comicsOnPage, this.searchValue)
             .then(data => {
                 const comicsArray: IComics[]  = data.results.map(comics => {
                     return {
@@ -67,6 +70,7 @@ class ComicsStore {
                     }
                 })
                 this.setComics(this.comics.concat(comicsArray));
+                this.setLoading(false);
             })
     }
 
@@ -94,7 +98,7 @@ class ComicsStore {
         this.setPage(1);
         this.setSearchValue(this.inputValue);
         this.setLoading(true);
-        api.comicsRequests.getComicsByTitle(this.comicsOnPage, (this.page - 1) * this.comicsOnPage, this.inputValue)
+        api.comicsRequests.getComicsByTitle(this.comicsOnPage, (this.page - 1) * this.comicsOnPage, this.searchValue)
             .then(data => {
                 const comicsArray: IComics[]  = data.results.map(comics => {
                     return {
