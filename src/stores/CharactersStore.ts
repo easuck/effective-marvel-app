@@ -56,23 +56,26 @@ class CharactersStore {
     }
 
     addNextCharactersByName = () => {
-        api.charactersRequests.getCharactersByNameWithoutLoad(this.charactersOnPage, (this.page - 1) * this.charactersOnPage, this.searchValue)
-            .then(data => {
-                const charactersArray: ICharacter[]  = data.results.map(character => {
-                    return {
-                        id: character.id,
-                        name: character.name,
-                        desc: character.description,
-                        image: character.thumbnail.path + "." + character.thumbnail.extension
-                    }
+        /*if (this.charactersAmount != this.characters.length){*/
+            api.charactersRequests.getCharactersByNameWithoutLoad(this.charactersOnPage, (this.page - 1) * this.charactersOnPage, this.searchValue)
+                .then(data => {
+                    const charactersArray: ICharacter[]  = data.results.map(character => {
+                        return {
+                            id: character.id,
+                            name: character.name,
+                            desc: character.description,
+                            image: character.thumbnail.path + "." + character.thumbnail.extension
+                        }
+                    })
+                    this.setCharacters(this.characters.concat(charactersArray));
                 })
-                this.setCharacters(this.characters.concat(charactersArray));
-            })
+        //}
     }
 
     searchCharacters = () => {
         this.setPage(1);
         this.setSearchValue("");
+        this.setLoading(true);
         api.charactersRequests.getCharacters(this.charactersOnPage, (this.page - 1) * this.charactersOnPage)
         .then(data => {
             const charactersArray: ICharacter[]  = data.results.map(character => {
@@ -85,12 +88,14 @@ class CharactersStore {
             })
             this.setCharacters(charactersArray);
             this.setCharactersAmount(data.total);
+            this.setLoading(false);
         })
     }
 
     searchCharactersByName = () => {
         this.setPage(1);
         this.setSearchValue(this.inputValue);
+        this.setLoading(true);
         api.charactersRequests.getCharactersByName(this.charactersOnPage, (this.page - 1) * this.charactersOnPage, this.inputValue)
             .then(data => {
                 const charactersArray: ICharacter[]  = data.results.map(character => {
@@ -103,6 +108,7 @@ class CharactersStore {
                 })
                 this.setCharacters(charactersArray);
                 this.setCharactersAmount(data.total);
+                this.setLoading(false);
             })
     }
 }

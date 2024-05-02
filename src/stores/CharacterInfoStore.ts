@@ -20,6 +20,7 @@ class CharacterInfoStore {
     }
 
     getCharacterById = (id: string) => {
+        this.setLoading(true);
         api.charactersRequests.getCharacterById(id as unknown as number)
             .then(data => {
                 const charactersArray: ICharacter[] = data.results.map(character => {
@@ -38,9 +39,9 @@ class CharacterInfoStore {
                     }
                 })
                 this.setCharacter(charactersArray);
+                this.setLoading(false);
             });
     }
 }
 
 export const characterInfoStore = new CharacterInfoStore();
-export  default characterInfoStore;
