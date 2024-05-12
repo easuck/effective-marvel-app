@@ -6,7 +6,7 @@ if ('serviceWorker' in navigator){
 
 async function send(){
     console.log("Registering service worker...");
-    const register = await navigator.serviceWorker.register("./sw.js", {
+    const register = await navigator.serviceWorker.register("./serviceWorker.js", {
         scope: "/",
     });
     console.log("Service Worker Registered...");
@@ -26,5 +26,5 @@ async function send(){
             "content-type": "application/json",
         },
     });
-    console.log("Push Sent...");
+    console.log("Push Sent..."); //почему не вызывается?
 }
