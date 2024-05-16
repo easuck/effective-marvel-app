@@ -1,7 +1,9 @@
 const publicVapidKey = "BNmO7o29hUpkX3h_0vE36sVXgtSWMYc6ydzC2oKp1CSV_DQWI8u_cp9tOKpA-36NCQo_lj5E9XNJgobGNcML57I";
 
-if ('serviceWorker' in navigator){
-    send().catch(err => console.error(err));
+export const register = () => {
+    if ('serviceWorker' in navigator){
+        send().catch(err => console.error(err));
+    }
 }
 
 async function send(){
@@ -26,5 +28,5 @@ async function send(){
             "content-type": "application/json",
         },
     });
-    console.log("Push Sent..."); //почему не вызывается?
+    console.log("Push Sent...");
 }

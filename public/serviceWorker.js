@@ -1,9 +1,9 @@
-console.log("Service Worker Loaded..."); //не вызывается???
+console.log("Service Worker Loaded...");
 
 self.addEventListener("push", (e) => {
     const data = e.data.json();
     console.log("Push Recieved...");
     self.registration.showNotification(data.title, {
-        body: "Knock Knock",
+        body: "push push",
     }).then(() => console.log("Notification has been shown"));
 });
