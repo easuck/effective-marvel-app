@@ -13,22 +13,23 @@ async function send(){
     });
     console.log("Service Worker Registered...");
 
-    setTimeout(async () => {
-        console.log("Registering Push...");
-        const subscription = await register.pushManager.subscribe({
-            userVisibleOnly: true,
-            applicationServerKey: publicVapidKey,
-        });
-        console.log("Push Registered...");
+    await navigator.serviceWorker.ready
+        .then(async() => {
+            console.log("Registering Push...");
+            const subscription = await register.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: publicVapidKey,
+            });
+            console.log("Push Registered...");
 
-        console.log("Sending Push...");
-        await fetch("http://localhost:8080/subscribe", {
-            method: "POST",
-            body: JSON.stringify(subscription),
-            headers: {
-                "content-type": "application/json",
-            },
+            console.log("Sending Push...");
+            await fetch("http://localhost:8080/subscribe", {
+                method: "POST",
+                body: JSON.stringify(subscription),
+                headers: {
+                    "content-type": "application/json",
+                },
+            });
+            console.log("Push Sent...");
         });
-        console.log("Push Sent...");
-    }, 1000);
 }
