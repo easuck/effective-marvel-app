@@ -1,13 +1,17 @@
-import React, {FC, useEffect, useState} from 'react';
+import {ChangeEventHandler, FC, useEffect, useState} from 'react';
 import styles from "./styles.module.css"
 import {Link} from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import {IconContext} from "react-icons";
+import {useTranslation} from "react-i18next";
+import i18n from "i18next";
+import {localesKeys} from "../../localization";
 
 const Header: FC = () => {
     const [highResolution, setHighResolution] =
         useState<boolean>(window.matchMedia("(min-width: 550px)").matches);
     const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+    const {t} = useTranslation();
 
     useEffect(() => {
         window
@@ -18,6 +22,12 @@ const Header: FC = () => {
             })
     }, []);
 
+    const handleLanguageChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
+        i18n.changeLanguage(e.target.value);
+        localStorage.setItem("LOCALE", e.target.value);
+    }
+
+
     return (
         <>
             <header className={styles.header}>
@@ -25,9 +35,16 @@ const Header: FC = () => {
                 {
                     highResolution ? (
                         <nav className={styles.nav}>
-                            <Link to="characters">Characters</Link>
-                            <Link to="comics">Comics</Link>
-                            <Link to="favourites">Favourites</Link>
+                            <select onChange={(e) => handleLanguageChange(e)} value={i18n.language}>
+                                {localesKeys.map(item => (
+                                    <option key={item} value={item}>
+                                        {item}
+                                    </option>
+                                ))}
+                            </select>
+                            <Link to="characters">{t("Characters")}</Link>
+                            <Link to="comics">{t("Comics")}</Link>
+                            <Link to="favourites">{t("Favourites")}</Link>
                         </nav>
                     ) : (
                         <IconContext.Provider value={{size: "40px", color: "orange"}}>
