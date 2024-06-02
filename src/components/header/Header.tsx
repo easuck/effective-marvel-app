@@ -47,22 +47,33 @@ const Header: FC = () => {
                             <Link to="favourites">{t("Favourites")}</Link>
                         </nav>
                     ) : (
-                        <IconContext.Provider value={{size: "40px", color: "orange"}}>
-                            <GiHamburgerMenu onClick={() => setIsMenuOpen(!isMenuOpen)}/>
-                        </IconContext.Provider>
+                        <div className={styles.navWrapper}>
+                            <select onChange={(e) => handleLanguageChange(e)} value={i18n.language}>
+                                {localesKeys.map(item => (
+                                    <option key={item} value={item}>
+                                        {item}
+                                    </option>
+                                ))}
+                            </select>
+                            <IconContext.Provider value={{size: "40px", color: "orange"}}>
+                                <GiHamburgerMenu onClick={() => setIsMenuOpen(!isMenuOpen)}/>
+                            </IconContext.Provider>
+                        </div>
+
                     )
                 }
                 {
                     isMenuOpen &&
                     <nav className={styles.nav}>
-                        <Link to="characters">Characters</Link>
-                        <Link to="comics">Comics</Link>
-                        <Link to="favourites">Favourites</Link>
+                        <Link to="characters">{t("Characters")}</Link>
+                        <Link to="comics">{t("Comics")}</Link>
+                        <Link to="favourites">{t("Favourites")}</Link>
                     </nav>
                 }
             </header>
         </>
-    );
+    )
+        ;
 };
 
 export default Header;

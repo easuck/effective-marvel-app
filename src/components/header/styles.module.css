@@ -34,4 +34,13 @@
         right: 0;
         z-index: 10;
     }
+    .navWrapper{
+        display: flex;
+        gap: 20px;
+    }
+    .navWrapper *{
+        color: orange;
+        font-size: 20px;
+        font-weight: 700;
+    }
 }
