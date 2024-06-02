@@ -1,5 +1,12 @@
 {
     "Characters": "Персонажи",
     "Comics": "Комиксы",
-    "Favourites": "Избранное"
+    "Favourites": "Избранное",
+    "Comics with this character": "Комиксы с этим персонажем:",
+    "No comics": "Комиксов нет",
+    "Characters in this comics": "Персонажи в этом комиксе:",
+    "No characters": "Персонажей нет",
+    "Search for Characters by Name": "Найти персонажей по имени...",
+    "Search for Comics by Name":  "Найти комиксы по названию...",
+    "SEARCH": "НАЙТИ"
 }

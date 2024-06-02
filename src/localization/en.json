@@ -1,5 +1,12 @@
 {
   "Characters": "Characters",
   "Comics": "Comics",
-  "Favourites": "Favourites"
+  "Favourites": "Favourites",
+  "Comics with this character": "Comics with this character:",
+  "No comics": "No comics",
+  "Characters in this comics": "Characters in this comics:",
+  "No characters": "No characters",
+  "Search for Characters by Name":  "Search for Characters by Name...",
+  "Search for Comics by Name":  "Search for Comics by Title...",
+  "SEARCH": "SEARCH"
 }
