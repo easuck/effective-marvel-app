@@ -1,4 +1,4 @@
-import {ChangeEventHandler, FC, useEffect, useState} from 'react';
+import {ChangeEvent, ChangeEventHandler, FC, useEffect, useState} from 'react';
 import styles from "./styles.module.css"
 import {Link} from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -6,6 +6,7 @@ import {IconContext} from "react-icons";
 import {useTranslation} from "react-i18next";
 import i18n from "i18next";
 import {localesKeys} from "../../localization";
+import {themes, themeStore} from "../../stores/ThemeStore.ts";
 
 const Header: FC = () => {
     const [highResolution, setHighResolution] =
@@ -27,6 +28,10 @@ const Header: FC = () => {
         localStorage.setItem("LOCALE", e.target.value);
     }
 
+    const handleThemeChange: ChangeEventHandler<HTMLSelectElement> = (e) => {
+        themeStore.changeActiveTheme(e.target.value);
+    }
+
 
     return (
         <>
@@ -35,11 +40,14 @@ const Header: FC = () => {
                 {
                     highResolution ? (
                         <nav className={styles.nav}>
+                            <select onChange={(e) => handleThemeChange(e)}>
+                                {themes.map(theme => (
+                                    <option key={theme}>{theme}</option>
+                                ))}
+                            </select>
                             <select onChange={(e) => handleLanguageChange(e)} value={i18n.language}>
                                 {localesKeys.map(item => (
-                                    <option key={item} value={item}>
-                                        {item}
-                                    </option>
+                                    <option key={item}>{item}</option>
                                 ))}
                             </select>
                             <Link to="characters">{t("Characters")}</Link>

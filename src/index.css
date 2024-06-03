@@ -7,6 +7,14 @@
   --main-padding: 40px;
   --sub-padding: 20px;
 }
+body[data-theme="light"]{
+  --color-text: black;
+  --color--bg: white;
+}
+body[data-theme="dark"]{
+  --color-text: white;
+  --color--bg: black;
+}
 .link{
   text-decoration: none;
   color: cornflowerblue;
