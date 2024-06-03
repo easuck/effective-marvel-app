@@ -6,6 +6,12 @@
 :root{
   --main-padding: 40px;
   --sub-padding: 20px;
+  --color-primary: red;
+  --color-secondary: orange;
+  --color-third: grey;
+}
+body{
+  background: var(--color--bg);
 }
 body[data-theme="light"]{
   --color-text: black;

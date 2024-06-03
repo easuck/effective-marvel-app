@@ -10,7 +10,7 @@
 }
 .divider{
     border: none;
-    background: grey;
+    background: var(--color-third);
     height: 1px;
     margin: 0  0 var(--main-padding) 0;
 }
@@ -22,11 +22,12 @@
 .labelFavourites{
     font-size: 50px;
     font-weight: 700;
+    color: var(--color-text);
 }
 .labelAmount{
     font-size: 30px;
     font-weight: 700;
-    color: grey;
+    color: var(--color-third);
     line-height: 60px;
 }
 @media(max-width: 1024px){
