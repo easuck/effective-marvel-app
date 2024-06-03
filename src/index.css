@@ -9,17 +9,22 @@
   --color-primary: red;
   --color-secondary: orange;
   --color-third: grey;
+  --color-gradient-start: rgba(139,167,32,0);
 }
 body{
-  background: var(--color--bg);
+  background: var(--color-bg);
 }
 body[data-theme="light"]{
   --color-text: black;
-  --color--bg: white;
+  --color-bg: white;
+  --color-footer: grey;
+  --color-gradient-end: white;
 }
 body[data-theme="dark"]{
   --color-text: white;
-  --color--bg: black;
+  --color-bg: black;
+  --color-footer: #121212;
+  --color-gradient-end: black;
 }
 .link{
   text-decoration: none;
