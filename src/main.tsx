@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import {BrowserRouter} from "react-router-dom";
 import Router from "./router/Router.tsx";
 import {register} from "./swRegistration.ts"
+import environments from "./config/environments.ts";
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -13,4 +14,4 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       </BrowserRouter>
 );
 
-register();
+if (environments.swSubscribeURL) register();
