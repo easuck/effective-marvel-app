@@ -7,6 +7,7 @@ import {useTranslation} from "react-i18next";
 import i18n from "i18next";
 import {localesKeys} from "../../localization";
 import {themes, themeStore} from "../../stores/ThemeStore.ts";
+import Selector from "../selector/Selector.tsx";
 
 const Header: FC = () => {
     const [highResolution, setHighResolution] =
@@ -40,29 +41,16 @@ const Header: FC = () => {
                 {
                     highResolution ? (
                         <nav className={styles.nav}>
-                            <select onChange={(e) => handleThemeChange(e)}>
-                                {themes.map(theme => (
-                                    <option key={theme}>{theme}</option>
-                                ))}
-                            </select>
-                            <select onChange={(e) => handleLanguageChange(e)} value={i18n.language}>
-                                {localesKeys.map(item => (
-                                    <option key={item}>{item}</option>
-                                ))}
-                            </select>
+                            <Selector options={themes} callback={handleThemeChange} defaultTheme={localStorage.getItem("ACTIVE_THEME")}/>
+                            <Selector options={localesKeys} callback={handleLanguageChange} defaultLng={i18n.language}/>
                             <Link to="characters">{t("Characters")}</Link>
                             <Link to="comics">{t("Comics")}</Link>
                             <Link to="favourites">{t("Favourites")}</Link>
                         </nav>
                     ) : (
                         <div className={styles.navWrapper}>
-                            <select onChange={(e) => handleLanguageChange(e)} value={i18n.language}>
-                                {localesKeys.map(item => (
-                                    <option key={item} value={item}>
-                                        {item}
-                                    </option>
-                                ))}
-                            </select>
+                            <Selector options={themes} callback={handleThemeChange} defaultTheme={localStorage.getItem("ACTIVE_THEME")}/>
+                            <Selector options={localesKeys} callback={handleLanguageChange} defaultLng={i18n.language}/>
                             <IconContext.Provider value={{size: "40px", color: "orange"}}>
                                 <GiHamburgerMenu onClick={() => setIsMenuOpen(!isMenuOpen)}/>
                             </IconContext.Provider>
@@ -80,8 +68,7 @@ const Header: FC = () => {
                 }
             </header>
         </>
-    )
-        ;
+    );
 };
 
 export default Header;
