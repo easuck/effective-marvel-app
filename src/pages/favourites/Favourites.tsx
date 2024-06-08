@@ -4,14 +4,16 @@ import styles from "./styles.module.css"
 import {observer} from "mobx-react-lite";
 import favouritesStore from "../../stores/FavouritesStore.ts";
 import {VirtuosoGrid} from "react-virtuoso";
+import {useTranslation} from "react-i18next";
 
 const Favourites: FC = observer(() => {
     const {favourites} = favouritesStore;
+    const {t} = useTranslation();
 
     return (
         <section className={styles.favourites}>
             <div className={styles.labelWrapper}>
-                <h3 className={styles.labelFavourites}>Favourites</h3>
+                <h3 className={styles.labelFavourites}>{t("Favourites")}</h3>
                 <h3 className={styles.labelAmount}>({favouritesStore.favourites.length})</h3>
             </div>
             <hr className={styles.divider}/>

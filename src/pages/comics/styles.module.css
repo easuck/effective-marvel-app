@@ -11,7 +11,7 @@
 }
 .divider{
     border: none;
-    background: grey;
+    background: var(--color-third);
     height: 1px;
     margin: var(--main-padding) 0;
 }

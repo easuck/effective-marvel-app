@@ -4,10 +4,12 @@ import {Link, useParams} from "react-router-dom";
 import {characterInfoStore} from "../../stores/CharacterInfoStore.ts";
 import {observer} from "mobx-react-lite";
 import {ColorRing} from "react-loader-spinner";
+import {useTranslation} from "react-i18next";
 
 const CharacterInfo: FC = observer(() => {
     const {id} = useParams<"id">();
     const {character, loading} = characterInfoStore;
+    const {t} = useTranslation();
 
     useEffect(() => {
         characterInfoStore.getCharacterById(id);
@@ -28,8 +30,8 @@ const CharacterInfo: FC = observer(() => {
                         <h4>{character[0]?.desc == "" ? "No description" : character[0]?.desc}</h4>
                     </div>
                     <div className={styles.comicsList}>
-                        <h3>Comics with this character:</h3>
-                        {character[0]?.comics.length == 0 ? <h4>No comics</h4> :
+                        <h3>{t("Comics with this character")}</h3>
+                        {character[0]?.comics.length == 0 ? <h4>{t("No comics")}</h4> :
                             character[0]?.comics.map((comics) => {
                                 return <Link key={comics.id} className="link" to={`/comics/${comics.id}`}>
                                     <h4>{comics.title}</h4>

@@ -1,3 +1,5 @@
+import environments from "./config/environments.ts";
+
 const publicVapidKey = "BNmO7o29hUpkX3h_0vE36sVXgtSWMYc6ydzC2oKp1CSV_DQWI8u_cp9tOKpA-36NCQo_lj5E9XNJgobGNcML57I";
 
 export const register = () => {
@@ -23,7 +25,7 @@ async function send(){
             console.log("Push Registered...");
 
             console.log("Sending Push...");
-            await fetch("http://localhost:8080/subscribe", {
+            await fetch(environments.swSubscribeURL, {
                 method: "POST",
                 body: JSON.stringify(subscription),
                 headers: {

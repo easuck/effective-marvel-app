@@ -15,8 +15,8 @@
 .form button{
     height: 100%;
     flex: 1;
-    background: orange;
-    color: white;
+    background: var(--color-secondary);
+    color: var(--color-text);
     border: none;
     font-size: 16px;
     font-weight: 500;
@@ -29,11 +29,12 @@
 .labelCharacters{
     font-size: 50px;
     font-weight: 700;
+    color: var(--color-text)
 }
 .labelAmount{
     font-size: 30px;
     font-weight: 700;
-    color: grey;
+    color: var(--color-third);
     line-height: 60px;
 }
 @media (max-width: 550px) {
