@@ -1,0 +1,73 @@
+.characterInfo{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.portrait{
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+    object-position: bottom 60% right 0;
+}
+.info{
+    padding: var(--sub-padding);
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+}
+.descriptionWrapper{
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    font-size: 30px;
+    color: var(--color-text);
+}
+.descriptionWrapper h4{
+    font-weight: 500;
+    font-size: 24px;
+}
+.comicsList{
+    display: flex;
+    flex-direction: column;
+    font-size: 30px;
+    color: var(--color-text);
+}
+.comicsList h4{
+    font-weight: 500;
+    font-size: 24px;
+}
+.loaderContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30vh;
+}
+@media (max-width: 768px){
+    .descriptionWrapper{
+        font-size: 25px;
+    }
+    .descriptionWrapper h4{
+        font-size: 18px;
+    }
+    .comicsList{
+        font-size: 25px;
+    }
+    .comicsList h4{
+        font-size: 18px;
+    }
+}
+@media (max-width: 425px){
+    .descriptionWrapper{
+        font-size: 20px;
+    }
+    .descriptionWrapper h4{
+        font-size: 15px;
+    }
+    .comicsList{
+        font-size: 20px;
+    }
+    .comicsList h4{
+        font-size: 15px;
+    }
+}
+
