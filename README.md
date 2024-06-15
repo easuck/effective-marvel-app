@@ -20,7 +20,7 @@ ___
 * ### Запустить приложение с помощью команды npm run dev
 ## Инфомрация о деплое:
 * ### Приложение развернуто на сервисе Vercel
-* ### [Ссылка для перехода](https://effective-marvel-5o0ebnday-egors-projects-1e812c54.vercel.app)
+* ### [Ссылка для перехода](https://effective-marvel-app.vercel.app/)
 ## Скриншоты:
 ### Страница с персонажами (светлая тема)
 ![](public/screenshots/sh1.jpg)
