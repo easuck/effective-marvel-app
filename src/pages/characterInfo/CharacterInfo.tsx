@@ -27,7 +27,7 @@ const CharacterInfo: FC = observer(() => {
                 <div className={styles.info}>
                     <div className={styles.descriptionWrapper}>
                         <h3>{character[0]?.name}</h3>
-                        <h4>{character[0]?.desc == "" ? "No description" : character[0]?.desc}</h4>
+                        <h4>{character[0]?.desc == "" ? t("No description") : character[0]?.desc}</h4>
                     </div>
                     <div className={styles.comicsList}>
                         <h3>{t("Comics with this character")}</h3>

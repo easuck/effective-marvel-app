@@ -7,12 +7,14 @@ import favouritesStore from "../../stores/FavouritesStore.ts";
 import {LocalStorageEntity} from "../../types/LocalStorageEntity.tsx";
 import localStorageInteraction from "../../helpers/localStorageInteraction.ts";
 import {observer} from "mobx-react-lite";
+import {useTranslation} from "react-i18next";
 
 const Card: FC<{id: number, image: string, name: string, desc: string, link: string}> =
     observer(({id, image, name, desc, link}) => {
     const [isMouseOver, setIsMouseOver] = useState<boolean>(false);
     const {favourites} = favouritesStore;
     const {getItem, setItem, removeItem} = localStorageInteraction;
+    const {t} = useTranslation();
 
     const onMouseEnter = () => {
         setIsMouseOver(true);
@@ -47,7 +49,7 @@ const Card: FC<{id: number, image: string, name: string, desc: string, link: str
             </Link>
             <div className={styles.textWrapper}>
                 <h3 className={styles.name}>{name}</h3>
-                <p className={styles.desc}>{desc == "" ? "No description" : desc}</p>
+                <p className={styles.desc}>{desc == "" ? t("No description") : desc}</p>
             </div>
         </div>
     )
